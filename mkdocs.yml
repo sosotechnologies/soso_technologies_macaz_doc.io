@@ -1,9 +1,9 @@
-site_name: MiddleWareBCBSNC Elasticsearch Documentation
-site_description: MiddleWareBCBSNC Elasticsearch Documentation
-repo_name: MiddleWareBCBSNC Elasticsearch
-repo_url: https://github.com/sosotechnologies/soso_elastic.io/
-edit_uri: https://github.com/sosotechnologies/soso_elastic.io/
-copyright: MiddleWareBCBSNC - Documentation
+site_name: SosoTech External Documentation
+site_description: SosoTech External Documentation for Tenants
+repo_name: soso_technologies_macaz_doc.io
+repo_url: https://github.com/sosotechnologies/soso_technologies_macaz_doc.io
+edit_uri: https://github.com/sosotechnologies/soso_technologies_macaz_doc.io
+copyright: SosoTech LLC - Documentation
 theme:
   # name: readthedocs
   name: readthedocs
@@ -13,17 +13,11 @@ theme:
     - content.action.view
     - content.code.annotate
     - content.code.copy
-    # - content.tabs.link
     - content.tooltips
-    # - header.autohide
-    # - navigation.expand
     - navigation.footer
     - navigation.indexes
-    # - navigation.instant
-    # - navigation.prune
     - navigation.sections
     - navigation.tabs
-    # - navigation.tabs.sticky
     - navigation.top
     - navigation.tracking
     - search.highlight
@@ -53,8 +47,6 @@ theme:
 plugins:
   - search:
       separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
-  # - minify:
-  #     minify_html: true
 
 extra_css:
 - assets/stylesheets/extra.css
@@ -63,15 +55,15 @@ extra_javascript:
 extra:
   social:
   - type: github
-    link: https://github.com/middlewarebcbsnc-io/bcbsnc-elasticsearch/
+    link: https://github.com/sosotechnologies/
   - type: medium
-    link: https://medium.com/bcbsnc-elasticsearch/
+    link: https://medium.com/@sosotechglobal/
 
 markdown_extensions:
 - markdown.extensions.admonition
 nav:
  - Home: 
-   - About: index.md
+   - About Us: index.md
  - Getting started: 
    - Request Sandbox: getting-started/env-setup.md
    - Sample UseCases: getting-started/usecases.md
