@@ -59,13 +59,9 @@
     <ul class="current">
                 <li class="toctree-l2 current"><a class="reference internal current" href="./">Installations</a>
     <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#repository">Repository</a>
+    <li class="toctree-l3"><a class="reference internal" href="#iam-role-eks-authenticator">IAM-Role-EKS-authenticator</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#revisioning">Revisioning</a>
-    </li>
-        </ul>
+    <li class="toctree-l3"><a class="reference internal" href="#install-docker-in-ec2">install docker in ec2</a>
     </li>
     </ul>
                 </li>
@@ -123,248 +119,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="adding-a-git-repository">Adding a git repository</h1>
-<p>If your documentation is related to source code, Material for MkDocs provides
-the ability to display information to the project's repository as part of the
-static site, including stars and forks. Furthermore, the
-<a href="#document-dates">date of last update and creation</a>, as well as <a href="#document-contributors">contributors</a> can be shown.</p>
-<h2 id="configuration">Configuration</h2>
-<h3 id="repository">Repository</h3>
-<p><a href="https://github.com/squidfunk/mkdocs-material/releases/tag/0.1.0">:octicons-tag-24: 0.1.0</a> ·
-:octicons-milestone-24: Default: <em>none</em></p>
-<p>In order to display a link to the repository of your project as part of your
-documentation, set <a href="https://www.mkdocs.org/user-guide/configuration/#repo_url"><code>repo_url</code></a> in <code>mkdocs.yml</code> to the public URL of
-your repository, e.g.:</p>
-<pre><code class="language-yaml">repo_url: https://github.com/squidfunk/mkdocs-material
+                <h1 id="system-requirements">System Requirements</h1>
+<p>Windows OS systems will be the preferred OS that will be used throughout 
+ this program. Students with MaC OS can still use their MAC pcs, but may have 
+ some diffuculties with running some Windows-specific commands.
+  ## Installation links</p>
+<h3 id="iam-role-eks-authenticator">IAM-Role-EKS-authenticator</h3>
+<p><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html">IAM Auth link</a></p>
+<pre><code>curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/aws-iam-authenticator
+chmod +x ./aws-iam-authenticator
+sudo mv ./aws-iam-authenticator /usr/local/bin
+aws-iam-authenticator help
 </code></pre>
-<p>The link to the repository will be rendered next to the search bar on big
-screens and as part of the main navigation drawer on smaller screen sizes.
-Additionally, for public repositories hosted on <a href="https://github.com/">GitHub</a> or <a href="https://about.gitlab.com/">GitLab</a>, the
-number of stars and forks is automatically requested and rendered.</p>
-<p>GitHub repositories also include the tag of the latest release.[^1]</p>
-<p>[^1]:
-    Unfortunately, GitHub only provides an API endpoint to obtain the <a href="https://docs.github.com/en/rest/reference/releases#get-the-latest-release">latest
-    release</a> - not the latest tag. Thus, make sure to <a href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release">create a release</a> (not 
-    pre-release) for the latest tag you want to display next to the number of
-    stars and forks.</p>
-<h4 id="repository-name">Repository name</h4>
-<p><a href="https://github.com/squidfunk/mkdocs-material/releases/tag/0.1.0">:octicons-tag-24: 0.1.0</a> ·
-:octicons-milestone-24: Default: <em>automatically set to</em> <code>GitHub</code>, <code>GitLab</code> <em>or</em>
-<code>Bitbucket</code></p>
-<p>MkDocs will infer the source provider by examining the URL and try to set the
-<em>repository name</em> automatically. If you wish to customize the name, set
-<a href="https://www.mkdocs.org/user-guide/configuration/#repo_name"><code>repo_name</code></a> in <code>mkdocs.yml</code>:</p>
-<pre><code class="language-yaml">repo_name: squidfunk/mkdocs-material
-</code></pre>
-<h4 id="repository-icon">Repository icon</h4>
-<p><a href="https://github.com/squidfunk/mkdocs-material/releases/tag/5.0.0">:octicons-tag-24: 5.0.0</a> ·
-:octicons-milestone-24: Default:
-:fontawesome-brands-git-alt: – <code>fontawesome/brands/git-alt</code></p>
-<p>While the default repository icon is a generic git icon, it can be set to
-any icon bundled with the theme by referencing a valid icon path in
-<code>mkdocs.yml</code>:</p>
-<pre><code class="language-yaml">theme:
-  icon:
-    repo: fontawesome/brands/git-alt # (1)!
-</code></pre>
+<h3 id="install-docker-in-ec2">install docker in ec2</h3>
+<p><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-container-image.html">Docker installation link</a></p>
+<p>Before you can use [Giscus], you need to complete the following steps:</p>
 <ol>
-<li>
-<p>Enter a few keywords to find the perfect icon using our <a href="../reference/icons-emojis.md#search">icon search</a> and
-    click on the shortcode to copy it to your clipboard:</p>
-<p><div class="mdx-iconsearch" data-mdx-component="iconsearch">
-  <input class="md-input md-input--stretch mdx-iconsearch__input" placeholder="Search icon" data-mdx-component="iconsearch-query" value="git" />
-  <div class="mdx-iconsearch-result" data-mdx-component="iconsearch-result" data-mdx-mode="file">
-    <div class="mdx-iconsearch-result__meta"></div>
-    <ol class="mdx-iconsearch-result__list"></ol>
-  </div>
-</div></p>
-</li>
+<li><strong>Install the [Giscus GitHub App]</strong> and grant access to the repository
+    that should host comments as GitHub discussions. Note that this can be a
+    repository different from your documentation.</li>
+<li><strong>Visit [Giscus] and generate the snippet</strong> through their configuration tool
+    to load the comment system. Copy the snippet for the next step. The
+    resulting snippet should look similar to this:</li>
 </ol>
-<p>Some popular choices:</p>
-<ul>
-<li>:fontawesome-brands-git: – <code>fontawesome/brands/git</code></li>
-<li>:fontawesome-brands-git-alt: – <code>fontawesome/brands/git-alt</code></li>
-<li>:fontawesome-brands-github: – <code>fontawesome/brands/github</code></li>
-<li>:fontawesome-brands-github-alt: – <code>fontawesome/brands/github-alt</code></li>
-<li>:fontawesome-brands-gitlab: – <code>fontawesome/brands/gitlab</code></li>
-<li>:fontawesome-brands-gitkraken: – <code>fontawesome/brands/gitkraken</code></li>
-<li>:fontawesome-brands-bitbucket: – <code>fontawesome/brands/bitbucket</code></li>
-<li>:fontawesome-solid-trash: – <code>fontawesome/solid/trash</code></li>
-</ul>
-<h4 id="code-actions">Code actions</h4>
-<p><a href="https://github.com/squidfunk/mkdocs-material/releases/tag/9.0.0">:octicons-tag-24: 9.0.0</a> ·
-:octicons-unlock-24: Feature flag</p>
-<p>If the <a href="#repository">repository URL</a> points to a valid <a href="https://github.com/">GitHub</a>, <a href="https://about.gitlab.com/">GitLab</a> or <a href="https://bitbucket.org/">Bitbucket</a>
-repository, <a href="https://www.mkdocs.org">MkDocs</a> provides a setting called <a href="https://www.mkdocs.org/user-guide/configuration/#edit_uri"><code>edit_uri</code></a>, which
-resolves to the subfolder where your documentation is hosted.</p>
-<p>If your default branch is called <code>main</code>, change the setting to:</p>
-<pre><code class="language-yaml">edit_uri: edit/main/docs/
-</code></pre>
-<p>After making sure that <code>edit_uri</code> is correctly configured, buttons for code
-actions can be added. Two types of code actions are supported: <code>edit</code> and <code>view</code>
-(GitHub only):</p>
-<p>=== ":material-file-edit-outline: Edit this page"</p>
-<pre><code>``` yaml
-theme:
-  features:
-    - content.action.edit
-```
-</code></pre>
-<p>=== ":material-file-eye-outline: View source of this page"</p>
-<pre><code>``` yaml
-theme:
-  features:
-    - content.action.view
-```
-</code></pre>
-<p>The icon of the edit and view buttons can be changed with the following lines:</p>
-<pre><code class="language-yaml">theme:
-  icon:
-    edit: material/pencil # (1)!
-    view: material/eye
-</code></pre>
-<ol>
-<li>
-<p>Enter a few keywords to find the perfect icon using our <a href="../reference/icons-emojis.md#search">icon search</a> and
-    click on the shortcode to copy it to your clipboard:</p>
-<p><div class="mdx-iconsearch" data-mdx-component="iconsearch">
-  <input class="md-input md-input--stretch mdx-iconsearch__input" placeholder="Search icon" data-mdx-component="iconsearch-query" value="material pencil" />
-  <div class="mdx-iconsearch-result" data-mdx-component="iconsearch-result" data-mdx-mode="file">
-    <div class="mdx-iconsearch-result__meta"></div>
-    <ol class="mdx-iconsearch-result__list"></ol>
-  </div>
-</div></p>
-</li>
-</ol>
-<h3 id="revisioning">Revisioning</h3>
-<p>The following plugins are fully integrated with Material for MkDocs, allowing
-for showing the <a href="#document-dates">date of last update and creation</a> of a document, as well as
-links to all <a href="#document-contributors">contributors</a> or <a href="#document-authors">authors</a> involved.</p>
-<h4 id="document-dates">Document dates</h4>
-<p><a href="https://github.com/squidfunk/mkdocs-material/releases/tag/4.6.0">:octicons-tag-24: 4.6.0</a> ·
-<a href="https://github.com/timvink/mkdocs-git-revision-date-localized-plugin">:octicons-cpu-24: Plugin</a></p>
-<p>The <a href="https://github.com/timvink/mkdocs-git-revision-date-localized-plugin">git-revision-date-localized</a> plugin adds support for adding the date of
-last update and creation of a document at the bottom of each page. Install it
-with <code>pip</code>:</p>
-<pre><code>pip install mkdocs-git-revision-date-localized-plugin
-</code></pre>
-<p>Then, add the following lines to <code>mkdocs.yml</code>:</p>
-<pre><code class="language-yaml">plugins:
-  - git-revision-date-localized:
-      enable_creation_date: true
-</code></pre>
-<p>The following configuration options are supported:</p>
-<p><a href="#+git-revision-date-localized.enabled"><code>enabled</code></a>{ #+git-revision-date-localized.enabled }</p>
-<p>:   :octicons-milestone-24: Default: <code>true</code> – This option specifies whether
-    the plugin is enabled when building your project. If you want to switch
-    the plugin off, e.g. for local builds, use an <a href="https://www.mkdocs.org/user-guide/configuration/#environment-variables">environment variable</a>:</p>
-<pre><code>``` yaml
-plugins:
-  - git-revision-date-localized:
-      enabled: !ENV [CI, false]
-```
-</code></pre>
-<p><a href="#+git-revision-date-localized.type"><code>type</code></a>{ #+git-revision-date-localized.type }</p>
-<p>:   :octicons-milestone-24: Default: <code>date</code> – The format of the date to be
-    displayed. Valid values are <code>date</code>, <code>datetime</code>, <code>iso_date</code>, <code>iso_datetime</code>
-    and <code>timeago</code>:</p>
-<pre><code>``` yaml
-plugins:
-  - git-revision-date-localized:
-      type: date
-```
-</code></pre>
-<p><a href="#+git-revision-date-localized.enable_creation_date"><code>enable_creation_date</code></a>{ #+git-revision-date-localized.enable_creation_date }</p>
-<p>:   :octicons-milestone-24: Default: <code>false</code> – Enables the display of the
-    creation date of the file associated with the page next to the last updated
-    date at the bottom of the page:</p>
-<pre><code>``` yaml
-plugins:
-  - git-revision-date-localized:
-      enable_creation_date: true
-```
-</code></pre>
-<p><a href="#+git-revision-date-localized.fallback_to_build_date"><code>fallback_to_build_date</code></a>{ #+git-revision-date-localized.fallback_to_build_date }</p>
-<p>:   :octicons-milestone-24: Default: <code>false</code> – Enables falling back to
-    the time when <code>mkdocs build</code> was executed. Can be used as a fallback when
-    the build is performed outside of a git repository:</p>
-<pre><code>``` yaml
-plugins:
-  - git-revision-date-localized:
-      fallback_to_build_date: true
-```
-</code></pre>
-<p>The other configuration options of this extension are not officially supported
-by Material for MkDocs, which is why they may yield unexpected results. Use
-them at your own risk.</p>
-<h4 id="document-contributors">Document contributors</h4>
-<p><a href="../insiders/index.md">:octicons-heart-fill-24:{ .mdx-heart } Sponsors only</a>{ .mdx-insiders } ·
-<a href="../insiders/index.md">:octicons-tag-24: insiders-4.19.0</a> ·
-<a href="https://github.com/ojacques/mkdocs-git-committers-plugin-2">:octicons-cpu-24: Plugin</a> ·
-:octicons-beaker-24: Experimental</p>
-<p>The <a href="https://github.com/ojacques/mkdocs-git-committers-plugin-2">git-committers</a>[^2] plugin renders the GitHub avatars of all contributors,
-linking to their GitHub profiles at the bottom of each page. As always, it can
-be installed with <code>pip</code>:</p>
-<p>[^2]:
-    We currently recommend using a fork of the <a href="https://github.com/ojacques/mkdocs-git-committers-plugin-2">git-committers</a> plugin, as it
-    contains many improvements that have not yet been merged back into the
-    original plugin. See byrnereese/mkdocs-git-committers-plugin#12 for more
-    information.</p>
-<pre><code>pip install mkdocs-git-committers-plugin-2
-</code></pre>
-<p>Then, add the following lines to <code>mkdocs.yml</code>:</p>
-<pre><code class="language-yaml">plugins:
-  - git-committers:
-      repository: squidfunk/mkdocs-material
-      branch: main
-</code></pre>
-<p>The following configuration options are supported:</p>
-<p><a href="#+git-committers.enabled"><code>enabled</code></a>{ #+git-committers.enabled }</p>
-<p>:   :octicons-milestone-24: Default: <code>true</code> – This option specifies whether
-    the plugin is enabled when building your project. If you want to switch
-    the plugin off, e.g. for local builds, use an <a href="https://www.mkdocs.org/user-guide/configuration/#environment-variables">environment variable</a>:</p>
-<pre><code>``` yaml
-plugins:
-  - git-committers:
-      enabled: !ENV [CI, false]
-```
-</code></pre>
-<p><a href="#+git-committers.repository"><code>repository</code></a>{ #+git-committers.repository }</p>
-<p>:   :octicons-milestone-24: Default: <em>none</em> · :octicons-alert-24: <strong>Required</strong> –
-    This property must be set to the slug of the repository that contains your
-    documentation. The slug must follow the pattern <code>&lt;username&gt;/&lt;repository&gt;</code>:</p>
-<pre><code>``` yaml
-plugins:
-  - git-committers:
-      repository: squidfunk/mkdocs-material
-```
-</code></pre>
-<p><a href="#+git-committers.branch"><code>branch</code></a>{ #+git-committers.branch }</p>
-<p>:   :octicons-milestone-24: Default: <code>master</code> – This property should be set to
-    the branch of the repository from which to retrieve the contributors. To use the <code>main</code> branch:</p>
-<pre><code>``` yaml
-plugins:
-  - git-committers:
-      branch: main
-```
-</code></pre>
-<p>The other configuration options of this extension are not officially supported
-by Material for MkDocs, which is why they may yield unexpected results. Use
-them at your own risk.</p>
-<h4 id="document-authors">Document authors</h4>
-<p><a href="../insiders/index.md">:octicons-heart-fill-24:{ .mdx-heart } Sponsors only</a>{ .mdx-insiders } ·
-<a href="../insiders/index.md">:octicons-tag-24: insiders-4.19.0</a> ·
-<a href="https://github.com/timvink/mkdocs-git-authors-plugin/">:octicons-cpu-24: Plugin</a> ·
-:octicons-beaker-24: Experimental</p>
-<p>The <a href="https://github.com/timvink/mkdocs-git-authors-plugin/">git-authors</a> plugin extracts the authors of a document from git to display
-them at the bottom of each page. It's a lightweight alternative to the
-<a href="https://github.com/ojacques/mkdocs-git-committers-plugin-2">git-committers</a> plugin. Install it with <code>pip</code>:</p>
-<pre><code>pip install mkdocs-git-authors-plugin
-</code></pre>
-<p>Then, add the following lines to <code>mkdocs.yml</code>:</p>
-<pre><code class="language-yaml">plugins:
-  - git-authors
-</code></pre>
               
             </div>
           </div><footer>
