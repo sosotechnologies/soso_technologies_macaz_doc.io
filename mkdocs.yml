@@ -1,0 +1,90 @@
+site_name: MiddleWareBCBSNC Elasticsearch Documentation
+site_description: MiddleWareBCBSNC Elasticsearch Documentation
+repo_name: MiddleWareBCBSNC Elasticsearch
+repo_url: https://github.com/sosotechnologies/soso_elastic.io/
+edit_uri: https://github.com/sosotechnologies/soso_elastic.io/
+copyright: MiddleWareBCBSNC - Documentation
+theme:
+  # name: readthedocs
+  name: readthedocs
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    # - content.tabs.link
+    - content.tooltips
+    # - header.autohide
+    # - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    # - navigation.instant
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    # - toc.integrate
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.png
+  icon:
+    logo: logo
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  # - minify:
+  #     minify_html: true
+
+extra_css:
+- assets/stylesheets/extra.css
+extra_javascript:
+- assets/javascripts/extra.js
+extra:
+  social:
+  - type: github
+    link: https://github.com/middlewarebcbsnc-io/bcbsnc-elasticsearch/
+  - type: medium
+    link: https://medium.com/bcbsnc-elasticsearch/
+
+markdown_extensions:
+- markdown.extensions.admonition
+nav:
+ - Home: 
+   - About: index.md
+ - Getting started: 
+   - ElasticSearch: getting-started/elk/elasticsearch.md
+   - Kibana: getting-started/elk/kibana.md
+   - Request Environment: getting-started/request-environment.md
+   - Request Sandbox: getting-started/request-sandbox.md
+   - Sample UseCases: getting-started/usecases.md
+ - Setup:
+   - Setup Sharding: setup/adding-a-git-repository.md
+   - Adding a comment system: setup/adding-a-comment-system.md
+  # - Extensions:
+  #   - setup/extensions/index.md
+  #   - Python Markdown: setup/extensions/python-markdown.md
+  #   - Python Markdown Extensions: setup/extensions/python-markdown-extensions.md
+  # - Dependencies:
+  #   - setup/dependencies/image-processing.md
+
