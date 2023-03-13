@@ -68,8 +68,9 @@ nav:
    - Request Sandbox: getting-started/env-setup.md
    - Sample UseCases: getting-started/usecases.md
  - Weekly Lectures: 
-   - Week 1: weekly/week1/week1.md
-   - Hands On: weekly/week1/week1-1.md
+   - Week 1: 
+      - Installations: weekly/week1/week1.md
+      - Getting Started: weekly/week1/week1-1.md
    - Week 2:
       - Getting started: weekly/week2/week2.md
       - Hands On: weekly/week2/week2-1.md
