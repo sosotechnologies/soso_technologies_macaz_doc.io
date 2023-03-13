@@ -141,28 +141,42 @@
  some diffuculties with running some Windows-specific commands.
   ## Installation links</p>
 <h3 id="install-iam-eks-authenticator">Install IAM EKS authenticator</h3>
-<p><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html">Right-Click to open in a New Tab</a></p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html">Right-Click to open in a New Tab</a></li>
+</ul>
 <pre><code>curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/aws-iam-authenticator
 chmod +x ./aws-iam-authenticator
 sudo mv ./aws-iam-authenticator /usr/local/bin
 aws-iam-authenticator help
 </code></pre>
 <h3 id="install-docker-in-ec2">Install docker in ec2</h3>
-<p><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-container-image.html">Right-Click to open in a New Tab</a></p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-container-image.html">Right-Click to open in a New Tab</a></li>
+</ul>
 <h3 id="install-awscli">Install AWSCLI</h3>
-<p><a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">Right-Click to open in a New Tab</a></p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">Right-Click to open in a New Tab</a></li>
+</ul>
 <h3 id="install-terraform">Install Terraform</h3>
-<p><a href="https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli">Right-Click to open in a New Tab</a></p>
+<ul>
+<li><a href="https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli">Right-Click to open in a New Tab</a></li>
+</ul>
 <h3 id="install-kubens-kubectx">Install Kubens + kubectx</h3>
-<p><a href="https://github.com/ahmetb/kubectx#installation">Right-Click to open in a New Tab</a> </p>
+<ul>
+<li><a href="https://github.com/ahmetb/kubectx#installation">Right-Click to open in a New Tab</a> </li>
+</ul>
 <h3 id="install-helm">Install HelM</h3>
-<p><a href="https://helm.sh/docs/intro/install/">Right-Click to open in a New Tab</a></p>
+<ul>
+<li><a href="https://helm.sh/docs/intro/install/">Right-Click to open in a New Tab</a></li>
+</ul>
 <pre><code>curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
 </code></pre>
 <h3 id="install-kubectl">Install Kubectl</h3>
-<p><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html/">Right-Click to open in a New Tab</a></p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html/">Right-Click to open in a New Tab</a></li>
+</ul>
 <pre><code>curl -LO &quot;https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl&quot;
 curl -LO &quot;https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256&quot;
 echo &quot;$(&lt;kubectl.sha256)  kubectl&quot; | sha256sum --check
@@ -170,7 +184,9 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 kubectl version --client --output=yaml
 </code></pre>
 <h3 id="install-mkdocs">Install MkDocs</h3>
-<p><a href="https://www.mkdocs.org/user-guide/installation/">Right-Click to open in a New Tab</a></p>
+<ul>
+<li><a href="https://www.mkdocs.org/user-guide/installation/">Right-Click to open in a New Tab</a></li>
+</ul>
 <pre><code>pip install mkdocs
 mkdocs helm
 mkdocs new my-soso-package
@@ -186,7 +202,9 @@ curl -O https://bootstrap.pypa.io/get-pip.py
 python3 get-pip.py --user
 </code></pre>
 <h3 id="install-trivy">Install Trivy</h3>
-<p><a href="https://aquasecurity.github.io/trivy/v0.18.3/installation/">Right-Click to open in a New Tab</a></p>
+<ul>
+<li><a href="https://aquasecurity.github.io/trivy/v0.18.3/installation/">Right-Click to open in a New Tab</a></li>
+</ul>
 <pre><code>sudo yum -y update
 
 sudo wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb
