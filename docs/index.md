@@ -6,3 +6,7 @@
     - SRE
     - Cloud Engineers
     - AI Engineers
+
+![SosoTechCICI](photos/index/sosotech_architecture_diagram.png)
+
+
