@@ -73,14 +73,23 @@ nav:
  - Home: 
    - About: index.md
  - Getting started: 
-   - ElasticSearch: getting-started/elk/elasticsearch.md
-   - Kibana: getting-started/elk/kibana.md
-   - Request Environment: getting-started/request-environment.md
-   - Request Sandbox: getting-started/request-sandbox.md
+   - Request Sandbox: getting-started/env-setup.md
    - Sample UseCases: getting-started/usecases.md
+ - Weekly Lectures: 
+   - Week 1: weekly/week1/week1.md
+   - Hands On: weekly/week1/week1-1.md
+   - Week 2:
+      - Getting started: weekly/week2/week2.md
+      - Hands On: weekly/week2/week2-1.md
+   - Week 3:
+      - Getting started: weekly/week3/week3.md
+      - Hands On: weekly/week3/week3-1.md
  - Setup:
-   - Setup Sharding: setup/adding-a-git-repository.md
+   - Getting started: setup/adding-a-git-repository.md
    - Adding a comment system: setup/adding-a-comment-system.md
+ 
+
+
   # - Extensions:
   #   - setup/extensions/index.md
   #   - Python Markdown: setup/extensions/python-markdown.md
