@@ -74,16 +74,6 @@
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#focus-aws-cloud">FOCUS: AWS CLOUD</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#s3">S3</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#vpc">VPC</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#iam">IAM</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#aws-elastic-load-balancer-elb">AWS ELASTIC LOAD BALANCER (ELB)</a>
-    </li>
-        </ul>
     </li>
     </ul>
                 </li>
@@ -244,8 +234,8 @@ Platform as a Service (PaaS), and Software as a Service (SaaS).</p>
    offers a mix of packaged platform as a service (PaaS), software as 
    a service (SaaS), and infrastructure as a service (IaaS).  </p>
 <p>### EC2
-   Amazon EC2 is AWS primary web service that provides resizable compute 
-   capacity in the cloud. </p>
+  Amazon EC2 is AWS primary web service that provides resizable compute 
+  capacity in the cloud. </p>
 <p><strong><em>Instance types:</em></strong>
     Amazon EC2 provides a wide selection of instance types optimized to fit 
     different use cases. Instance types comprise varying combinations of CPU, 
@@ -276,85 +266,92 @@ Amazon EC2 instances. </p>
 <p><strong><em>Instance Stores:</em></strong> Is another type of “block storage” volume offering 
 by AWS for your instance. This storage is located on disks that are 
 physically attached to the host computer.</p>
-<h3 id="s3">S3</h3>
-<p>Amazon Simple Storage Service is a secure, durable, and highly-scalable 
-cloud storage. Some use cases for cloud storage include: </p>
-<ul>
-<li>Backup and archive for on-premises or cloud data.</li>
-<li>Content, media, and software storage and distribution.</li>
-<li>Big data analytics.</li>
-<li>Static website hosting.</li>
-<li>Cloud-native mobile and Internet application hosting.</li>
-</ul>
-<h3 id="vpc">VPC</h3>
-<p>The Amazon Virtual Private Cloud (Amazon VPC) is a custom-defined 
-virtual network within the AWS Cloud.</p>
-<p><img alt="cloud1" src="../photos/cloud5.png" /></p>
-<p><strong><em>VPC COMPONENTS:</em></strong>
-An Amazon VPC consists of the following main components: Subnets, 
-Route tables, Dynamic Host Configuration Protocol (DHCP) option sets 
-Security groups, Network Access Control Lists (ACLs).
-Also, optional components: Internet Gateways (IGWs), Elastic IP (EIP) 
-addresses, Elastic Network Interfaces (ENIs), Endpoints, Peering, 
-Network Address Translation (NATs) instances and NAT gateways, Virtual 
-Private Gateway (VPG), Customer Gateways (CGWs), 
-and Virtual Private Networks (VPNs)</p>
-<p><strong><em>Subnets:</em></strong> 
-A subnet is a segment of an Amazon VPC’s IP address range. 
-Subnets reside within one Availability Zone and cannot span zones; 
-You can, however, have multiple subnets in one Availability Zone. 
-Each subnet must be associated with a route table, which controls 
-the routing for the subnet.</p>
-<p><strong><em>Route Tables:</em></strong> 
-A route table is a logical construct within an 
-Amazon VPC that contains a set of rules (called routes) that are 
-applied to the subnet and used to determine where network traffic is 
-directed.</p>
-<p><strong><em>Internet Gateways:</em></strong> 
-IGW allows communication between instances in your Amazon VPC 
-and the Internet. </p>
-<p><strong><em>Dynamic Host Configuration</em></strong> 
-Protocol (DHCP) Option Sets: provides a standard for passing 
-configuration information to hosts on a TCP/IP network. AWS 
-automatically creates and associates a DHCP option set for your 
-Amazon VPC upon creation and sets two options: domain-name-servers 
-(defaulted to AmazonProvidedDNS) and domain-name 
-(defaulted to the domain name for your region).</p>
-<h3 id="iam">IAM</h3>
-<p>With AWS IAM Identity Center (successor to AWS Single Sign-On), 
- you can manage sign-in security for your workforce identities, also 
- known as workforce users. IAM Identity Center provides one place where 
- you can create or connect workforce users and centrally manage their 
- access across all their AWS accounts and applications. </p>
-<p>For more on IAM chack the link: <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/getting-started.html">IAM</a></p>
-<h3 id="aws-elastic-load-balancer-elb">AWS ELASTIC LOAD BALANCER (ELB)</h3>
-<p>AWS has an Elastic Load Balancer that is used to distribute 
-incoming traffic across multiple targets, such as EC2 instances, 
-containers, and IP addresses, in one or more Availability Zones. 
-It monitors the health of its registered targets, and routes traffic 
-only to the healthy targets. Elastic Load Balancing supports routing 
-and load balancing of Hypertext.
-Transfer Protocol (HTTP), Hypertext Transfer Protocol Secure (HTTPS), 
-Transmission Control Protocol (TCP), and Secure Sockets Layer (SSL) 
-traffic to Amazon EC2 instances. </p>
-<p><strong><em>Types of AWS ELB:</em></strong>
-<img alt="cloud1" src="../photos/cloud7.png" /></p>
-<p>The two major Elastic load balancers are: </p>
-<p><strong><em>Application Load Balancer</em></strong> 
- Application layer that describes the use of HTTP and HTTPS connections 
- from clients to the load balancer and from the load balancer to your 
- back-end instance. </p>
-<p><strong><em>Network Load Balancer</em></strong>
- Are used to route traffic through layer 4, based IPs and TCP or UDP ports.</p>
-<p>### EKS
- Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service 
- that you can use to run Kubernetes on AWS without needing to install, 
- operate, and maintain your own Kubernetes control plane or nodes. 
- Kubernetes is an open-source system for automating the deployment, 
- scaling, and management of containerized applications.
- For more on EKS chack the link: [EKS]https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html</p>
 </li>
 </ul>
+<p>### S3
+   Amazon Simple Storage Service is a secure, durable, and highly-scalable 
+   cloud storage. Some use cases for cloud storage include: </p>
+<pre><code> - Backup and archive for on-premises or cloud data.
+ - Content, media, and software storage and distribution.
+ - Big data analytics.
+ - Static website hosting.
+ - Cloud-native mobile and Internet application hosting.
+</code></pre>
+<p>### VPC
+   The Amazon Virtual Private Cloud (Amazon VPC) is a custom-defined 
+   virtual network within the AWS Cloud.</p>
+<pre><code>![cloud1](photos/cloud5.png)
+</code></pre>
+<p><strong><em>VPC COMPONENTS:</em></strong>
+   An Amazon VPC consists of the following main components: Subnets, 
+   Route tables, Dynamic Host Configuration Protocol (DHCP) option sets 
+   Security groups, Network Access Control Lists (ACLs).
+   Also, optional components: Internet Gateways (IGWs), Elastic IP (EIP) 
+   addresses, Elastic Network Interfaces (ENIs), Endpoints, Peering, 
+   Network Address Translation (NATs) instances and NAT gateways, Virtual 
+   Private Gateway (VPG), Customer Gateways (CGWs), 
+   and Virtual Private Networks (VPNs)</p>
+<pre><code>***Subnets:***
+</code></pre>
+<p>A subnet is a segment of an Amazon VPC’s IP address range. 
+   Subnets reside within one Availability Zone and cannot span zones; 
+   You can, however, have multiple subnets in one Availability Zone. 
+   Each subnet must be associated with a route table, which controls 
+   the routing for the subnet.</p>
+<pre><code>***Route Tables:***
+</code></pre>
+<p>A route table is a logical construct within an 
+   Amazon VPC that contains a set of rules (called routes) that are 
+   applied to the subnet and used to determine where network traffic is 
+   directed.</p>
+<pre><code>***Internet Gateways:***
+</code></pre>
+<p>IGW allows communication between instances in your Amazon VPC 
+   and the Internet. </p>
+<pre><code>***Dynamic Host Configuration***
+</code></pre>
+<p>Protocol (DHCP) Option Sets: provides a standard for passing 
+   configuration information to hosts on a TCP/IP network. AWS 
+   automatically creates and associates a DHCP option set for your 
+   Amazon VPC upon creation and sets two options: domain-name-servers 
+   (defaulted to AmazonProvidedDNS) and domain-name 
+   (defaulted to the domain name for your region).</p>
+<p>### IAM
+   With AWS IAM Identity Center (successor to AWS Single Sign-On), 
+   you can manage sign-in security for your workforce identities, also 
+   known as workforce users. IAM Identity Center provides one place where 
+   you can create or connect workforce users and centrally manage their 
+   access across all their AWS accounts and applications. </p>
+<p>For more on IAM chack the link: <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/getting-started.html">IAM</a></p>
+<p>### AWS ELASTIC LOAD BALANCER (ELB)
+   AWS has an Elastic Load Balancer that is used to distribute 
+   incoming traffic across multiple targets, such as EC2 instances, 
+   containers, and IP addresses, in one or more Availability Zones. 
+   It monitors the health of its registered targets, and routes traffic 
+   only to the healthy targets. Elastic Load Balancing supports routing 
+   and load balancing of Hypertext.
+   Transfer Protocol (HTTP), Hypertext Transfer Protocol Secure (HTTPS), 
+   Transmission Control Protocol (TCP), and Secure Sockets Layer (SSL) 
+   traffic to Amazon EC2 instances. </p>
+<p><strong><em>Types of AWS ELB:</em></strong>
+    <img alt="cloud1" src="../photos/cloud7.png" /></p>
+<pre><code>The two major Elastic load balancers are:
+
+***Application Load Balancer*** 
+ Application layer that describes the use of HTTP and HTTPS connections 
+ from clients to the load balancer and from the load balancer to your 
+ back-end instance.
+
+ ***Network Load Balancer***
+ Are used to route traffic through layer 4, based IPs and TCP or UDP ports.
+</code></pre>
+<p>### EKS
+   Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service 
+   that you can use to run Kubernetes on AWS without needing to install, 
+   operate, and maintain your own Kubernetes control plane or nodes. 
+   Kubernetes is an open-source system for automating the deployment, 
+   scaling, and management of containerized applications.
+   For more on EKS chack the link: [EKS]https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html</p>
               
             </div>
           </div><footer>
