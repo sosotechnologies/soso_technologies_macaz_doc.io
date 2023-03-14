@@ -74,8 +74,6 @@
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#focus-aws-cloud">FOCUS: AWS CLOUD</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#repository">Repository</a>
     </li>
@@ -234,11 +232,131 @@ Platform as a Service (PaaS), and Software as a Service (SaaS).</p>
     business continuity easier and less   expensive because data can be mirrored at multiple redundant sites on the cloud provider’s network.</li>
 </ul>
 <h2 id="focus-aws-cloud">FOCUS: AWS CLOUD</h2>
-<p>If your documentation is related to source code, Material for MkDocs provides
-the ability to display information to the project's repository as part of the
-static site, including stars and forks. Furthermore, the
-<a href="#document-dates">date of last update and creation</a>, as well as <a href="#document-contributors">contributors</a> can be shown.</p>
-<h2 id="configuration">Configuration</h2>
+<p><strong><em>What Is Amazon Web Services(AWS):</em></strong> Amazon Web Services(AWS) is Amazon’s 
+cloud computing platform that offers a mix of packaged platform as a service (PaaS), 
+software as a service (SaaS), and infrastructure as a service (IaaS).  </p>
+<p><strong><em>EC2</em></strong>
+   Amazon EC2 is AWS primary web service that provides resizable compute 
+   capacity in the cloud. </p>
+<p><strong><em>Instance types:</em></strong>
+    Amazon EC2 provides a wide selection of instance types optimized to fit 
+    different use cases. Instance types comprise varying combinations of CPU, 
+    memory, storage, and networking capacity and give you the flexibility to 
+    choose the appropriate mix of resources for your applications. Each 
+    instance type includes one or more instance sizes, allowing you to scale 
+    your resources to the requirements of your target workload.</p>
+<p><strong><em>Example instance Family:</em></strong></p>
+<ul>
+<li>c4 Compute optimized—For workloads requiring significant processing</li>
+<li>r3 Memory optimized—For memory-intensive workloads</li>
+<li>i2 Storage optimized—For workloads requiring high amounts of fast SSD storage</li>
+<li>
+<p>g2 GPU-based instances—Intended for graphics and general-purpose GPU compute workloads</p>
+</li>
+<li>
+<p><strong><em>Amazon Machine Images (AMIs):</em></strong>
+   Defines the initial software that will be on an instance when it is launched. 
+   An AMI defines; The Operating System (OS) and its configuration, The initial 
+   state of any patches, Application or system software. 
+   AMI’s can be AWS published, from the AWS Marketplace, Generated 
+   from Existing Instances, or Uploaded Virtual Servers</p>
+</li>
+<li>
+<p><strong><em>Security Groups:</em></strong>
+   This is a VPC concept. If an instance is running in an Amazon VPC, 
+   you can change which security groups are associated with an instance 
+   while the instance is running.</p>
+</li>
+<li>
+<p><strong><em>EBS:</em></strong> Is type of “block storage” volume offering by AWS. 
+    EBS provides persistent block-level storage volumes for use with 
+    Amazon EC2 instances. </p>
+</li>
+<li>
+<p><strong><em>Instance Stores:</em></strong> Is another type of “block storage” volume offering 
+    by AWS for your instance. This storage is located on disks that are 
+    physically attached to the host computer.</p>
+</li>
+</ul>
+<p><strong><em>S3</em></strong>
+    Amazon Simple Storage Service is a secure, durable, and highly-scalable 
+    cloud storage. Some use cases for cloud storage include: </p>
+<pre><code> - Backup and archive for on-premises or cloud data.
+ - Content, media, and software storage and distribution.
+ - Big data analytics.
+ - Static website hosting.
+ - Cloud-native mobile and Internet application hosting.
+</code></pre>
+<p><strong><em>VPC</em></strong>
+    The Amazon Virtual Private Cloud (Amazon VPC) is a custom-defined 
+    virtual network within the AWS Cloud.</p>
+<pre><code> ![cloud1](photos/cloud5.png)
+</code></pre>
+<p><strong><em>VPC COMPONENTS:</em></strong>
+    An Amazon VPC consists of the following main components: Subnets, 
+    Route tables, Dynamic Host Configuration Protocol (DHCP) option sets 
+    Security groups, Network Access Control Lists (ACLs).
+    Also, optional components: Internet Gateways (IGWs), Elastic IP (EIP) 
+    addresses, Elastic Network Interfaces (ENIs), Endpoints, Peering, 
+    Network Address Translation (NATs) instances and NAT gateways, Virtual 
+    Private Gateway (VPG), Customer Gateways (CGWs), 
+    and Virtual Private Networks (VPNs)</p>
+<pre><code>***Subnets:*** A subnet is a segment of an Amazon VPC’s IP address range. 
+Subnets reside within one Availability Zone and cannot span zones; 
+You can, however, have multiple subnets in one Availability Zone. 
+Each subnet must be associated with a route table, which controls 
+the routing for the subnet.
+
+***Route Tables:*** A route table is a logical construct within an 
+Amazon VPC that contains a set of rules (called routes) that are 
+applied to the subnet and used to determine where network traffic is 
+directed.
+
+***Internet Gateways:*** IGW allows communication between instances 
+in your Amazon VPC and the Internet.
+
+***Dynamic Host Configuration*** 
+Protocol (DHCP) Option Sets: provides a standard for passing 
+configuration information to hosts on a TCP/IP network. AWS 
+automatically creates and associates a DHCP option set for your 
+Amazon VPC upon creation and sets two options: domain-name-servers 
+(defaulted to AmazonProvidedDNS) and domain-name 
+(defaulted to the domain name for your region).
+
+***AWS ELASTIC LOAD BALANCER (ELB)***
+AWS has an Elastic Load Balancer that is used to distribute 
+incoming traffic across multiple targets, such as EC2 instances, 
+containers, and IP addresses, in one or more Availability Zones. 
+It monitors the health of its registered targets, and routes traffic 
+only to the healthy targets. Elastic Load Balancing supports routing 
+and load balancing of Hypertext.
+Transfer Protocol (HTTP), Hypertext Transfer Protocol Secure (HTTPS), 
+Transmission Control Protocol (TCP), and Secure Sockets Layer (SSL) 
+traffic to Amazon EC2 instances.
+
+***Types of AWS ELB:***
+![cloud1](photos/cloud7.png)
+
+ The two major Elastic load balancers are:
+
+***Application Load Balancer*** 
+ Application layer that describes the use of HTTP and HTTPS connections 
+ from clients to the load balancer and from the load balancer to your 
+ back-end instance.
+
+ ***Network Load Balancer***
+ Are used to route traffic through layer 4, based IPs and TCP or UDP ports.
+
+ ***IAM***
+ IAM uses traditional identity concepts such as users, groups, and access 
+ control policies to control who can use your AWS account, what services 
+ and resources they can use, and how they can use them. 
+ Principals: The first IAM concept to understand is principals. 
+ A principal is an IAM entity that is allowed to interact with AWS 
+ resources. A principal can be permanent or temporary, and it can 
+ represent a human or an application. There are three types of principles: 
+ root users, IAM users, and roles/temporary security tokens.
+</code></pre>
 <h3 id="repository">Repository</h3>
 <p><a href="https://github.com/squidfunk/mkdocs-material/releases/tag/0.1.0">:octicons-tag-24: 0.1.0</a> ·
 :octicons-milestone-24: Default: <em>none</em></p>
