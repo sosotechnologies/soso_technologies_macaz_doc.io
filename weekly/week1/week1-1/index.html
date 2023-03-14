@@ -79,6 +79,8 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#vpc">VPC</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#iam">IAM</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#aws-elastic-load-balancer-elb">AWS ELASTIC LOAD BALANCER (ELB)</a>
     </li>
         </ul>
@@ -238,7 +240,7 @@ Platform as a Service (PaaS), and Software as a Service (SaaS).</p>
    Amazon Web Services(AWS) is Amazon’s cloud computing platform that 
    offers a mix of packaged platform as a service (PaaS), software as 
    a service (SaaS), and infrastructure as a service (IaaS).  </p>
-<p>#### <strong><em>EC2</em></strong></p>
+<p>#### EC2</p>
 <p>Amazon EC2 is AWS primary web service that provides resizable compute 
    capacity in the cloud. </p>
 <p><strong><em>Instance types:</em></strong>
@@ -271,7 +273,7 @@ Amazon EC2 instances. </p>
 <p><strong><em>Instance Stores:</em></strong> Is another type of “block storage” volume offering 
 by AWS for your instance. This storage is located on disks that are 
 physically attached to the host computer.</p>
-<h4 id="s3"><strong><em>S3</em></strong></h4>
+<h4 id="s3">S3</h4>
 <p>Amazon Simple Storage Service is a secure, durable, and highly-scalable 
 cloud storage. Some use cases for cloud storage include: </p>
 <ul>
@@ -281,7 +283,7 @@ cloud storage. Some use cases for cloud storage include: </p>
 <li>Static website hosting.</li>
 <li>Cloud-native mobile and Internet application hosting.</li>
 </ul>
-<h4 id="vpc"><strong><em>VPC</em></strong></h4>
+<h4 id="vpc">VPC</h4>
 <p>The Amazon Virtual Private Cloud (Amazon VPC) is a custom-defined 
 virtual network within the AWS Cloud.</p>
 <p><img alt="cloud1" src="../photos/cloud5.png" /></p>
@@ -315,7 +317,14 @@ automatically creates and associates a DHCP option set for your
 Amazon VPC upon creation and sets two options: domain-name-servers 
 (defaulted to AmazonProvidedDNS) and domain-name 
 (defaulted to the domain name for your region).</p>
-<h4 id="aws-elastic-load-balancer-elb"><strong><em>AWS ELASTIC LOAD BALANCER (ELB)</em></strong></h4>
+<h4 id="iam">IAM</h4>
+<p>With AWS IAM Identity Center (successor to AWS Single Sign-On), 
+ you can manage sign-in security for your workforce identities, also 
+ known as workforce users. IAM Identity Center provides one place where 
+ you can create or connect workforce users and centrally manage their 
+ access across all their AWS accounts and applications. </p>
+<p>For more on IAM chack the link: <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/getting-started.html">IAM</a></p>
+<h4 id="aws-elastic-load-balancer-elb">AWS ELASTIC LOAD BALANCER (ELB)</h4>
 <p>AWS has an Elastic Load Balancer that is used to distribute 
 incoming traffic across multiple targets, such as EC2 instances, 
 containers, and IP addresses, in one or more Availability Zones. 
@@ -334,15 +343,13 @@ traffic to Amazon EC2 instances. </p>
  back-end instance. </p>
 <p><strong><em>Network Load Balancer</em></strong>
  Are used to route traffic through layer 4, based IPs and TCP or UDP ports.</p>
-<p>#### <strong><em>IAM</em></strong>
- IAM uses traditional identity concepts such as users, groups, and access 
- control policies to control who can use your AWS account, what services 
- and resources they can use, and how they can use them. 
- Principals: The first IAM concept to understand is principals. 
- A principal is an IAM entity that is allowed to interact with AWS 
- resources. A principal can be permanent or temporary, and it can 
- represent a human or an application. There are three types of principles: 
- root users, IAM users, and roles/temporary security tokens. </p>
+<p>#### EKS
+ Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service 
+ that you can use to run Kubernetes on AWS without needing to install, 
+ operate, and maintain your own Kubernetes control plane or nodes. 
+ Kubernetes is an open-source system for automating the deployment, 
+ scaling, and management of containerized applications.</p>
+<p>For more on EKS chack the link: [EKS]https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html</p>
 </li>
 </ul>
               
