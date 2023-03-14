@@ -252,30 +252,22 @@ software as a service (SaaS), and infrastructure as a service (IaaS).  </p>
 <li>i2 Storage optimized—For workloads requiring high amounts of fast SSD storage</li>
 <li>
 <p>g2 GPU-based instances—Intended for graphics and general-purpose GPU compute workloads</p>
-</li>
-<li>
 <p><strong><em>Amazon Machine Images (AMIs):</em></strong>
    Defines the initial software that will be on an instance when it is launched. 
    An AMI defines; The Operating System (OS) and its configuration, The initial 
    state of any patches, Application or system software. 
    AMI’s can be AWS published, from the AWS Marketplace, Generated 
    from Existing Instances, or Uploaded Virtual Servers</p>
-</li>
-<li>
 <p><strong><em>Security Groups:</em></strong>
    This is a VPC concept. If an instance is running in an Amazon VPC, 
    you can change which security groups are associated with an instance 
    while the instance is running.</p>
-</li>
-<li>
 <p><strong><em>EBS:</em></strong> Is type of “block storage” volume offering by AWS. 
-    EBS provides persistent block-level storage volumes for use with 
-    Amazon EC2 instances. </p>
-</li>
-<li>
+EBS provides persistent block-level storage volumes for use with 
+Amazon EC2 instances. </p>
 <p><strong><em>Instance Stores:</em></strong> Is another type of “block storage” volume offering 
-    by AWS for your instance. This storage is located on disks that are 
-    physically attached to the host computer.</p>
+by AWS for your instance. This storage is located on disks that are 
+physically attached to the host computer.</p>
 </li>
 </ul>
 <p><strong><em>S3</em></strong>
@@ -301,19 +293,22 @@ software as a service (SaaS), and infrastructure as a service (IaaS).  </p>
     Network Address Translation (NATs) instances and NAT gateways, Virtual 
     Private Gateway (VPG), Customer Gateways (CGWs), 
     and Virtual Private Networks (VPNs)</p>
-<pre><code>***Subnets:*** A subnet is a segment of an Amazon VPC’s IP address range. 
+<pre><code>***Subnets:*** 
+A subnet is a segment of an Amazon VPC’s IP address range. 
 Subnets reside within one Availability Zone and cannot span zones; 
 You can, however, have multiple subnets in one Availability Zone. 
 Each subnet must be associated with a route table, which controls 
 the routing for the subnet.
 
-***Route Tables:*** A route table is a logical construct within an 
+***Route Tables:*** 
+A route table is a logical construct within an 
 Amazon VPC that contains a set of rules (called routes) that are 
 applied to the subnet and used to determine where network traffic is 
 directed.
 
-***Internet Gateways:*** IGW allows communication between instances 
-in your Amazon VPC and the Internet.
+***Internet Gateways:*** 
+IGW allows communication between instances in your Amazon VPC 
+and the Internet.
 
 ***Dynamic Host Configuration*** 
 Protocol (DHCP) Option Sets: provides a standard for passing 
