@@ -75,13 +75,11 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#focus-aws-cloud">FOCUS: AWS CLOUD</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#repository-name">Repository name</a>
+    <li class="toctree-l4"><a class="reference internal" href="#s3">S3</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#repository-icon">Repository icon</a>
+    <li class="toctree-l4"><a class="reference internal" href="#vpc">VPC</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#code-actions">Code actions</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#revisioning">Revisioning</a>
+    <li class="toctree-l4"><a class="reference internal" href="#aws-elastic-load-balancer-elb">AWS ELASTIC LOAD BALANCER (ELB)</a>
     </li>
         </ul>
     </li>
@@ -240,8 +238,8 @@ Platform as a Service (PaaS), and Software as a Service (SaaS).</p>
    Amazon Web Services(AWS) is Amazon’s cloud computing platform that 
    offers a mix of packaged platform as a service (PaaS), software as 
    a service (SaaS), and infrastructure as a service (IaaS).  </p>
-<p><strong><em>EC2</em></strong>
-   Amazon EC2 is AWS primary web service that provides resizable compute 
+<p>#### <strong><em>EC2</em></strong></p>
+<p>Amazon EC2 is AWS primary web service that provides resizable compute 
    capacity in the cloud. </p>
 <p><strong><em>Instance types:</em></strong>
     Amazon EC2 provides a wide selection of instance types optimized to fit 
@@ -273,58 +271,52 @@ Amazon EC2 instances. </p>
 <p><strong><em>Instance Stores:</em></strong> Is another type of “block storage” volume offering 
 by AWS for your instance. This storage is located on disks that are 
 physically attached to the host computer.</p>
-</li>
+<h4 id="s3"><strong><em>S3</em></strong></h4>
+<p>Amazon Simple Storage Service is a secure, durable, and highly-scalable 
+cloud storage. Some use cases for cloud storage include: </p>
+<ul>
+<li>Backup and archive for on-premises or cloud data.</li>
+<li>Content, media, and software storage and distribution.</li>
+<li>Big data analytics.</li>
+<li>Static website hosting.</li>
+<li>Cloud-native mobile and Internet application hosting.</li>
 </ul>
-<p><strong><em>S3</em></strong>
-    Amazon Simple Storage Service is a secure, durable, and highly-scalable 
-    cloud storage. Some use cases for cloud storage include: </p>
-<pre><code> - Backup and archive for on-premises or cloud data.
- - Content, media, and software storage and distribution.
- - Big data analytics.
- - Static website hosting.
- - Cloud-native mobile and Internet application hosting.
-</code></pre>
-<p><strong><em>VPC</em></strong>
-    The Amazon Virtual Private Cloud (Amazon VPC) is a custom-defined 
-    virtual network within the AWS Cloud.</p>
-<pre><code> ![cloud1](photos/cloud5.png)
-</code></pre>
+<h4 id="vpc"><strong><em>VPC</em></strong></h4>
+<p>The Amazon Virtual Private Cloud (Amazon VPC) is a custom-defined 
+virtual network within the AWS Cloud.</p>
+<p><img alt="cloud1" src="../photos/cloud5.png" /></p>
 <p><strong><em>VPC COMPONENTS:</em></strong>
-    An Amazon VPC consists of the following main components: Subnets, 
-    Route tables, Dynamic Host Configuration Protocol (DHCP) option sets 
-    Security groups, Network Access Control Lists (ACLs).
-    Also, optional components: Internet Gateways (IGWs), Elastic IP (EIP) 
-    addresses, Elastic Network Interfaces (ENIs), Endpoints, Peering, 
-    Network Address Translation (NATs) instances and NAT gateways, Virtual 
-    Private Gateway (VPG), Customer Gateways (CGWs), 
-    and Virtual Private Networks (VPNs)</p>
-<pre><code>***Subnets:*** 
+An Amazon VPC consists of the following main components: Subnets, 
+Route tables, Dynamic Host Configuration Protocol (DHCP) option sets 
+Security groups, Network Access Control Lists (ACLs).
+Also, optional components: Internet Gateways (IGWs), Elastic IP (EIP) 
+addresses, Elastic Network Interfaces (ENIs), Endpoints, Peering, 
+Network Address Translation (NATs) instances and NAT gateways, Virtual 
+Private Gateway (VPG), Customer Gateways (CGWs), 
+and Virtual Private Networks (VPNs)</p>
+<p><strong><em>Subnets:</em></strong> 
 A subnet is a segment of an Amazon VPC’s IP address range. 
 Subnets reside within one Availability Zone and cannot span zones; 
 You can, however, have multiple subnets in one Availability Zone. 
 Each subnet must be associated with a route table, which controls 
-the routing for the subnet.
-
-***Route Tables:*** 
+the routing for the subnet.</p>
+<p><strong><em>Route Tables:</em></strong> 
 A route table is a logical construct within an 
 Amazon VPC that contains a set of rules (called routes) that are 
 applied to the subnet and used to determine where network traffic is 
-directed.
-
-***Internet Gateways:*** 
+directed.</p>
+<p><strong><em>Internet Gateways:</em></strong> 
 IGW allows communication between instances in your Amazon VPC 
-and the Internet.
-
-***Dynamic Host Configuration*** 
+and the Internet. </p>
+<p><strong><em>Dynamic Host Configuration</em></strong> 
 Protocol (DHCP) Option Sets: provides a standard for passing 
 configuration information to hosts on a TCP/IP network. AWS 
 automatically creates and associates a DHCP option set for your 
 Amazon VPC upon creation and sets two options: domain-name-servers 
 (defaulted to AmazonProvidedDNS) and domain-name 
-(defaulted to the domain name for your region).
-
-***AWS ELASTIC LOAD BALANCER (ELB)***
-AWS has an Elastic Load Balancer that is used to distribute 
+(defaulted to the domain name for your region).</p>
+<h4 id="aws-elastic-load-balancer-elb"><strong><em>AWS ELASTIC LOAD BALANCER (ELB)</em></strong></h4>
+<p>AWS has an Elastic Load Balancer that is used to distribute 
 incoming traffic across multiple targets, such as EC2 instances, 
 containers, and IP addresses, in one or more Availability Zones. 
 It monitors the health of its registered targets, and routes traffic 
@@ -332,22 +324,17 @@ only to the healthy targets. Elastic Load Balancing supports routing
 and load balancing of Hypertext.
 Transfer Protocol (HTTP), Hypertext Transfer Protocol Secure (HTTPS), 
 Transmission Control Protocol (TCP), and Secure Sockets Layer (SSL) 
-traffic to Amazon EC2 instances.
-
-***Types of AWS ELB:***
-![cloud1](photos/cloud7.png)
-
- The two major Elastic load balancers are:
-
-***Application Load Balancer*** 
+traffic to Amazon EC2 instances. </p>
+<p><strong><em>Types of AWS ELB:</em></strong>
+<img alt="cloud1" src="../photos/cloud7.png" /></p>
+<p>The two major Elastic load balancers are: </p>
+<p><strong><em>Application Load Balancer</em></strong> 
  Application layer that describes the use of HTTP and HTTPS connections 
  from clients to the load balancer and from the load balancer to your 
- back-end instance.
-
- ***Network Load Balancer***
- Are used to route traffic through layer 4, based IPs and TCP or UDP ports.
-
- ***IAM***
+ back-end instance. </p>
+<p><strong><em>Network Load Balancer</em></strong>
+ Are used to route traffic through layer 4, based IPs and TCP or UDP ports.</p>
+<p>#### <strong><em>IAM</em></strong>
  IAM uses traditional identity concepts such as users, groups, and access 
  control policies to control who can use your AWS account, what services 
  and resources they can use, and how they can use them. 
@@ -355,243 +342,9 @@ traffic to Amazon EC2 instances.
  A principal is an IAM entity that is allowed to interact with AWS 
  resources. A principal can be permanent or temporary, and it can 
  represent a human or an application. There are three types of principles: 
- root users, IAM users, and roles/temporary security tokens.
-</code></pre>
-<p><a href="https://github.com/squidfunk/mkdocs-material/releases/tag/0.1.0">:octicons-tag-24: 0.1.0</a> ·
-:octicons-milestone-24: Default: <em>none</em></p>
-<p>In order to display a link to the repository of your project as part of your
-documentation, set <a href="https://www.mkdocs.org/user-guide/configuration/#repo_url"><code>repo_url</code></a> in <code>mkdocs.yml</code> to the public URL of
-your repository, e.g.:</p>
-<pre><code class="language-yaml">repo_url: https://github.com/squidfunk/mkdocs-material
-</code></pre>
-<p>The link to the repository will be rendered next to the search bar on big
-screens and as part of the main navigation drawer on smaller screen sizes.
-Additionally, for public repositories hosted on <a href="https://github.com/">GitHub</a> or <a href="https://about.gitlab.com/">GitLab</a>, the
-number of stars and forks is automatically requested and rendered.</p>
-<p>GitHub repositories also include the tag of the latest release.[^1]</p>
-<p>[^1]:
-    Unfortunately, GitHub only provides an API endpoint to obtain the <a href="https://docs.github.com/en/rest/reference/releases#get-the-latest-release">latest
-    release</a> - not the latest tag. Thus, make sure to <a href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release">create a release</a> (not 
-    pre-release) for the latest tag you want to display next to the number of
-    stars and forks.</p>
-<h4 id="repository-name">Repository name</h4>
-<p><a href="https://github.com/squidfunk/mkdocs-material/releases/tag/0.1.0">:octicons-tag-24: 0.1.0</a> ·
-:octicons-milestone-24: Default: <em>automatically set to</em> <code>GitHub</code>, <code>GitLab</code> <em>or</em>
-<code>Bitbucket</code></p>
-<p>MkDocs will infer the source provider by examining the URL and try to set the
-<em>repository name</em> automatically. If you wish to customize the name, set
-<a href="https://www.mkdocs.org/user-guide/configuration/#repo_name"><code>repo_name</code></a> in <code>mkdocs.yml</code>:</p>
-<pre><code class="language-yaml">repo_name: squidfunk/mkdocs-material
-</code></pre>
-<h4 id="repository-icon">Repository icon</h4>
-<p><a href="https://github.com/squidfunk/mkdocs-material/releases/tag/5.0.0">:octicons-tag-24: 5.0.0</a> ·
-:octicons-milestone-24: Default:
-:fontawesome-brands-git-alt: – <code>fontawesome/brands/git-alt</code></p>
-<p>While the default repository icon is a generic git icon, it can be set to
-any icon bundled with the theme by referencing a valid icon path in
-<code>mkdocs.yml</code>:</p>
-<pre><code class="language-yaml">theme:
-  icon:
-    repo: fontawesome/brands/git-alt # (1)!
-</code></pre>
-<ol>
-<li>
-<p>Enter a few keywords to find the perfect icon using our <a href="../reference/icons-emojis.md#search">icon search</a> and
-    click on the shortcode to copy it to your clipboard:</p>
-<p><div class="mdx-iconsearch" data-mdx-component="iconsearch">
-  <input class="md-input md-input--stretch mdx-iconsearch__input" placeholder="Search icon" data-mdx-component="iconsearch-query" value="git" />
-  <div class="mdx-iconsearch-result" data-mdx-component="iconsearch-result" data-mdx-mode="file">
-    <div class="mdx-iconsearch-result__meta"></div>
-    <ol class="mdx-iconsearch-result__list"></ol>
-  </div>
-</div></p>
+ root users, IAM users, and roles/temporary security tokens. </p>
 </li>
-</ol>
-<p>Some popular choices:</p>
-<ul>
-<li>:fontawesome-brands-git: – <code>fontawesome/brands/git</code></li>
-<li>:fontawesome-brands-git-alt: – <code>fontawesome/brands/git-alt</code></li>
-<li>:fontawesome-brands-github: – <code>fontawesome/brands/github</code></li>
-<li>:fontawesome-brands-github-alt: – <code>fontawesome/brands/github-alt</code></li>
-<li>:fontawesome-brands-gitlab: – <code>fontawesome/brands/gitlab</code></li>
-<li>:fontawesome-brands-gitkraken: – <code>fontawesome/brands/gitkraken</code></li>
-<li>:fontawesome-brands-bitbucket: – <code>fontawesome/brands/bitbucket</code></li>
-<li>:fontawesome-solid-trash: – <code>fontawesome/solid/trash</code></li>
 </ul>
-<h4 id="code-actions">Code actions</h4>
-<p><a href="https://github.com/squidfunk/mkdocs-material/releases/tag/9.0.0">:octicons-tag-24: 9.0.0</a> ·
-:octicons-unlock-24: Feature flag</p>
-<p>If the <a href="#repository">repository URL</a> points to a valid <a href="https://github.com/">GitHub</a>, <a href="https://about.gitlab.com/">GitLab</a> or <a href="https://bitbucket.org/">Bitbucket</a>
-repository, <a href="https://www.mkdocs.org">MkDocs</a> provides a setting called <a href="https://www.mkdocs.org/user-guide/configuration/#edit_uri"><code>edit_uri</code></a>, which
-resolves to the subfolder where your documentation is hosted.</p>
-<p>If your default branch is called <code>main</code>, change the setting to:</p>
-<pre><code class="language-yaml">edit_uri: edit/main/docs/
-</code></pre>
-<p>After making sure that <code>edit_uri</code> is correctly configured, buttons for code
-actions can be added. Two types of code actions are supported: <code>edit</code> and <code>view</code>
-(GitHub only):</p>
-<p>=== ":material-file-edit-outline: Edit this page"</p>
-<pre><code>``` yaml
-theme:
-  features:
-    - content.action.edit
-```
-</code></pre>
-<p>=== ":material-file-eye-outline: View source of this page"</p>
-<pre><code>``` yaml
-theme:
-  features:
-    - content.action.view
-```
-</code></pre>
-<p>The icon of the edit and view buttons can be changed with the following lines:</p>
-<pre><code class="language-yaml">theme:
-  icon:
-    edit: material/pencil # (1)!
-    view: material/eye
-</code></pre>
-<ol>
-<li>
-<p>Enter a few keywords to find the perfect icon using our <a href="../reference/icons-emojis.md#search">icon search</a> and
-    click on the shortcode to copy it to your clipboard:</p>
-<p><div class="mdx-iconsearch" data-mdx-component="iconsearch">
-  <input class="md-input md-input--stretch mdx-iconsearch__input" placeholder="Search icon" data-mdx-component="iconsearch-query" value="material pencil" />
-  <div class="mdx-iconsearch-result" data-mdx-component="iconsearch-result" data-mdx-mode="file">
-    <div class="mdx-iconsearch-result__meta"></div>
-    <ol class="mdx-iconsearch-result__list"></ol>
-  </div>
-</div></p>
-</li>
-</ol>
-<h3 id="revisioning">Revisioning</h3>
-<p>The following plugins are fully integrated with Material for MkDocs, allowing
-for showing the <a href="#document-dates">date of last update and creation</a> of a document, as well as
-links to all <a href="#document-contributors">contributors</a> or <a href="#document-authors">authors</a> involved.</p>
-<h4 id="document-dates">Document dates</h4>
-<p><a href="https://github.com/squidfunk/mkdocs-material/releases/tag/4.6.0">:octicons-tag-24: 4.6.0</a> ·
-<a href="https://github.com/timvink/mkdocs-git-revision-date-localized-plugin">:octicons-cpu-24: Plugin</a></p>
-<p>The <a href="https://github.com/timvink/mkdocs-git-revision-date-localized-plugin">git-revision-date-localized</a> plugin adds support for adding the date of
-last update and creation of a document at the bottom of each page. Install it
-with <code>pip</code>:</p>
-<pre><code>pip install mkdocs-git-revision-date-localized-plugin
-</code></pre>
-<p>Then, add the following lines to <code>mkdocs.yml</code>:</p>
-<pre><code class="language-yaml">plugins:
-  - git-revision-date-localized:
-      enable_creation_date: true
-</code></pre>
-<p>The following configuration options are supported:</p>
-<p><a href="#+git-revision-date-localized.enabled"><code>enabled</code></a>{ #+git-revision-date-localized.enabled }</p>
-<p>:   :octicons-milestone-24: Default: <code>true</code> – This option specifies whether
-    the plugin is enabled when building your project. If you want to switch
-    the plugin off, e.g. for local builds, use an <a href="https://www.mkdocs.org/user-guide/configuration/#environment-variables">environment variable</a>:</p>
-<pre><code>``` yaml
-plugins:
-  - git-revision-date-localized:
-      enabled: !ENV [CI, false]
-```
-</code></pre>
-<p><a href="#+git-revision-date-localized.type"><code>type</code></a>{ #+git-revision-date-localized.type }</p>
-<p>:   :octicons-milestone-24: Default: <code>date</code> – The format of the date to be
-    displayed. Valid values are <code>date</code>, <code>datetime</code>, <code>iso_date</code>, <code>iso_datetime</code>
-    and <code>timeago</code>:</p>
-<pre><code>``` yaml
-plugins:
-  - git-revision-date-localized:
-      type: date
-```
-</code></pre>
-<p><a href="#+git-revision-date-localized.enable_creation_date"><code>enable_creation_date</code></a>{ #+git-revision-date-localized.enable_creation_date }</p>
-<p>:   :octicons-milestone-24: Default: <code>false</code> – Enables the display of the
-    creation date of the file associated with the page next to the last updated
-    date at the bottom of the page:</p>
-<pre><code>``` yaml
-plugins:
-  - git-revision-date-localized:
-      enable_creation_date: true
-```
-</code></pre>
-<p><a href="#+git-revision-date-localized.fallback_to_build_date"><code>fallback_to_build_date</code></a>{ #+git-revision-date-localized.fallback_to_build_date }</p>
-<p>:   :octicons-milestone-24: Default: <code>false</code> – Enables falling back to
-    the time when <code>mkdocs build</code> was executed. Can be used as a fallback when
-    the build is performed outside of a git repository:</p>
-<pre><code>``` yaml
-plugins:
-  - git-revision-date-localized:
-      fallback_to_build_date: true
-```
-</code></pre>
-<p>The other configuration options of this extension are not officially supported
-by Material for MkDocs, which is why they may yield unexpected results. Use
-them at your own risk.</p>
-<h4 id="document-contributors">Document contributors</h4>
-<p><a href="../insiders/index.md">:octicons-heart-fill-24:{ .mdx-heart } Sponsors only</a>{ .mdx-insiders } ·
-<a href="../insiders/index.md">:octicons-tag-24: insiders-4.19.0</a> ·
-<a href="https://github.com/ojacques/mkdocs-git-committers-plugin-2">:octicons-cpu-24: Plugin</a> ·
-:octicons-beaker-24: Experimental</p>
-<p>The <a href="https://github.com/ojacques/mkdocs-git-committers-plugin-2">git-committers</a>[^2] plugin renders the GitHub avatars of all contributors,
-linking to their GitHub profiles at the bottom of each page. As always, it can
-be installed with <code>pip</code>:</p>
-<p>[^2]:
-    We currently recommend using a fork of the <a href="https://github.com/ojacques/mkdocs-git-committers-plugin-2">git-committers</a> plugin, as it
-    contains many improvements that have not yet been merged back into the
-    original plugin. See byrnereese/mkdocs-git-committers-plugin#12 for more
-    information.</p>
-<pre><code>pip install mkdocs-git-committers-plugin-2
-</code></pre>
-<p>Then, add the following lines to <code>mkdocs.yml</code>:</p>
-<pre><code class="language-yaml">plugins:
-  - git-committers:
-      repository: squidfunk/mkdocs-material
-      branch: main
-</code></pre>
-<p>The following configuration options are supported:</p>
-<p><a href="#+git-committers.enabled"><code>enabled</code></a>{ #+git-committers.enabled }</p>
-<p>:   :octicons-milestone-24: Default: <code>true</code> – This option specifies whether
-    the plugin is enabled when building your project. If you want to switch
-    the plugin off, e.g. for local builds, use an <a href="https://www.mkdocs.org/user-guide/configuration/#environment-variables">environment variable</a>:</p>
-<pre><code>``` yaml
-plugins:
-  - git-committers:
-      enabled: !ENV [CI, false]
-```
-</code></pre>
-<p><a href="#+git-committers.repository"><code>repository</code></a>{ #+git-committers.repository }</p>
-<p>:   :octicons-milestone-24: Default: <em>none</em> · :octicons-alert-24: <strong>Required</strong> –
-    This property must be set to the slug of the repository that contains your
-    documentation. The slug must follow the pattern <code>&lt;username&gt;/&lt;repository&gt;</code>:</p>
-<pre><code>``` yaml
-plugins:
-  - git-committers:
-      repository: squidfunk/mkdocs-material
-```
-</code></pre>
-<p><a href="#+git-committers.branch"><code>branch</code></a>{ #+git-committers.branch }</p>
-<p>:   :octicons-milestone-24: Default: <code>master</code> – This property should be set to
-    the branch of the repository from which to retrieve the contributors. To use the <code>main</code> branch:</p>
-<pre><code>``` yaml
-plugins:
-  - git-committers:
-      branch: main
-```
-</code></pre>
-<p>The other configuration options of this extension are not officially supported
-by Material for MkDocs, which is why they may yield unexpected results. Use
-them at your own risk.</p>
-<h4 id="document-authors">Document authors</h4>
-<p><a href="../insiders/index.md">:octicons-heart-fill-24:{ .mdx-heart } Sponsors only</a>{ .mdx-insiders } ·
-<a href="../insiders/index.md">:octicons-tag-24: insiders-4.19.0</a> ·
-<a href="https://github.com/timvink/mkdocs-git-authors-plugin/">:octicons-cpu-24: Plugin</a> ·
-:octicons-beaker-24: Experimental</p>
-<p>The <a href="https://github.com/timvink/mkdocs-git-authors-plugin/">git-authors</a> plugin extracts the authors of a document from git to display
-them at the bottom of each page. It's a lightweight alternative to the
-<a href="https://github.com/ojacques/mkdocs-git-committers-plugin-2">git-committers</a> plugin. Install it with <code>pip</code>:</p>
-<pre><code>pip install mkdocs-git-authors-plugin
-</code></pre>
-<p>Then, add the following lines to <code>mkdocs.yml</code>:</p>
-<pre><code class="language-yaml">plugins:
-  - git-authors
-</code></pre>
               
             </div>
           </div><footer>
