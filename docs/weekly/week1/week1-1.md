@@ -75,7 +75,9 @@ Platform as a Service (PaaS), and Software as a Service (SaaS).
    client, usually an online browser over the web. SAAS services are used for the 
    development and deployment of modern applications.
   
-   The emergence of Cloud computing has given rise to more as-a-service offerings. Some of them include:
+   The emergence of Cloud computing has given rise to more as-a-service offerings. 
+   Some of them include:
+
      - AIaaS: AI as a service
      - DaaS: Desktop as a service
      - ITaaS: IT as a service
@@ -92,7 +94,8 @@ Platform as a Service (PaaS), and Software as a Service (SaaS).
   - Provides unlimited Storage Capacity.
   - Provides ease in Back-up and Restoring of Data
   - Reliability: Cloud computing makes data backup, disaster recovery, and 
-    business continuity easier and less   expensive because data can be mirrored at multiple redundant sites on the cloud provider’s network.
+    business continuity easier and less expensive because data can be mirrored 
+    at multiple redundant sites on the cloud provider’s network.
 
 ## FOCUS: AWS CLOUD
 
@@ -101,10 +104,9 @@ Platform as a Service (PaaS), and Software as a Service (SaaS).
    offers a mix of packaged platform as a service (PaaS), software as 
    a service (SaaS), and infrastructure as a service (IaaS).  
 
-   #### EC2
-
-   Amazon EC2 is AWS primary web service that provides resizable compute 
-   capacity in the cloud. 
+  ### EC2
+  Amazon EC2 is AWS primary web service that provides resizable compute 
+  capacity in the cloud. 
    
    ***Instance types:***
     Amazon EC2 provides a wide selection of instance types optimized to fit 
@@ -142,10 +144,9 @@ Platform as a Service (PaaS), and Software as a Service (SaaS).
     by AWS for your instance. This storage is located on disks that are 
     physically attached to the host computer.
 
-   
-    #### S3
-    Amazon Simple Storage Service is a secure, durable, and highly-scalable 
-    cloud storage. Some use cases for cloud storage include: 
+  ### S3
+   Amazon Simple Storage Service is a secure, durable, and highly-scalable 
+   cloud storage. Some use cases for cloud storage include: 
 
      - Backup and archive for on-premises or cloud data.
      - Content, media, and software storage and distribution.
@@ -153,71 +154,71 @@ Platform as a Service (PaaS), and Software as a Service (SaaS).
      - Static website hosting.
      - Cloud-native mobile and Internet application hosting.
 
-    #### VPC
-    The Amazon Virtual Private Cloud (Amazon VPC) is a custom-defined 
-    virtual network within the AWS Cloud.
+  ### VPC
+   The Amazon Virtual Private Cloud (Amazon VPC) is a custom-defined 
+   virtual network within the AWS Cloud.
 
-     ![cloud1](photos/cloud5.png)
+    ![cloud1](photos/cloud5.png)
 
-    ***VPC COMPONENTS:***
-    An Amazon VPC consists of the following main components: Subnets, 
-    Route tables, Dynamic Host Configuration Protocol (DHCP) option sets 
-    Security groups, Network Access Control Lists (ACLs).
-    Also, optional components: Internet Gateways (IGWs), Elastic IP (EIP) 
-    addresses, Elastic Network Interfaces (ENIs), Endpoints, Peering, 
-    Network Address Translation (NATs) instances and NAT gateways, Virtual 
-    Private Gateway (VPG), Customer Gateways (CGWs), 
-    and Virtual Private Networks (VPNs)
+   ***VPC COMPONENTS:***
+   An Amazon VPC consists of the following main components: Subnets, 
+   Route tables, Dynamic Host Configuration Protocol (DHCP) option sets 
+   Security groups, Network Access Control Lists (ACLs).
+   Also, optional components: Internet Gateways (IGWs), Elastic IP (EIP) 
+   addresses, Elastic Network Interfaces (ENIs), Endpoints, Peering, 
+   Network Address Translation (NATs) instances and NAT gateways, Virtual 
+   Private Gateway (VPG), Customer Gateways (CGWs), 
+   and Virtual Private Networks (VPNs)
 
     ***Subnets:*** 
-    A subnet is a segment of an Amazon VPC’s IP address range. 
-    Subnets reside within one Availability Zone and cannot span zones; 
-    You can, however, have multiple subnets in one Availability Zone. 
-    Each subnet must be associated with a route table, which controls 
-    the routing for the subnet.
+   A subnet is a segment of an Amazon VPC’s IP address range. 
+   Subnets reside within one Availability Zone and cannot span zones; 
+   You can, however, have multiple subnets in one Availability Zone. 
+   Each subnet must be associated with a route table, which controls 
+   the routing for the subnet.
 
     ***Route Tables:*** 
-    A route table is a logical construct within an 
-    Amazon VPC that contains a set of rules (called routes) that are 
-    applied to the subnet and used to determine where network traffic is 
-    directed.
+   A route table is a logical construct within an 
+   Amazon VPC that contains a set of rules (called routes) that are 
+   applied to the subnet and used to determine where network traffic is 
+   directed.
 
     ***Internet Gateways:*** 
-    IGW allows communication between instances in your Amazon VPC 
-    and the Internet. 
+   IGW allows communication between instances in your Amazon VPC 
+   and the Internet. 
     
     ***Dynamic Host Configuration*** 
-    Protocol (DHCP) Option Sets: provides a standard for passing 
-    configuration information to hosts on a TCP/IP network. AWS 
-    automatically creates and associates a DHCP option set for your 
-    Amazon VPC upon creation and sets two options: domain-name-servers 
-    (defaulted to AmazonProvidedDNS) and domain-name 
-    (defaulted to the domain name for your region).
+   Protocol (DHCP) Option Sets: provides a standard for passing 
+   configuration information to hosts on a TCP/IP network. AWS 
+   automatically creates and associates a DHCP option set for your 
+   Amazon VPC upon creation and sets two options: domain-name-servers 
+   (defaulted to AmazonProvidedDNS) and domain-name 
+   (defaulted to the domain name for your region).
 
-    #### IAM
-     With AWS IAM Identity Center (successor to AWS Single Sign-On), 
-     you can manage sign-in security for your workforce identities, also 
-     known as workforce users. IAM Identity Center provides one place where 
-     you can create or connect workforce users and centrally manage their 
-     access across all their AWS accounts and applications. 
+  ### IAM
+   With AWS IAM Identity Center (successor to AWS Single Sign-On), 
+   you can manage sign-in security for your workforce identities, also 
+   known as workforce users. IAM Identity Center provides one place where 
+   you can create or connect workforce users and centrally manage their 
+   access across all their AWS accounts and applications. 
 
-     For more on IAM chack the link: [IAM](https://docs.aws.amazon.com/singlesignon/latest/userguide/getting-started.html)
+   For more on IAM chack the link: [IAM](https://docs.aws.amazon.com/singlesignon/latest/userguide/getting-started.html)
 
-    #### AWS ELASTIC LOAD BALANCER (ELB)
-    AWS has an Elastic Load Balancer that is used to distribute 
-    incoming traffic across multiple targets, such as EC2 instances, 
-    containers, and IP addresses, in one or more Availability Zones. 
-    It monitors the health of its registered targets, and routes traffic 
-    only to the healthy targets. Elastic Load Balancing supports routing 
-    and load balancing of Hypertext.
-    Transfer Protocol (HTTP), Hypertext Transfer Protocol Secure (HTTPS), 
-    Transmission Control Protocol (TCP), and Secure Sockets Layer (SSL) 
-    traffic to Amazon EC2 instances. 
+  ### AWS ELASTIC LOAD BALANCER (ELB)
+   AWS has an Elastic Load Balancer that is used to distribute 
+   incoming traffic across multiple targets, such as EC2 instances, 
+   containers, and IP addresses, in one or more Availability Zones. 
+   It monitors the health of its registered targets, and routes traffic 
+   only to the healthy targets. Elastic Load Balancing supports routing 
+   and load balancing of Hypertext.
+   Transfer Protocol (HTTP), Hypertext Transfer Protocol Secure (HTTPS), 
+   Transmission Control Protocol (TCP), and Secure Sockets Layer (SSL) 
+   traffic to Amazon EC2 instances. 
     
-    ***Types of AWS ELB:***
+   ***Types of AWS ELB:***
     ![cloud1](photos/cloud7.png)
 
-     The two major Elastic load balancers are: 
+    The two major Elastic load balancers are: 
 
     ***Application Load Balancer*** 
      Application layer that describes the use of HTTP and HTTPS connections 
@@ -227,11 +228,10 @@ Platform as a Service (PaaS), and Software as a Service (SaaS).
      ***Network Load Balancer***
      Are used to route traffic through layer 4, based IPs and TCP or UDP ports.
 
-     #### EKS
-     Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service 
-     that you can use to run Kubernetes on AWS without needing to install, 
-     operate, and maintain your own Kubernetes control plane or nodes. 
-     Kubernetes is an open-source system for automating the deployment, 
-     scaling, and management of containerized applications.
-
-     For more on EKS chack the link: [EKS]https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html
+  ### EKS
+   Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service 
+   that you can use to run Kubernetes on AWS without needing to install, 
+   operate, and maintain your own Kubernetes control plane or nodes. 
+   Kubernetes is an open-source system for automating the deployment, 
+   scaling, and management of containerized applications.
+   For more on EKS chack the link: [EKS]https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html
