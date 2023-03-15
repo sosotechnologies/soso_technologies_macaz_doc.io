@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>Installations - SosoTech External Documentation</title>
+    <title>Local Install - SosoTech External Documentation</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
@@ -13,7 +13,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Installations";
+        var mkdocs_page_name = "Local Install";
         var mkdocs_page_input_path = "weekly\\week1\\week1.md";
         var mkdocs_page_url = null;
       </script>
@@ -57,29 +57,19 @@
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Week 1</a>
     <ul class="current">
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Installations</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Local Install</a>
     <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#install-iam-eks-authenticator">Install IAM EKS authenticator</a>
+    <li class="toctree-l3"><a class="reference internal" href="#install-wsl">Install WSL</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#install-docker-in-ec2">Install docker in ec2</a>
+    <li class="toctree-l3"><a class="reference internal" href="#install-chocolatey">Install Chocolatey</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#install-awscli">Install AWSCLI</a>
+    <li class="toctree-l3"><a class="reference internal" href="#install-awscli">Install AWSCli</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#install-terraform">Install Terraform</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#install-kubens-kubectx">Install Kubens + kubectx</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#install-helm">Install HelM</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#install-kubectl">Install Kubectl</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#install-mkdocs">Install MkDocs</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#install-pip-on-rhel">Install PiP on RHeL</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#install-trivy">Install Trivy</a>
+    <li class="toctree-l3"><a class="reference internal" href="#install-choco-packages">Install Choco Packages</a>
     </li>
     </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../week1-1/">Remote Install</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../week1-1/">Getting Started</a>
                 </li>
@@ -125,7 +115,7 @@
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
           <li>Weekly Lectures &raquo;</li>
           <li>Week 1 &raquo;</li>
-      <li>Installations</li>
+      <li>Local Install</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/weekly/week1/week1.md">Edit on soso_technologies_macaz_doc.io</a>
     </li>
@@ -135,90 +125,58 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="system-requirements">System Requirements</h1>
+                <h1 id="locally">Locally</h1>
+<p>System Requirements</p>
 <p>Windows OS systems will be the preferred OS that will be used throughout 
  this program. Students with MaC OS can still use their MAC pcs, but may have 
- some diffuculties with running some Windows-specific commands.
-  ## Installation links</p>
-<h3 id="install-iam-eks-authenticator">Install IAM EKS authenticator</h3>
+ some diffuculties with running some Windows-specific commands.</p>
+<h2 id="install-wsl">Install WSL</h2>
+<p>Requirments:</p>
 <ul>
-<li><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html">Right-Click to open Link in a New Tab</a></li>
+<li>windows 10 or greater</li>
 </ul>
-<pre><code>curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/aws-iam-authenticator
-chmod +x ./aws-iam-authenticator
-sudo mv ./aws-iam-authenticator /usr/local/bin
-aws-iam-authenticator help
+<p>search for  'feat'<br />
+  Click -&gt; Turning windows features off or on
+   <strong><em>select</em></strong>
+   - virtual machine platform
+   - windows Subsystem for Linux</p>
+<p>In the windows search, Type: 'feat'  </p>
+<p>Click -&gt; Turning windows features off or on, and check
+   <strong><em>select</em></strong>
+   - virtual machine platform
+   - windows Subsystem for Linux</p>
+<p>```
+  common commands</p>
+<p>$ winver
+  $ wsl -l -v
+  $ wsl --set-version Ubuntu-20.04 2
+  $ wsl --set-default-version 2
+  ```
+See Youtube link: <a href="https://www.youtube.com/watch?v=_fntjriRe48">Click link</a></p>
+<p>Install Linux Kernel <a href="https://learn.microsoft.com/en-us/windows/wsl/install-manual">Step 4 - Download the Linux kernel update package</a></p>
+<p>Now go to searchBar and search <strong><em>store</em></strong></p>
+<h2 id="install-chocolatey">Install Chocolatey</h2>
+<p>Link <a href="https://docs.chocolatey.org/en-us/choco/setup">link</a></p>
+<p>Run 
+<code>Get-ExecutionPolicy</code></p>
+<p>If it returns Restricted, then run </p>
+<p><code>Set-ExecutionPolicy AllSigned</code></p>
+<p>Now run the following command:</p>
+<pre><code>Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 </code></pre>
-<h3 id="install-docker-in-ec2">Install docker in ec2</h3>
-<ul>
-<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-container-image.html">Right-Click to open Link in a New Tab</a></li>
-</ul>
-<h3 id="install-awscli">Install AWSCLI</h3>
-<ul>
-<li><a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">Right-Click to open Link in a New Tab</a></li>
-</ul>
-<h3 id="install-terraform">Install Terraform</h3>
-<ul>
-<li><a href="https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli">Right-Click to open Link in a New Tab</a></li>
-</ul>
-<h3 id="install-kubens-kubectx">Install Kubens + kubectx</h3>
-<ul>
-<li><a href="https://github.com/ahmetb/kubectx#installation">Right-Click to open Link in a New Tab</a> </li>
-</ul>
-<h3 id="install-helm">Install HelM</h3>
-<ul>
-<li><a href="https://helm.sh/docs/intro/install/">Right-Click to open Link in a New Tab</a></li>
-</ul>
-<pre><code>curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-chmod 700 get_helm.sh
-./get_helm.sh
-</code></pre>
-<h3 id="install-kubectl">Install Kubectl</h3>
-<ul>
-<li><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html/">Right-Click to open Link in a New Tab</a></li>
-</ul>
-<pre><code>curl -LO &quot;https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl&quot;
-curl -LO &quot;https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256&quot;
-echo &quot;$(&lt;kubectl.sha256)  kubectl&quot; | sha256sum --check
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-kubectl version --client --output=yaml
-</code></pre>
-<h3 id="install-mkdocs">Install MkDocs</h3>
-<ul>
-<li><a href="https://www.mkdocs.org/user-guide/installation/">Right-Click to open Link in a New Tab</a></li>
-</ul>
-<pre><code>pip install mkdocs
-mkdocs helm
-mkdocs new my-soso-package
-cd my-soso-package
-tree
-</code></pre>
-<h3 id="install-pip-on-rhel">Install PiP on RHeL</h3>
-<pre><code>REDHAT
-sudo yum info python*-pip     //get the pip version, then install the version
-sudo yum install python39-pip
-python3 --version
-curl -O https://bootstrap.pypa.io/get-pip.py
-python3 get-pip.py --user
-</code></pre>
-<h3 id="install-trivy">Install Trivy</h3>
-<ul>
-<li><a href="https://aquasecurity.github.io/trivy/v0.18.3/installation/">Right-Click to open Link in a New Tab</a></li>
-</ul>
-<pre><code>sudo yum -y update
-
-sudo wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb
-sudo dpkg -i trivy_0.18.3_Linux-64bit.deb
-trivy i nginx    //scanning nginx image
-trivy i nginx | grep -i critical
-trivy i nginx:alpine | grep -i critical
-</code></pre>
+<h2 id="install-awscli">Install AWSCli</h2>
+<p>msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi</p>
+<h2 id="install-choco-packages">Install Choco Packages</h2>
+<p>choco install kubectl
+choco install k9s
+choco install terraform</p>
+<p><strong><em>Restart System</em></strong></p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../../../getting-started/usecases/" class="btn btn-neutral float-left" title="Sample UseCases"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../week1-1/" class="btn btn-neutral float-right" title="Getting Started">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../week1-1/" class="btn btn-neutral float-right" title="Remote Install">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>

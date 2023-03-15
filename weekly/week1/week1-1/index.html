@@ -57,23 +57,31 @@
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Week 1</a>
     <ul class="current">
-                <li class="toctree-l2"><a class="reference internal" href="../week1/">Installations</a>
+                <li class="toctree-l2"><a class="reference internal" href="../week1/">Local Install</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="./">Remote Install</a>
                 </li>
                 <li class="toctree-l2 current"><a class="reference internal current" href="./">Getting Started</a>
     <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#what-is-cloud-computing">What is Cloud Computing?</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#types-of-cloud-computing">Types of cloud computing</a>
+    <li class="toctree-l3"><a class="reference internal" href="#install-iam-eks-authenticator">Install IAM EKS authenticator</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#components-of-cloud-infrastructure">Components of cloud infrastructure</a>
+    <li class="toctree-l3"><a class="reference internal" href="#install-docker-in-ec2">Install docker in ec2</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#service-models">Service Models</a>
+    <li class="toctree-l3"><a class="reference internal" href="#install-awscli">Install AWSCLI</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#top-benefits-of-cloud-computing">Top benefits of cloud computing</a>
+    <li class="toctree-l3"><a class="reference internal" href="#install-terraform">Install Terraform</a>
     </li>
-        </ul>
+    <li class="toctree-l3"><a class="reference internal" href="#install-kubens-kubectx">Install Kubens + kubectx</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#focus-aws-cloud">FOCUS: AWS CLOUD</a>
+    <li class="toctree-l3"><a class="reference internal" href="#install-helm">Install HelM</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-kubectl">Install Kubectl</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-mkdocs">Install MkDocs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-pip-on-rhel">Install PiP on RHeL</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-trivy">Install Trivy</a>
     </li>
     </ul>
                 </li>
@@ -129,234 +137,86 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="cloud-technologies">Cloud Technologies</h1>
+                <h1 id="remote-server">Remote Server</h1>
+<p>## Installation links</p>
+<h3 id="install-iam-eks-authenticator">Install IAM EKS authenticator</h3>
 <ul>
-<li>Defining cloud computing</li>
-<li>Defining private, public, and hybrid cloud<ul>
-<li>Exploring the components of cloud infrastructure</li>
-<li>Defining the different Service Models</li>
+<li><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html">Right-Click to open Link in a New Tab</a></li>
 </ul>
-</li>
-</ul>
-<h2 id="what-is-cloud-computing">What is Cloud Computing?</h2>
-<p>Cloud computing is the use of hosted services, such as servers, data storage, databases, software, and networking over the internet¬ — instead of directly accessing your computer hard drive.</p>
-<h3 id="types-of-cloud-computing">Types of cloud computing</h3>
-<p>Cloud computing is offered in 3 major forms: private, public, and hybrid cloud.
-<img alt="cloud1" src="../photos/cloud1.png" /></p>
+<pre><code>curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/aws-iam-authenticator
+chmod +x ./aws-iam-authenticator
+sudo mv ./aws-iam-authenticator /usr/local/bin
+aws-iam-authenticator help
+</code></pre>
+<h3 id="install-docker-in-ec2">Install docker in ec2</h3>
 <ul>
-<li>Private Cloud: 
-  The private cloud computing service is a cloud computing model
-  where the infrastructure is dedicated only to select users instead
-  of the general public, either over the Internet or a private internal
-  network. Other names for the private cloud are internal or corporate cloud.
-  Some private cloud providers are VMware-vRealize Suite Cloud Management 
-  Platform, AWS-Virtual Private Cloud, Microsoft-Azure Private Cloud…</li>
-<li>Public Cloud: 
-  The public cloud is defined as computing services offered by third-party
-  providers over the public Internet, making them available to anyone who 
-  wants to use or purchase them. They may be free or sold on-demand, allowing 
-  customers to pay only per usage for the CPU cycles, storage, or bandwidth they 
-  consume. Some public cloud services are AWS, GCP, Azure, IBM Cloud, Alibaba Cloud…</li>
-<li>Hybrid Cloud:
-  A hybrid cloud is a computing environment that combines an on-premises data center 
-  (also called a private cloud) with a public cloud, allowing data and applications 
-  to be shared between them. Some public cloud providers are VMware, Microsoft Azure…</li>
+<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-container-image.html">Right-Click to open Link in a New Tab</a></li>
 </ul>
-<h3 id="components-of-cloud-infrastructure">Components of cloud infrastructure</h3>
-<p><img alt="cloud1" src="../photos/cloud2.png" /></p>
+<h3 id="install-awscli">Install AWSCLI</h3>
 <ul>
-<li><strong><em>Client-side Infrastructure:</em></strong> 
-   Here, users interact with the cloud through a front-end GUI
-   (Graphical User Interface). Desktop, laptops, mobiles, tablets, and
-   others are used on the client-side to access services.</li>
-<li><strong><em>Application:</em></strong>
-   The application may be any software or platform that a client wants to access.</li>
-<li><strong><em>The operating system:</em></strong> 
-   The cloud operating system manages the operation, the virtual servers, 
-   execution and processes of virtual machines and virtual infrastructure, as well 
-   as the back-end hardware and software resources. </li>
-<li><strong><em>Service:</em></strong>
-   Cloud Services are offered in different models. These services are being provided 
-   based on the client’s request.</li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">Right-Click to open Link in a New Tab</a></li>
 </ul>
-<p>Some of the service models are seen below</p>
-<h3 id="service-models">Service Models</h3>
-<p>Cloud-Computing providers offer their “services” according to different models, of 
-which the three standard models per NIST are Infrastructure as a Service (IaaS), 
-Platform as a Service (PaaS), and Software as a Service (SaaS).</p>
-<p><img alt="cloud1" src="../photos/cloud3.png" /></p>
+<h3 id="install-terraform">Install Terraform</h3>
 <ul>
-<li><strong><em>IAAS:</em></strong> 
-   Infrastructure As A Service (IAAS) is means of delivering computing infrastructure
-   as on-demand services. It is one of the three fundamental cloud service model 
-   servers’ storage network operating systems. In the user purchasing servers, 
-   software data center space, or network equipment and renting those resources 
-   as a fully outsourced service can demand model. It allows dynamic scaling, and 
-   the resources are distributed as a service. It generally includes multiple users 
-   on a single piece of hardware.</li>
-<li><strong><em>PAAS:</em></strong>
-   Platform as A Service (PAAS) is a cloud delivery model for applications composed 
-   of services managed by a third party. It provides elastic scaling of your application 
-   which allows developers to build applications and services over the internet and the 
-   deployment models include public, private and hybrid.</li>
-<li><strong><em>SAAS:</em></strong> 
-   Software As A Service (SAAS) allows users to run existing online applications and 
-   it is a model software that is deployed as a hosting service and is accessed over 
-   Output Rephrased/Re-written Text the internet or software delivery model during 
-   which software and its associated data are hosted centrally and accessed using their 
-   client, usually an online browser over the web. SAAS services are used for the 
-   development and deployment of modern applications.</li>
+<li><a href="https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli">Right-Click to open Link in a New Tab</a></li>
 </ul>
-<p>The emergence of Cloud computing has given rise to more as-a-service offerings. 
-   Some of them include:</p>
-<pre><code> - AIaaS: AI as a service
- - DaaS: Desktop as a service
- - ITaaS: IT as a service
- - RaaS: Ransomware as a service.
-</code></pre>
-<h3 id="top-benefits-of-cloud-computing">Top benefits of cloud computing</h3>
-<p><img alt="cloud1" src="../photos/cloud4.png" /></p>
+<h3 id="install-kubens-kubectx">Install Kubens + kubectx</h3>
 <ul>
-<li>High Speed: the ability to spin up new instances in a matter of seconds.</li>
-<li>Efficiency and Cost Reduction</li>
-<li>Provides efficient Data Security</li>
-<li>Scalable: ease with quickly — scale up/down infrastructures.</li>
-<li>Collaboration: Cloud environments enable better collaboration across teams.</li>
-<li>Provides unlimited Storage Capacity.</li>
-<li>Provides ease in Back-up and Restoring of Data</li>
-<li>Reliability: Cloud computing makes data backup, disaster recovery, and 
-    business continuity easier and less expensive because data can be mirrored 
-    at multiple redundant sites on the cloud provider’s network.</li>
+<li><a href="https://github.com/ahmetb/kubectx#installation">Right-Click to open Link in a New Tab</a> </li>
 </ul>
-<h2 id="focus-aws-cloud">FOCUS: AWS CLOUD</h2>
-<p><strong><em>What Is Amazon Web Services(AWS):</em></strong> 
-   Amazon Web Services(AWS) is Amazon’s cloud computing platform that 
-   offers a mix of packaged platform as a service (PaaS), software as 
-   a service (SaaS), and infrastructure as a service (IaaS).  </p>
-<p>### EC2
-   Amazon EC2 is AWS primary web service that provides resizable compute 
-   capacity in the cloud. </p>
-<p><strong><em>Instance types:</em></strong>
-    Amazon EC2 provides a wide selection of instance types optimized to fit 
-    different use cases. Instance types comprise varying combinations of CPU, 
-    memory, storage, and networking capacity and give you the flexibility to 
-    choose the appropriate mix of resources for your applications. Each 
-    instance type includes one or more instance sizes, allowing you to scale 
-    your resources to the requirements of your target workload.</p>
-<p><strong><em>Example instance Family:</em></strong></p>
+<h3 id="install-helm">Install HelM</h3>
 <ul>
-<li>c4 Compute optimized—For workloads requiring significant processing</li>
-<li>r3 Memory optimized—For memory-intensive workloads</li>
-<li>i2 Storage optimized—For workloads requiring high amounts of fast SSD storage</li>
-<li>
-<p>g2 GPU-based instances—Intended for graphics and general-purpose GPU compute workloads</p>
-<p><strong><em>Amazon Machine Images (AMIs):</em></strong>
-   Defines the initial software that will be on an instance when it is launched. 
-   An AMI defines; The Operating System (OS) and its configuration, The initial 
-   state of any patches, Application or system software. 
-   AMI’s can be AWS published, from the AWS Marketplace, Generated 
-   from Existing Instances, or Uploaded Virtual Servers</p>
-<p><strong><em>Security Groups:</em></strong>
-   This is a VPC concept. If an instance is running in an Amazon VPC, 
-   you can change which security groups are associated with an instance 
-   while the instance is running.</p>
-<p><strong><em>EBS:</em></strong> Is type of “block storage” volume offering by AWS. 
-EBS provides persistent block-level storage volumes for use with 
-Amazon EC2 instances. </p>
-<p><strong><em>Instance Stores:</em></strong> Is another type of “block storage” volume offering 
-by AWS for your instance. This storage is located on disks that are 
-physically attached to the host computer.</p>
-</li>
+<li><a href="https://helm.sh/docs/intro/install/">Right-Click to open Link in a New Tab</a></li>
 </ul>
-<p>### S3
-   Amazon Simple Storage Service is a secure, durable, and highly-scalable 
-   cloud storage. Some use cases for cloud storage include: </p>
-<pre><code> - Backup and archive for on-premises or cloud data.
- - Content, media, and software storage and distribution.
- - Big data analytics.
- - Static website hosting.
- - Cloud-native mobile and Internet application hosting.
+<pre><code>curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
 </code></pre>
-<p>### VPC
-   The Amazon Virtual Private Cloud (Amazon VPC) is a custom-defined 
-   virtual network within the AWS Cloud.</p>
-<pre><code>![cloud1](photos/cloud5.png)
+<h3 id="install-kubectl">Install Kubectl</h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html/">Right-Click to open Link in a New Tab</a></li>
+</ul>
+<pre><code>curl -LO &quot;https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl&quot;
+curl -LO &quot;https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256&quot;
+echo &quot;$(&lt;kubectl.sha256)  kubectl&quot; | sha256sum --check
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client --output=yaml
 </code></pre>
-<p><strong><em>VPC COMPONENTS:</em></strong>
-   An Amazon VPC consists of the following main components: Subnets, 
-   Route tables, Dynamic Host Configuration Protocol (DHCP) option sets 
-   Security groups, Network Access Control Lists (ACLs).
-   Also, optional components: Internet Gateways (IGWs), Elastic IP (EIP) 
-   addresses, Elastic Network Interfaces (ENIs), Endpoints, Peering, 
-   Network Address Translation (NATs) instances and NAT gateways, Virtual 
-   Private Gateway (VPG), Customer Gateways (CGWs), 
-   and Virtual Private Networks (VPNs)</p>
-<pre><code>***Subnets:***
+<h3 id="install-mkdocs">Install MkDocs</h3>
+<ul>
+<li><a href="https://www.mkdocs.org/user-guide/installation/">Right-Click to open Link in a New Tab</a></li>
+</ul>
+<pre><code>pip install mkdocs
+mkdocs helm
+mkdocs new my-soso-package
+cd my-soso-package
+tree
 </code></pre>
-<p>A subnet is a segment of an Amazon VPC’s IP address range. 
-   Subnets reside within one Availability Zone and cannot span zones; 
-   You can, however, have multiple subnets in one Availability Zone. 
-   Each subnet must be associated with a route table, which controls 
-   the routing for the subnet.</p>
-<pre><code>***Route Tables:***
+<h3 id="install-pip-on-rhel">Install PiP on RHeL</h3>
+<pre><code>REDHAT
+sudo yum info python*-pip     //get the pip version, then install the version
+sudo yum install python39-pip
+python3 --version
+curl -O https://bootstrap.pypa.io/get-pip.py
+python3 get-pip.py --user
 </code></pre>
-<p>A route table is a logical construct within an 
-   Amazon VPC that contains a set of rules (called routes) that are 
-   applied to the subnet and used to determine where network traffic is 
-   directed.</p>
-<pre><code>***Internet Gateways:***
-</code></pre>
-<p>IGW allows communication between instances in your Amazon VPC 
-   and the Internet. </p>
-<pre><code>***Dynamic Host Configuration***
-</code></pre>
-<p>Protocol (DHCP) Option Sets: provides a standard for passing 
-   configuration information to hosts on a TCP/IP network. AWS 
-   automatically creates and associates a DHCP option set for your 
-   Amazon VPC upon creation and sets two options: domain-name-servers 
-   (defaulted to AmazonProvidedDNS) and domain-name 
-   (defaulted to the domain name for your region).</p>
-<p>### IAM
-   With AWS IAM Identity Center (successor to AWS Single Sign-On), 
-   you can manage sign-in security for your workforce identities, also 
-   known as workforce users. IAM Identity Center provides one place where 
-   you can create or connect workforce users and centrally manage their 
-   access across all their AWS accounts and applications. </p>
-<p>For more on IAM chack the link: <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/getting-started.html">IAM</a></p>
-<p>### AWS ELASTIC LOAD BALANCER (ELB)
-   AWS has an Elastic Load Balancer that is used to distribute 
-   incoming traffic across multiple targets, such as EC2 instances, 
-   containers, and IP addresses, in one or more Availability Zones. 
-   It monitors the health of its registered targets, and routes traffic 
-   only to the healthy targets. Elastic Load Balancing supports routing 
-   and load balancing of Hypertext.
-   Transfer Protocol (HTTP), Hypertext Transfer Protocol Secure (HTTPS), 
-   Transmission Control Protocol (TCP), and Secure Sockets Layer (SSL) 
-   traffic to Amazon EC2 instances. </p>
-<p><strong><em>Types of AWS ELB:</em></strong>
-    <img alt="cloud1" src="../photos/cloud7.png" /></p>
-<pre><code>The two major Elastic load balancers are:
+<h3 id="install-trivy">Install Trivy</h3>
+<ul>
+<li><a href="https://aquasecurity.github.io/trivy/v0.18.3/installation/">Right-Click to open Link in a New Tab</a></li>
+</ul>
+<pre><code>sudo yum -y update
 
-***Application Load Balancer*** 
- Application layer that describes the use of HTTP and HTTPS connections 
- from clients to the load balancer and from the load balancer to your 
- back-end instance.
-
- ***Network Load Balancer***
- Are used to route traffic through layer 4, based IPs and TCP or UDP ports.
+sudo wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb
+sudo dpkg -i trivy_0.18.3_Linux-64bit.deb
+trivy i nginx    //scanning nginx image
+trivy i nginx | grep -i critical
+trivy i nginx:alpine | grep -i critical
 </code></pre>
-<p>### EKS
-   Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service 
-   that you can use to run Kubernetes on AWS without needing to install, 
-   operate, and maintain your own Kubernetes control plane or nodes. 
-   Kubernetes is an open-source system for automating the deployment, 
-   scaling, and management of containerized applications.
-   For more on EKS chack the link: [EKS]https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../week1/" class="btn btn-neutral float-left" title="Installations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="./" class="btn btn-neutral float-left" title="Remote Install"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../../week2/week2/" class="btn btn-neutral float-right" title="Getting started">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -381,7 +241,7 @@ physically attached to the host computer.</p>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../week1/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="./" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../../week2/week2/" style="color: #fcfcfc">Next &raquo;</a></span>
