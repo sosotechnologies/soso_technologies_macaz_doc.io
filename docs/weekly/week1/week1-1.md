@@ -105,8 +105,8 @@ Platform as a Service (PaaS), and Software as a Service (SaaS).
    a service (SaaS), and infrastructure as a service (IaaS).  
 
   ### EC2
-  Amazon EC2 is AWS primary web service that provides resizable compute 
-  capacity in the cloud. 
+   Amazon EC2 is AWS primary web service that provides resizable compute 
+   capacity in the cloud. 
    
    ***Instance types:***
     Amazon EC2 provides a wide selection of instance types optimized to fit 
