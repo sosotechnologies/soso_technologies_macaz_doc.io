@@ -191,19 +191,21 @@ this request and Responds back to the user, through the Server.</p>
 <p><strong><em>Shard Example use Case 2</em></strong>
    <img alt="elastic3" src="../photos/elastic4.png" /></p>
 <p><strong><em>Scenario 1:</em></strong></p>
-<p><code>- An Elastic engineer searches 500k documents that is stored in a single Shard 
-   - The response time for searching 500k Documents in a single shard is 10 seconds.</code></p>
-<p><strong><em>Scenario 2:</em></strong></p>
-<p>```
-   - An Elastic engineer runs a parallel searches of 500k documents that are 
-     distributed in 5 Shard.
-   - The response time for searching 100k  Documents/Shard will be 2 seconds.</p>
-<pre><code> Now the real difference here is that:
-</code></pre>
 <ul>
-<li>The response time for searching all 500k Documents that are distributed 
-    amongst the 5 shard will still be 2 seconds.
-  ```</li>
+<li>An Elastic engineer searches 500k documents that is stored in a single Shard </li>
+<li>The response time for searching 500k Documents in a single shard is 10 seconds.</li>
+</ul>
+<p><strong><em>Scenario 2:</em></strong></p>
+<ul>
+<li>An Elastic engineer runs a parallel searches of 500k documents that are 
+     distributed in 5 Shard.</li>
+<li>
+<p>The response time for searching 100k  Documents/Shard will be 2 seconds.</p>
+</li>
+<li>
+<p>So, the response time for searching all 500k Documents that are distributed 
+     amongst the 5 shard will still be 2 seconds.</p>
+</li>
 </ul>
 <h2 id="kibana">Kibana</h2>
 <p>Kibana is a data visualization and exploration tool used for log and time-series 
