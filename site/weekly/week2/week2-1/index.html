@@ -69,11 +69,13 @@
                 </li>
                 <li class="toctree-l2 current"><a class="reference internal current" href="./">Hands On</a>
     <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#customization">Customization</a>
+    <li class="toctree-l3"><a class="reference internal" href="#elasticsearch">ElasticSearch</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#giscus-integration">Giscus integration</a>
+    <li class="toctree-l4"><a class="reference internal" href="#elasticsearch-architecture-key-components">Elasticsearch Architecture: Key Components</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#kibana">Kibana</a>
     </li>
     </ul>
                 </li>
@@ -121,98 +123,110 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="adding-a-comment-system">Adding a comment system</h1>
-<p>Material for MkDocs allows to easily add the third-party comment system of your
-choice to the footer of any page by using <a href="../customization.md#extending-the-theme">theme extension</a>. As an example,
-we'll be integrating <a href="https://giscus.app/">Giscus</a>, which is Open Source, free, and uses GitHub
-discussions as a backend.</p>
-<h2 id="customization">Customization</h2>
-<h3 id="giscus-integration">Giscus integration</h3>
-<p>Before you can use <a href="https://giscus.app/">Giscus</a>, you need to complete the following steps:</p>
-<ol>
-<li><strong>Install the <a href="https://github.com/apps/giscus">Giscus GitHub App</a></strong> and grant access to the repository
-    that should host comments as GitHub discussions. Note that this can be a
-    repository different from your documentation.</li>
+                <h1 id="elk-elastic-stack">ELK - Elastic Stack</h1>
+<p>ELK Stack is the world’s most popular log management platform.
+The ELK stack is an acronym used to describe a stack that comprises 
+of three popular projects: Elasticsearch, Logstash, and Kibana. </p>
+<ul>
 <li>
-<p><strong>Visit <a href="https://giscus.app/">Giscus</a> and generate the snippet</strong> through their configuration tool
-    to load the comment system. Copy the snippet for the next step. The
-    resulting snippet should look similar to this:</p>
-<p>``` html
-&lt;script
-  src="https://giscus.app/client.js"
-  data-repo="<username>/<repository>"
-  data-repo-id="..."
-  data-category="..."
-  data-category-id="..."
-  data-mapping="pathname"
-  data-reactions-enabled="1"
-  data-emit-metadata="1"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async</p>
-<blockquote>
-<p></script>
-```</p>
-</blockquote>
+<p><strong><em>Elasticsearch</em></strong>
+   is a distributed search and analytics engine built on Apache Lucene</p>
+</li>
+<li>
+<p><strong><em>Logstash</em></strong>
+   is used for both shipping as well as processing and storing logs</p>
+</li>
+<li>
+<p><strong><em>Kibana</em></strong>
+   is a visualization tool which is hosted through Nginx or Apache</p>
+</li>
+</ul>
+<p><strong><em>Some popular Use Cases for ELK are:</em></strong></p>
+<p>Logging, Matrics, Security Analysis, Business Analysis
+ -  Logging - logging and analysing Data, like gaming data
+ -  Matrics - like NASA Rover can sent telematrics, sensor data
+ -  Security Analysis - Helps with securing comunication in Apps like Slack
+ -  Business Analysis - Helps with matching people</p>
+<h2 id="elasticsearch">ElasticSearch</h2>
+<p>With ElasticSearch, User can sends search quary to your website and your 
+server send those requests to ElasticSearch, Elasticsearch then processes 
+this request and Responds back to the user, through the Server.</p>
+<h3 id="elasticsearch-architecture-key-components">Elasticsearch Architecture: Key Components</h3>
+<p><strong><em>Elasticsearch Cluster</em></strong>
+ is composed of a group of nodes that store data.</p>
+<p><strong><em>Elasticsearch Node</em></strong>
+ is an instance that runs in a cluster. Multiple nodes can be run on a 
+ single machine. When Elastic is running, you will have an instance of 
+ elastic known as Node. Each Node Has a unique ID and a node. Each Node 
+ belongs to a single cluster. Data is stored as documents in Elasticsearch.
+ Indices are used to group documents that are related to each other. 
+ When an Index is created, it comes with a Shard, by default. 
+ There are the three main options to configure an Elasticsearch node:</p>
+<ul>
+<li>Elasticsearch master node</li>
+<li>Elasticsearch data node</li>
+<li>Elasticsearch client node</li>
+</ul>
+<p><strong><em>Search movement</em></strong> - client --&gt; servers --&gt; ElasticSearch</p>
+<p><img alt="elastic1" src="../photos/elastic1.png" /></p>
+<p><strong><em>Shards</em></strong>
+  is where data is stored. What you create an Index, you can create multiple 
+  shards that are distributed across nodes. Each shard has its replica to 
+  recover data in case of node failure. The primary shard and replica shard is 
+  always placed on different nodes. Horizontal scaling or scale-out is the main 
+  reason to shard a database. The number of shards depends heavily on the 
+  amount of data we have.</p>
+<p><strong><em>Shard Example use Case 1</em></strong>
+   <img alt="elastic2" src="../photos/elastic3.png" /></p>
+<pre><code>Let’s Say:
+</code></pre>
+<p>```
+   - A BCBSNC Elastic engineer has 900k documents that they want to store. 
+   - Each Shard can only Hold a maximum of 300k Documents</p>
+<ul>
+<li>Two more shards of 300GB each will be added bringing the total storage 
+     capacity to 900K Documents
+  ```</li>
+</ul>
+<p><strong><em>Shard Example use Case 2</em></strong>
+   <img alt="elastic3" src="../photos/elastic4.png" /></p>
+<p><strong><em>Scenario 1:</em></strong></p>
+<p><code>- An Elastic engineer searches 500k documents that is stored in a single Shard 
+   - The response time for searching 500k Documents in a single shard is 10 seconds.</code></p>
+<p><strong><em>Scenario 2:</em></strong></p>
+<p>```
+   - An Elastic engineer runs a parallel searches of 500k documents that are 
+     distributed in 5 Shard.
+   - The response time for searching 100k  Documents/Shard will be 2 seconds.</p>
+<pre><code> Now the real difference here is that:
+</code></pre>
+<ul>
+<li>The response time for searching all 500k Documents that are distributed 
+    amongst the 5 shard will still be 2 seconds.
+  ```</li>
+</ul>
+<h2 id="kibana">Kibana</h2>
+<p>Kibana is a data visualization and exploration tool used for log and time-series 
+ analytics, application monitoring, and operational intelligence use cases. 
+ It offers powerful and easy-to-use features such as histograms, line graphs, 
+ pie charts, heat maps, and built-in geospatial support.</p>
+<p><img alt="kibana1" src="../photos/kibana1.png" /></p>
+<p><strong><em>Kibana Aggregations</em></strong></p>
+<p>There are two main types of aggregations </p>
+<ol>
+<li>
+<p><strong><em>Metric aggregations</em></strong><br />
+     are used to calculate a value for each bucket based on the 
+     documents inside the bucket.</p>
+</li>
+<li>
+<p><strong><em>Bucket aggregations</em></strong>
+     are used groups documents together in one bucket according to your logic 
+     and requirements, while the Metric aggregations </p>
 </li>
 </ol>
-<p>The <a href="https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/comments.html"><code>comments.html</code></a> partial (empty by default) is the best place to
-add the snippet generated by <a href="https://giscus.app/">Giscus</a>. Follow the guide on <a href="../customization.md#extending-the-theme">theme extension</a>
-and <a href="../customization.md#overriding-partials">override the <code>comments.html</code> partial</a> with:</p>
-<pre><code class="language-html">{% if page.meta.comments %}
-  &lt;h2 id=&quot;__comments&quot;&gt;{{ lang.t(&quot;meta.comments&quot;) }}&lt;/h2&gt;
-  &lt;!-- Insert generated snippet here --&gt;
-
-  &lt;!-- Synchronize Giscus theme with palette --&gt;
-  &lt;script&gt;
-    var giscus = document.querySelector(&quot;script[src*=giscus]&quot;)
-
-    /* Set palette on initial load */
-    var palette = __md_get(&quot;__palette&quot;)
-    if (palette &amp;&amp; typeof palette.color === &quot;object&quot;) {
-      var theme = palette.color.scheme === &quot;slate&quot; ? &quot;dark&quot; : &quot;light&quot;
-      giscus.setAttribute(&quot;data-theme&quot;, theme) // (1)!
-    }
-
-    /* Register event handlers after documented loaded */
-    document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
-      var ref = document.querySelector(&quot;[data-md-component=palette]&quot;)
-      ref.addEventListener(&quot;change&quot;, function() {
-        var palette = __md_get(&quot;__palette&quot;)
-        if (palette &amp;&amp; typeof palette.color === &quot;object&quot;) {
-          var theme = palette.color.scheme === &quot;slate&quot; ? &quot;dark&quot; : &quot;light&quot;
-
-          /* Instruct Giscus to change theme */
-          var frame = document.querySelector(&quot;.giscus-frame&quot;)
-          frame.contentWindow.postMessage(
-            { giscus: { setConfig: { theme } } },
-            &quot;https://giscus.app&quot;
-          )
-        }
-      })
-    })
-  &lt;/script&gt;
-{% endif %}
-</code></pre>
-<ol>
-<li>This code block ensures that <a href="https://giscus.app/">Giscus</a> renders with a dark theme when the
-    palette is set to <code>slate</code>. Note that multiple dark themes are available,
-    so you can change it to your liking.</li>
-</ol>
-<p>Replace the highlighted line with the snippet you generated with the <a href="https://giscus.app/">Giscus</a>
-configuration tool in the previous step. If you copied the snippet from above,
-you can enable comments on a page by setting the <code>comments</code> front matter
-property to <code>true</code>:</p>
-<pre><code class="language-yaml">---
-comments: true
----
-
-# Document title
-...
-</code></pre>
-<p>If you wish to enable comments for an entire folder, you can use the
-<a href="../reference/index.md#built-in-meta-plugin">built-in meta plugin</a>.</p>
+<p><img alt="kibana1" src="../photos/kibana2.png" /></p>
+<p>For More information on Kibana, see link: <a href="https://logz.io/blog/kibana-tutorial-2/#kibanaaggregations">Click link</a></p>
               
             </div>
           </div><footer>
