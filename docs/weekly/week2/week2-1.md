@@ -73,15 +73,16 @@ this request and Responds back to the user, through the Server.
 
    
    ***Scenario 1:***
-   - An Elastic engineer searches 500k documents that is stored in a single Shard 
 
+   - An Elastic engineer searches 500k documents that is stored in a single Shard 
    - The response time for searching 500k Documents in a single shard is 10 seconds.
   
 
    ***Scenario 2:***
+   
    - An Elastic engineer runs a parallel searches of 500k documents that are 
      distributed in 5 Shard.
-     
+
    - The response time for searching 100k  Documents/Shard will be 2 seconds.
 
    - So, the response time for searching all 500k Documents that are distributed 
