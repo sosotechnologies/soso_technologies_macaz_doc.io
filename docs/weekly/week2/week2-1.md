@@ -90,7 +90,7 @@ this request and Responds back to the user, through the Server.
 
 
  
-## Kibana
+### Kibana
 
  Kibana is a data visualization and exploration tool used for log and time-series 
  analytics, application monitoring, and operational intelligence use cases. 
@@ -114,3 +114,133 @@ this request and Responds back to the user, through the Server.
   ![kibana1](photos/kibana2.png)
   
    For More information on Kibana,: [Click link](https://logz.io/blog/kibana-tutorial-2/#kibanaaggregations)
+
+
+# Shell Scripting
+ 
+  A shell in a Linux operating system takes input from you in the form of 
+  commands, processes it, and then gives an output. 
+
+ ## Types of Shell
+  There are four types, but two main shells in Linux:
+
+  1. ***The Bourne Shell:***
+    The prompt for this shell is $ and its derivatives are listed below:
+
+  -	POSIX shell also is known as sh
+  -	Korn Shell also knew as sh
+  -	Bourne Again SHell also knew as bash (most popular)
+
+  2. ***The C shell:*** 
+    The prompt for this shell is %, and its subcategories are:
+
+  - C shell also is known as csh
+  -	Tops C shell also is known as tcsh
+
+  ### Hands-On
+    
+    Create script called:    sososcript.sh
+  ```
+  $ nano sososcript.sh
+  $ chmod +x sososcript.sh
+  ```
+ 
+  In the script, add the following content:
+  ```
+  #!/bin/bash
+  echo “Welcome to soso Devops master course sosoengineers”
+  sleep 2
+  echo “you’re all welcome sosoengineers”
+  sleep 2
+  echo “happy learning sosoengineers”
+  ```
+    
+  run the script:  ```$ sh sososcript.sh ```
+
+  EX 2:
+
+  ```
+  #!/bin/bash
+  name="sosoengineers"     #this name is a variable 
+  echo “Welcome to soso Devops master course $name”
+  sleep 2
+  echo “you’re all welcome to $name”
+  sleep 2
+  echo “happy learning at $name”
+  ```
+
+  run the script:  ```$ sh sososcript.sh ```
+
+  ### VARIABLES
+
+  A variable is a temporary store for a piece of information. 
+  There are two actions for variables:
+
+-	Setting a value for a variable.
+-	Reading the value for a variable.
+
+ Variables are defined as follows −   [variable_name=variable_value]
+
+ EX: NAME="soso technologies"
+
+ ***Variable Types:*** 
+ When a shell is running, three main types of variables are present 
+
+ - ***Local Variables*** are present within the current instance of 
+ the shell. They are set at the command prompt.
+
+ - ***Environment Variables*** are available to any child process of the shell. 
+
+ - ***Shell Variables*** is a special variable that is set by the shell and is 
+ required by the shell to function correctly. 
+
+ 
+***EX 1:*** set the name soso engineers as a variable[read] 
+ ```
+ #!/bin/bash
+ echo "what is the schools name"
+ read name
+ echo “Welcome to soso Devops master course $name”
+ sleep 2
+ echo “you’re all welcome to $name”
+ sleep 2
+ echo “happy learning at $name”
+```
+
+***EX 2:*** set the name soso engineers as a variable[read] 
+
+```
+ #!/bin/sh
+ echo "what is your study program?"
+ read name
+ echo "How is $name going so far?"
+ read remark
+ echo "It’s also going $remark with me too!"
+```
+
+***EX 3:*** set the name soso engineers as a variable[positional parameter-argument] 
+
+```
+ #!/bin/bash
+ name=$1
+
+ echo “Welcome to soso Devops master course $name”
+ sleep 2
+ echo “you’re all welcome to sosotech $name”
+ sleep 2
+ echo “happy learning $name”
+```
+																												
+				
+***EX 4:*** set the name soso engineers multi variables
+
+```
+ #!/bin/bash
+ sosouser=$(whoami)
+ sosodate=$(date)
+ serverconfig=$(ifconfig)
+ sosodir=$(pwd)
+ echo "$sosouser $sosodate $serverconfig $sosodir"
+```
+
+
