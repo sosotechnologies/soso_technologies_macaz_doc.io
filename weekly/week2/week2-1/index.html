@@ -128,12 +128,18 @@
 The ELK stack is an acronym used to describe a stack that comprises 
 of three popular projects: Elasticsearch, Logstash, and Kibana. </p>
 <ul>
-<li><strong><em>Elasticsearch</em></strong>
-   is a distributed search and analytics engine built on Apache Lucene</li>
-<li><strong><em>Logstash</em></strong>
-   is used for both shipping as well as processing and storing logs</li>
-<li><strong><em>Kibana</em></strong>
-   is a visualization tool which is hosted through Nginx or Apache</li>
+<li>
+<p><strong><em>Elasticsearch</em></strong>
+   is a distributed search and analytics engine built on Apache Lucene</p>
+</li>
+<li>
+<p><strong><em>Logstash</em></strong>
+   is used for both shipping as well as processing and storing logs</p>
+</li>
+<li>
+<p><strong><em>Kibana</em></strong>
+   is a visualization tool which is hosted through Nginx or Apache</p>
+</li>
 </ul>
 <p><strong><em>Some popular Use Cases for ELK are:</em></strong></p>
 <p>Logging, Matrics, Security Analysis, Business Analysis
@@ -147,8 +153,8 @@ server send those requests to ElasticSearch, Elasticsearch then processes
 this request and Responds back to the user, through the Server.</p>
 <h3 id="elasticsearch-architecture-key-components">Elasticsearch Architecture: Key Components</h3>
 <p><strong><em>Elasticsearch Cluster</em></strong>
- is composed of a group of nodes that store data.
-<strong><em>Elasticsearch Node</em></strong>
+ is composed of a group of nodes that store data.</p>
+<p><strong><em>Elasticsearch Node</em></strong>
  is an instance that runs in a cluster. Multiple nodes can be run on a 
  single machine. When Elastic is running, you will have an instance of 
  elastic known as Node. Each Node Has a unique ID and a node. Each Node 
@@ -162,7 +168,7 @@ this request and Responds back to the user, through the Server.</p>
 <li>Elasticsearch client node</li>
 </ul>
 <p><strong><em>Search movement</em></strong> - client --&gt; servers --&gt; ElasticSearch</p>
-<p><img alt="cloud1" src="../photos/elastic1.png" /></p>
+<p><img alt="elastic1" src="../photos/elastic1.png" /></p>
 <p><strong><em>Shards</em></strong>
   is where data is stored. What you create an Index, you can create multiple 
   shards that are distributed across nodes. Each shard has its replica to 
@@ -171,32 +177,56 @@ this request and Responds back to the user, through the Server.</p>
   reason to shard a database. The number of shards depends heavily on the 
   amount of data we have.</p>
 <p><strong><em>Shard Example use Case 1</em></strong>
-   <img alt="cloud1" src="../photos/elastic3.png" /></p>
+   <img alt="elastic2" src="../photos/elastic3.png" /></p>
 <pre><code>Let’s Say:
 </code></pre>
 <p>```
    - A BCBSNC Elastic engineer has 900k documents that they want to store. 
    - Each Shard can only Hold a maximum of 300k Documents</p>
 <ul>
-<li>Two more shards of 300GB each will be added bringing the total storage capacity to 900K Documents
+<li>Two more shards of 300GB each will be added bringing the total storage 
+     capacity to 900K Documents
   ```</li>
 </ul>
 <p><strong><em>Shard Example use Case 2</em></strong>
-   <img alt="cloud1" src="../photos/elastic4.png" /></p>
-<p><strong><em>Scenario 1:</em></strong>
-   <code>- An Elastic engineer searches 500k documents that is stored in a single Shard 
-  - The response time for searching 500k Documents in a single shard is 10 seconds.</code></p>
-<p><strong><em>Scenario 2:</em></strong>
-  ```
-  - An Elastic engineer runs a parallel searches of 500k documents that are distributed in 5 Shard.
-  - The response time for searching 100k  Documents/Shard will be 2 seconds.</p>
-<p>Now the real difference here is that:</p>
+   <img alt="elastic3" src="../photos/elastic4.png" /></p>
+<p><strong><em>Scenario 1:</em></strong></p>
+<p><code>- An Elastic engineer searches 500k documents that is stored in a single Shard 
+   - The response time for searching 500k Documents in a single shard is 10 seconds.</code></p>
+<p><strong><em>Scenario 2:</em></strong></p>
+<p>```
+   - An Elastic engineer runs a parallel searches of 500k documents that are 
+     distributed in 5 Shard.
+   - The response time for searching 100k  Documents/Shard will be 2 seconds.</p>
+<pre><code> Now the real difference here is that:
+</code></pre>
 <ul>
 <li>The response time for searching all 500k Documents that are distributed 
     amongst the 5 shard will still be 2 seconds.
   ```</li>
 </ul>
 <h2 id="kibana">Kibana</h2>
+<p>Kibana is a data visualization and exploration tool used for log and time-series 
+ analytics, application monitoring, and operational intelligence use cases. 
+ It offers powerful and easy-to-use features such as histograms, line graphs, 
+ pie charts, heat maps, and built-in geospatial support.</p>
+<p><img alt="kibana1" src="../photos/kibana1.png" /></p>
+<p><strong><em>Kibana Aggregations</em></strong></p>
+<p>There are two main types of aggregations </p>
+<ol>
+<li>
+<p><strong><em>Metric aggregations</em></strong><br />
+     are used to calculate a value for each bucket based on the 
+     documents inside the bucket.</p>
+</li>
+<li>
+<p><strong><em>Bucket aggregations</em></strong>
+     are used groups documents together in one bucket according to your logic 
+     and requirements, while the Metric aggregations </p>
+</li>
+</ol>
+<p><img alt="kibana1" src="../photos/kibana2.png" /></p>
+<p>For More information on Kibana, see link: <a href="https://logz.io/blog/kibana-tutorial-2/#kibanaaggregations">Click link</a></p>
               
             </div>
           </div><footer>
