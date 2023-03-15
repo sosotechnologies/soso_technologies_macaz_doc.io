@@ -61,6 +61,7 @@ this request and Responds back to the user, through the Server.
    ![elastic2](photos/elastic3.png)
 
    - A BCBSNC Elastic engineer has 900k documents that they want to store. 
+
    - Each Shard can only Hold a maximum of 300k Documents
 
    - Two more shards of 300GB each will be added bringing the total storage 
@@ -73,12 +74,14 @@ this request and Responds back to the user, through the Server.
    
    ***Scenario 1:***
    - An Elastic engineer searches 500k documents that is stored in a single Shard 
+
    - The response time for searching 500k Documents in a single shard is 10 seconds.
   
 
    ***Scenario 2:***
    - An Elastic engineer runs a parallel searches of 500k documents that are 
      distributed in 5 Shard.
+     
    - The response time for searching 100k  Documents/Shard will be 2 seconds.
 
    - So, the response time for searching all 500k Documents that are distributed 
