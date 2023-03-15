@@ -60,39 +60,30 @@ this request and Responds back to the user, through the Server.
   ***Shard Example use Case 1***
    ![elastic2](photos/elastic3.png)
 
-    Let’s Say:
-
-  ```
    - A BCBSNC Elastic engineer has 900k documents that they want to store. 
    - Each Shard can only Hold a maximum of 300k Documents
 
    - Two more shards of 300GB each will be added bringing the total storage 
      capacity to 900K Documents
-  ```
 
 
   ***Shard Example use Case 2***
    ![elastic3](photos/elastic4.png)
 
+   
    ***Scenario 1:***
-
-   ```
    - An Elastic engineer searches 500k documents that is stored in a single Shard 
    - The response time for searching 500k Documents in a single shard is 10 seconds.
-  ```
+  
 
    ***Scenario 2:***
-
-  ```
    - An Elastic engineer runs a parallel searches of 500k documents that are 
      distributed in 5 Shard.
    - The response time for searching 100k  Documents/Shard will be 2 seconds.
 
-     Now the real difference here is that:
+   - So, the response time for searching all 500k Documents that are distributed 
+     amongst the 5 shard will still be 2 seconds.
 
-  - The response time for searching all 500k Documents that are distributed 
-    amongst the 5 shard will still be 2 seconds.
-  ```
 
  
 ## Kibana
@@ -118,4 +109,4 @@ this request and Responds back to the user, through the Server.
 
   ![kibana1](photos/kibana2.png)
   
-   For More information on Kibana, see link: [Click link](https://logz.io/blog/kibana-tutorial-2/#kibanaaggregations)
+   For More information on Kibana,: [Click link](https://logz.io/blog/kibana-tutorial-2/#kibanaaggregations)
