@@ -155,10 +155,11 @@
 <p>Install Linux Kernel <a href="https://learn.microsoft.com/en-us/windows/wsl/install-manual">Step 4 - Download the Linux kernel update package</a></p>
 <p>Now go to searchBar and search <strong><em>store</em></strong></p>
 <h2 id="install-chocolatey">Install Chocolatey</h2>
-<p>Link <a href="https://docs.chocolatey.org/en-us/choco/setup">link</a></p>
-<p>Run 
-<code>Get-ExecutionPolicy</code></p>
-<p>If it returns Restricted, then run </p>
+<p>Open Powershell as Administrative user
+Link <a href="https://docs.chocolatey.org/en-us/choco/setup">Click-Link</a></p>
+<p>Run Command: 
+   <code>Get-ExecutionPolicy</code></p>
+<p>If it returns Restricted, then run: </p>
 <p><code>Set-ExecutionPolicy AllSigned</code></p>
 <p>Now run the following command:</p>
 <pre><code>Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
