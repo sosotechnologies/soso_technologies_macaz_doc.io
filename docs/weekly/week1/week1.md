@@ -16,8 +16,8 @@ Requirments:
 
    ***select***
 
-   - virtual machine platform
-   - windows Subsystem for Linux
+   - [x] virtual machine platform
+   - [x] windows Subsystem for Linux
 
      Some common WSL commands, use PowerShell
 

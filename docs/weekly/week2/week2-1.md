@@ -196,7 +196,8 @@ this request and Responds back to the user, through the Server.
 
  
 ***EX 1:*** set the name soso engineers as a variable[read] 
- ```
+
+ ```sh
  #!/bin/bash
  echo "what is the schools name"
  read name
@@ -243,4 +244,20 @@ this request and Responds back to the user, through the Server.
  echo "$sosouser $sosodate $serverconfig $sosodir"
 ```
 
+# 3 Tier Application
 
+A 3-tier application will compose of 3 layers: 
+a Presentation tier, an Application tier, and a Data tier.
+
+## Benefits of a 3 tier Application?
+The benefits of using a 3-tier architecture include improved horizontal scalability, 
+performance, and availability. With three tiers, each part can be developed 
+concurrently by a different team of programmers coding in different languages 
+from the other tier developers. Because the programming for a tier can be changed 
+or relocated without affecting the other tiers, the 3-tier model makes it easier 
+for an enterprise or software packager to continually evolve an application as new 
+needs and opportunities arise. Existing applications or critical parts can be 
+permanently or temporarily retained and encapsulated within the new tier of which it 
+becomes a component.
+
+### The 3 different layers explained
