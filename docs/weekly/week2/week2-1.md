@@ -115,6 +115,109 @@ this request and Responds back to the user, through the Server.
   
    For More information on Kibana,: [Click link](https://logz.io/blog/kibana-tutorial-2/#kibanaaggregations)
 
+### Adding data into Elasticsearch
+The main consideration for indexing or adding data into Elasticsearch largely depends on 
+whether you are indexing general content or timestamped data.
+
+***General content:***
+Index content like HTML pages, catalogs and other files. Send data directly to Elasticseach 
+from your application using an Elastic language client. Otherwise use Workplace Search 
+content connectors or the Enterprise Search web crawler.
+
+***Timestamped data:***
+The preferred way to index timestamped data is to use Elastic Agent. Elastic Agent is a single, 
+unified way to add monitoring for logs, metrics, and other types of data to a host.
+
+### How to ingest data into Elasticsearch Service
+There are 4 main ways in Adding Data to ElasticSearch Service:
+
+- By using Beats and Logstash
+
+- By using Kibana
+
+- By programmatically indexing data 
+
+- Manually adding data
+
+Read more about data ingestion in ElasticSearch [Click Link](https://www.elastic.co/blog/how-to-ingest-data-into-elasticsearch-service)
+
+### The index
+The index is the basis of Elasticsearch, it is where you store your documents. You can compare it to a table in a database. An index has settings and a mapping which defines how to store and index the documents.
+
+### Mapping 
+Mapping is the process of defining how a document, and the fields it contains, are stored and indexed.
+Each document is a collection of fields, which each have their own data type. When mapping your data, you 
+create a mapping definition, which contains a list of fields that are pertinent to the document.
+
+### What is Elastic integrations
+Elastic integrations are a streamlined way to connect your data to the Elastic Stack. 
+Integrations are available for popular services and platforms, like Nginx, AWS, and MongoDB, 
+as well as many generic input types like log files.
+
+For more on Data Integration [Click link:](https://docs.elastic.co/integrations)
+
+### Elastic Agent
+Elastic integrations are powered by Elastic Agent. Elastic Agent is a single, unified way to add 
+monitoring for logs, metrics, and other types of data to a host. It can also protect hosts from 
+security threats, query data from operating systems, forward data from remote services or hardware, and more. 
+
+### Sample Hands-on
+I will :
+
+- Use curl commands to talk to the Elasticsearch REST API. 
+   Or if you choose to use Kibana Devtools, thats also ok, because
+
+- Kibana’s Devtools can automatically recognizes and converts curl commands .
+
+ ***create an index Called middleware***
+
+ ```curl -X PUT “localhost:9200/middleware```
+
+***Delete the index Called middleware***
+
+```curl -X DELETE “localhost:9200/middleware”```
+
+***Create an index Called middleware with just one shard and no replicas***
+
+```
+PUT /middleware?pretty
+{
+   "settings" : {
+   "number_of_shards" : 1,
+   "number_of_replicas" : 0
+  }
+}
+```
+
+***loading data into that index Called middleware***
+
+```
+PUT /middleware/_mapping
+{
+  "properties": {
+  "post_time": { "type": "date" },
+  "username":  { "type": "keyword" },
+  "message":   { "type": "text" }
+ }
+}
+```
+
+***Now Load some data***
+
+1. Manually
+
+```
+POST /middleware/_doc/?pretty
+{
+    "user" : "collins",
+    "post_date" : "2023-16-03T14:10:10",
+    "message" : "Welcome to Elasticsearch?"
+}
+```
+
+see this mediam link, its cool [Click-Link](https://medium.com/tech-explained/getting-hands-on-with-elasticsearch-9969a2894f8a)
+
+
 
 # Shell Scripting
  

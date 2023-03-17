@@ -77,6 +77,20 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#kibana">Kibana</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#adding-data-into-elasticsearch">Adding data into Elasticsearch</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#how-to-ingest-data-into-elasticsearch-service">How to ingest data into Elasticsearch Service</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#the-index">The index</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#mapping">Mapping</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#what-is-elastic-integrations">What is Elastic integrations</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#elastic-agent">Elastic Agent</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#sample-hands-on">Sample Hands-on</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -235,6 +249,94 @@ this request and Responds back to the user, through the Server.</p>
 </ol>
 <p><img alt="kibana1" src="../photos/kibana2.png" /></p>
 <p>For More information on Kibana,: <a href="https://logz.io/blog/kibana-tutorial-2/#kibanaaggregations">Click link</a></p>
+<h3 id="adding-data-into-elasticsearch">Adding data into Elasticsearch</h3>
+<p>The main consideration for indexing or adding data into Elasticsearch largely depends on 
+whether you are indexing general content or timestamped data.</p>
+<p><strong><em>General content:</em></strong>
+Index content like HTML pages, catalogs and other files. Send data directly to Elasticseach 
+from your application using an Elastic language client. Otherwise use Workplace Search 
+content connectors or the Enterprise Search web crawler.</p>
+<p><strong><em>Timestamped data:</em></strong>
+The preferred way to index timestamped data is to use Elastic Agent. Elastic Agent is a single, 
+unified way to add monitoring for logs, metrics, and other types of data to a host.</p>
+<h3 id="how-to-ingest-data-into-elasticsearch-service">How to ingest data into Elasticsearch Service</h3>
+<p>There are 4 main ways in Adding Data to ElasticSearch Service:</p>
+<ul>
+<li>
+<p>By using Beats and Logstash</p>
+</li>
+<li>
+<p>By using Kibana</p>
+</li>
+<li>
+<p>By programmatically indexing data </p>
+</li>
+<li>
+<p>Manually adding data</p>
+</li>
+</ul>
+<p>Read more about data ingestion in ElasticSearch <a href="https://www.elastic.co/blog/how-to-ingest-data-into-elasticsearch-service">Click Link</a></p>
+<h3 id="the-index">The index</h3>
+<p>The index is the basis of Elasticsearch, it is where you store your documents. You can compare it to a table in a database. An index has settings and a mapping which defines how to store and index the documents.</p>
+<h3 id="mapping">Mapping</h3>
+<p>Mapping is the process of defining how a document, and the fields it contains, are stored and indexed.
+Each document is a collection of fields, which each have their own data type. When mapping your data, you 
+create a mapping definition, which contains a list of fields that are pertinent to the document.</p>
+<h3 id="what-is-elastic-integrations">What is Elastic integrations</h3>
+<p>Elastic integrations are a streamlined way to connect your data to the Elastic Stack. 
+Integrations are available for popular services and platforms, like Nginx, AWS, and MongoDB, 
+as well as many generic input types like log files.</p>
+<p>For more on Data Integration <a href="https://docs.elastic.co/integrations">Click link:</a></p>
+<h3 id="elastic-agent">Elastic Agent</h3>
+<p>Elastic integrations are powered by Elastic Agent. Elastic Agent is a single, unified way to add 
+monitoring for logs, metrics, and other types of data to a host. It can also protect hosts from 
+security threats, query data from operating systems, forward data from remote services or hardware, and more. </p>
+<h3 id="sample-hands-on">Sample Hands-on</h3>
+<p>I will :</p>
+<ul>
+<li>
+<p>Use curl commands to talk to the Elasticsearch REST API. 
+   Or if you choose to use Kibana Devtools, thats also ok, because</p>
+</li>
+<li>
+<p>Kibana’s Devtools can automatically recognizes and converts curl commands .</p>
+</li>
+</ul>
+<p><strong><em>create an index Called middleware</em></strong></p>
+<p><code>curl -X PUT “localhost:9200/middleware</code></p>
+<p><strong><em>Delete the index Called middleware</em></strong></p>
+<p><code>curl -X DELETE “localhost:9200/middleware”</code></p>
+<p><strong><em>Create an index Called middleware with just one shard and no replicas</em></strong></p>
+<pre><code>PUT /middleware?pretty
+{
+   &quot;settings&quot; : {
+   &quot;number_of_shards&quot; : 1,
+   &quot;number_of_replicas&quot; : 0
+  }
+}
+</code></pre>
+<p><strong><em>loading data into that index Called middleware</em></strong></p>
+<pre><code>PUT /middleware/_mapping
+{
+  &quot;properties&quot;: {
+  &quot;post_time&quot;: { &quot;type&quot;: &quot;date&quot; },
+  &quot;username&quot;:  { &quot;type&quot;: &quot;keyword&quot; },
+  &quot;message&quot;:   { &quot;type&quot;: &quot;text&quot; }
+ }
+}
+</code></pre>
+<p><strong><em>Now Load some data</em></strong></p>
+<ol>
+<li>Manually</li>
+</ol>
+<pre><code>POST /middleware/_doc/?pretty
+{
+    &quot;user&quot; : &quot;collins&quot;,
+    &quot;post_date&quot; : &quot;2023-16-03T14:10:10&quot;,
+    &quot;message&quot; : &quot;Welcome to Elasticsearch?&quot;
+}
+</code></pre>
+<p>see this mediam link, its cool <a href="https://medium.com/tech-explained/getting-hands-on-with-elasticsearch-9969a2894f8a">Click-Link</a></p>
 <h1 id="shell-scripting">Shell Scripting</h1>
 <p>A shell in a Linux operating system takes input from you in the form of 
   commands, processes it, and then gives an output. </p>
