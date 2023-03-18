@@ -1,5 +1,11 @@
 # Artificial Intelligence
 
+Eventhough AI Machines seem to be a threat to humanity, yet, they cannot beat the power of human intelligence, Machines will never beat the creative or imaginative ability of humans. 
+Always remember, humans created the machine.
+
+## What is AI?
+ "It is a branch of computer science by which we can create intelligent machines which can behave like a human, think like humans, and able to make decisions." 
+
 setup google codeLab [Open-Link](https://codelabs.developers.google.com/)
 
 Theres always been this lask of understanding between machine learning and artificial intelligence.
@@ -34,3 +40,26 @@ Put in context, artificial intelligence refers to the general ability of compute
 
   ![ai3](photos/ai3.png)
 
+### Machine Learning in ANNs
+
+These ML algorithms help to solve different business problems like Forecasting, Regression, Clustering, Classification, and Associations, etc.
+Machine learning is divided into mainly four types, which are:
+
+- ***Supervised Machine Learning*** -
+  Ex: Housing Price Prediction.
+  A Supervised machine learning is a technique where we train the machines using the "labelled" dataset, and based on the training, the machine predicts the output. In this type of learning, the labelled data specifies that some of the inputs are already mapped to the output. The machine are First trained with the input and corresponding output, and then we ask the machine to predict the output using the test dataset. A classic example will be the example of training a machine with
+
+- ***Unsupervised Machine Learning***
+  EX: Customer Segmentation and Market Basket Analysis.
+  In unsupervised machine learning, the machine is trained using the unlabeled dataset, and the machine predicts the output without any supervision. In this type, the models are trained with the data that is neither labelled nor classified, and the model acts on that data without any supervision. Unsupervised learning is much similar as a human learns, which makes it closer to the real AI.
+
+- ***Semi-Supervised Machine Learning***
+  Ex: Lane-Finding on GPS data.
+  It represents the intermediate ground between Supervised and Unsupervised learning algorithms and uses the combination of labelled and unlabeled datasets during the training period.
+
+- ***Reinforcement Learning***
+  Ex: Drivless Cars.
+  Reinforcement learning works on a feedback-based process, in which an AI agent automatically explore its surrounding by hitting & trail, taking action, learning from experiences, and improving its performance. Agent gets rewarded for each good action and get punished for each bad action; hence the goal of reinforcement learning agent is to maximize the rewards.
+  In reinforcement learning, there is no labelled data like supervised learning, and agents learn from their experiences only.
+
+  For more on this section, see this javatpoint Link: [Click-Link](https://www.javatpoint.com/types-of-machine-learning)
