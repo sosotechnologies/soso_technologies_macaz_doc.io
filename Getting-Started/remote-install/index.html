@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Remote Server - SosoTech External Documentation</title>
+    <title>Remote Installation - SosoTech External Documentation</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
@@ -13,7 +13,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Remote Server";
+        var mkdocs_page_name = "Remote Installation";
         var mkdocs_page_input_path = "Getting-Started\\remote-install.md";
         var mkdocs_page_url = null;
       </script>
@@ -47,10 +47,36 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Getting Started</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="" href="../../weekly/Getting-Started/local-install.md">Local-Installation</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../local-install/">Local-Installation</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="../../weekly/Getting-Started/remote-install.md">Remote Installation</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Remote Installation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#installation-links">Installation links</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#install-iam-eks-authenticator">Install IAM EKS authenticator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-docker-in-ec2">Install docker in ec2</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-awscli">Install AWSCLI</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-terraform">Install Terraform</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-kubens-kubectx">Install Kubens + kubectx</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-helm">Install HelM</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-kubectl">Install Kubectl</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-mkdocs">Install MkDocs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-pip-on-rhel">Install PiP on RHeL</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-trivy">Install Trivy</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Weekly Lectures</span></p>
@@ -102,7 +128,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Remote Server</li>
+          <li>Getting Started &raquo;</li>
+      <li>Remote Installation</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/Getting-Started/remote-install.md">Edit on soso_technologies_macaz_doc.io</a>
     </li>
@@ -190,6 +217,10 @@ trivy i nginx:alpine | grep -i critical
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../local-install/" class="btn btn-neutral float-left" title="Local-Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../weekly/Cloud-Technologies/intro-aws/" class="btn btn-neutral float-right" title="AWS">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -212,6 +243,10 @@ trivy i nginx:alpine | grep -i critical
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../local-install/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../weekly/Cloud-Technologies/intro-aws/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
