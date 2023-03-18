@@ -64,23 +64,20 @@ markdown_extensions:
 nav:
  - Home: 
    - About Us: index.md
- - Getting started: 
-   - Request Sandbox: getting-started/env-setup.md
-   - Sample UseCases: getting-started/usecases.md
+ - Getting Started: 
+   - Local-Installation: Getting-Started/local-install.md
+   - Remote Installation: Getting-Started/remote-install.md
  - Weekly Lectures: 
-   - Week 1: 
-      - Local Install: weekly/week1/week1.md
-      - Remote Install: weekly/week1/week1-1.md
-      - Getting Started: weekly/week1/week1-1.md
-   - Week 2:
-      - Getting started: weekly/week2/week2.md
-      - Hands On: weekly/week2/week2-1.md
-   - Week 3:
-      - Getting started: weekly/week3/week3.md
-      - Hands On: weekly/week3/week3-1.md
- - Setup:
-   - Getting started: setup/adding-a-git-repository.md
-   - Adding a comment system: setup/adding-a-comment-system.md
+   - Cloud Technologies: weekly/Cloud-Technologies/intro-aws.md
+   - GitHub: weekly/GitHub/github.md
+   - Terraform: weekly/Terraform/github.md
+   - Docker: weekly/Docker/docker.md
+   - Kubernetes: weekly/Kubernetes/Kubernetes.md
+   - Jenkins: weekly/Jenkins/jenkins.md
+   - AI: weekly/AI/ai.md
+   - ELK: weekly/week2/elk.md
+  
+ 
  
 
 
