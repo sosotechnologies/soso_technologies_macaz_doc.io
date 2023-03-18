@@ -50,9 +50,9 @@
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="#">Getting Started</a>
     <ul>
-                <li class="toctree-l2"><a class="" href="../../Getting Started/local-install.md">Local Install</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../Getting-Started/local-install/">Local Install</a>
                 </li>
-                <li class="toctree-l2"><a class="" href="../../Getting Started/remote-install.md">Remote Install</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../Getting-Started/remote-install/">Remote Install</a>
                 </li>
     </ul>
                   </li>
@@ -318,135 +318,6 @@ security threats, query data from operating systems, forward data from remote se
 }
 </code></pre>
 <p>see this mediam link, its cool <a href="https://medium.com/tech-explained/getting-hands-on-with-elasticsearch-9969a2894f8a">Click-Link</a></p>
-<h1 id="shell-scripting">Shell Scripting</h1>
-<p>A shell in a Linux operating system takes input from you in the form of 
-  commands, processes it, and then gives an output. </p>
-<p>## Types of Shell
-  There are four types, but two main shells in Linux:</p>
-<ol>
-<li>
-<p><strong><em>The Bourne Shell:</em></strong>
-    The prompt for this shell is $ and its derivatives are listed below:</p>
-</li>
-<li>
-<p>POSIX shell also is known as sh</p>
-</li>
-<li>Korn Shell also knew as sh</li>
-<li>
-<p>Bourne Again SHell also knew as bash (most popular)</p>
-</li>
-<li>
-<p><strong><em>The C shell:</em></strong> 
-    The prompt for this shell is %, and its subcategories are:</p>
-</li>
-<li>
-<p>C shell also is known as csh</p>
-</li>
-<li>Tops C shell also is known as tcsh</li>
-</ol>
-<p>### Hands-On</p>
-<pre><code>Create script called:    sososcript.sh
-</code></pre>
-<p><code>$ nano sososcript.sh
-  $ chmod +x sososcript.sh</code></p>
-<p>In the script, add the following content:
-  <code>#!/bin/bash
-  echo “Welcome to soso Devops master course sosoengineers”
-  sleep 2
-  echo “you’re all welcome sosoengineers”
-  sleep 2
-  echo “happy learning sosoengineers”</code></p>
-<p>run the script:  <code>$ sh sososcript.sh</code></p>
-<p>EX 2:</p>
-<p><code>#!/bin/bash
-  name="sosoengineers"     #this name is a variable 
-  echo “Welcome to soso Devops master course $name”
-  sleep 2
-  echo “you’re all welcome to $name”
-  sleep 2
-  echo “happy learning at $name”</code></p>
-<p>run the script:  <code>$ sh sososcript.sh</code></p>
-<p>### VARIABLES</p>
-<p>A variable is a temporary store for a piece of information. 
-  There are two actions for variables:</p>
-<ul>
-<li>Setting a value for a variable.</li>
-<li>Reading the value for a variable.</li>
-</ul>
-<p>Variables are defined as follows −   [variable_name=variable_value]</p>
-<p>EX: NAME="soso technologies"</p>
-<p><strong><em>Variable Types:</em></strong> 
- When a shell is running, three main types of variables are present </p>
-<ul>
-<li>
-<p><strong><em>Local Variables</em></strong> are present within the current instance of 
- the shell. They are set at the command prompt.</p>
-</li>
-<li>
-<p><strong><em>Environment Variables</em></strong> are available to any child process of the shell. </p>
-</li>
-<li>
-<p><strong><em>Shell Variables</em></strong> is a special variable that is set by the shell and is 
- required by the shell to function correctly. </p>
-</li>
-</ul>
-<p><strong><em>EX 1:</em></strong> set the name soso engineers as a variable[read] </p>
-<p>```sh
- #!/bin/bash
- echo "what is the schools name"
- read name
- echo “Welcome to soso Devops master course $name”
- sleep 2
- echo “you’re all welcome to $name”
- sleep 2
- echo “happy learning at $name”</p>
-<pre><code>
-***EX 2:*** set the name soso engineers as a variable[read] 
-
-</code></pre>
-<p>#!/bin/sh
- echo "what is your study program?"
- read name
- echo "How is $name going so far?"
- read remark
- echo "It’s also going $remark with me too!"</p>
-<pre><code>
-***EX 3:*** set the name soso engineers as a variable[positional parameter-argument] 
-
-</code></pre>
-<p>#!/bin/bash
- name=$1</p>
-<p>echo “Welcome to soso Devops master course $name”
- sleep 2
- echo “you’re all welcome to sosotech $name”
- sleep 2
- echo “happy learning $name”</p>
-<pre><code>
-
-***EX 4:*** set the name soso engineers multi variables
-
-</code></pre>
-<p>#!/bin/bash
- sosouser=$(whoami)
- sosodate=$(date)
- serverconfig=$(ifconfig)
- sosodir=$(pwd)
- echo "$sosouser $sosodate $serverconfig $sosodir"
-```</p>
-<h1 id="3-tier-application">3 Tier Application</h1>
-<p>A 3-tier application will compose of 3 layers: 
-a Presentation tier, an Application tier, and a Data tier.</p>
-<h2 id="benefits-of-a-3-tier-application">Benefits of a 3 tier Application?</h2>
-<p>The benefits of using a 3-tier architecture include improved horizontal scalability, 
-performance, and availability. With three tiers, each part can be developed 
-concurrently by a different team of programmers coding in different languages 
-from the other tier developers. Because the programming for a tier can be changed 
-or relocated without affecting the other tiers, the 3-tier model makes it easier 
-for an enterprise or software packager to continually evolve an application as new 
-needs and opportunities arise. Existing applications or critical parts can be 
-permanently or temporarily retained and encapsulated within the new tier of which it 
-becomes a component.</p>
-<h3 id="the-3-different-layers-explained">The 3 different layers explained</h3>
               
             </div>
           </div><footer>
