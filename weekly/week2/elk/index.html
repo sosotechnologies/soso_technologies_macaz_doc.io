@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>ELK - Elastic Stack - SosoTech External Documentation</title>
+    <title>ELK - SosoTech External Documentation</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "ELK - Elastic Stack";
-        var mkdocs_page_input_path = "weekly\\week2\\week2-1.md";
+        var mkdocs_page_name = "ELK";
+        var mkdocs_page_input_path = "weekly\\week2\\elk.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -54,7 +54,7 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Weekly Lectures</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="#">Getting Started</a>
     <ul>
                 <li class="toctree-l2"><a class="" href="../../Getting Started/local-install.md">Local Install</a>
@@ -63,16 +63,34 @@
                 </li>
     </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Cloud Technologies</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../Cloud-Technologies/intro-to-cloud/">Getting started</a>
-                </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Cloud-Technologies/intro-to-cloud/">Cloud Technologies</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">AI</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../AI/ai/">Getting started</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../AI/ai/">AI</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">ELK</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#elasticsearch">ElasticSearch</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#elasticsearch-architecture-key-components">Elasticsearch Architecture: Key Components</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#kibana">Kibana</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-data-into-elasticsearch">Adding data into Elasticsearch</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-to-ingest-data-into-elasticsearch-service">How to ingest data into Elasticsearch Service</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-index">The index</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mapping">Mapping</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-elastic-integrations">What is Elastic integrations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#elastic-agent">Elastic Agent</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sample-hands-on">Sample Hands-on</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                   </li>
               </ul>
@@ -90,9 +108,10 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>ELK - Elastic Stack</li>
+          <li>Weekly Lectures &raquo;</li>
+      <li>ELK</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/weekly/week2/week2-1.md">Edit on soso_technologies_macaz_doc.io</a>
+          <a href="https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/weekly/week2/elk.md">Edit on soso_technologies_macaz_doc.io</a>
     </li>
   </ul>
   <hr/>
@@ -430,6 +449,9 @@ becomes a component.</p>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../AI/ai/" class="btn btn-neutral float-left" title="AI"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
 
   <hr/>
 
@@ -451,6 +473,8 @@ becomes a component.</p>
   <div class="rst-versions" role="note" aria-label="Versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
+    
+      <span><a href="../../AI/ai/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>
