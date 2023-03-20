@@ -1,2 +1,0 @@
-io.siddhi.extension.store.elasticsearch.ElasticsearchEventTable
-io.siddhi.extension.store.elasticsearch.sink.ElasticsearchSink
