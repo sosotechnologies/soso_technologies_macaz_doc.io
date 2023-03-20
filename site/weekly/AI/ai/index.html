@@ -72,8 +72,18 @@
     <li class="toctree-l2"><a class="reference internal" href="#what-is-ai">What is AI?</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#artificial-neural-network-ann">Artificial Neural Network (ANN)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#neurons-in-ai">Neurons in AI</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#weight">Weight</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bias">Bias</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#neural-network-activation-function">Neural Network Activation Function?</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#machine-learning-in-anns">Machine Learning in ANNs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#weight_1">Weight</a>
     </li>
         </ul>
     </li>
@@ -137,12 +147,42 @@ Put in context, artificial intelligence refers to the general ability of compute
 <p>Neurons communicate with each other by sending chemicals, called neurotransmitters, across a tiny space called a synapse, between the axons and dendrites of nearby neurons.</p>
 <p><img alt="ai2" src="../photos/ai2.png" /></p>
 <p>So, now that we have that understanding of a human neuron, and how the neurons connect, the goal of AI was to replicate the way the human brain learns. In another sence, create machines that would have the ability to learn, adapt, and make decisions.</p>
-<p>### Neurona in AI</p>
-<p>As seen in the diagram below, the Input Values are independent Variables of [1, 2, and m]. These variables need to be standardized to make sure all variables contribute evenly to a scale when items are added together, or to make it easier to interpret results of a regression or other analysis.</p>
+<h2 id="neurons-in-ai">Neurons in AI</h2>
+<p>As seen in the diagram below, the Input Values are independent Variables of [1, 2, and m]. These variables need to be standardized to make sure all variables contribute evenly to a scale when items are added together, or to make it easier to interpret results of a regression or other analysis.
+ The <strong><em>output</em></strong> Value can be: continuous, binary or a catagorical variable. Neural network is made of interconnected neurons. Each of them is characterized by its weight, bias, and activation function.</p>
 <p><img alt="ai3" src="../photos/ai3.png" /></p>
+<h3 id="weight">Weight</h3>
+<p>Weight is the parameter within a neural network that transforms input data within the network's hidden layers. </p>
+<h3 id="bias">Bias</h3>
+<p>Bias in AI is when the machine gives consistently different outputs for one group of people compared to another. Typically these bias outputs follow classical societal biases like race, gender, biological sex, nationality or age.</p>
+<h3 id="neural-network-activation-function">Neural Network Activation Function?</h3>
+<p>An Activation Function is what makes the decision, if a neuron should be activated or not. This means that an ctivation Function is a mathematical “gate” that decide whether the neuron’s input to the network is important or not in the process of prediction using simpler mathematical operations. </p>
+<p><strong><em>Types of Activation Functions</em></strong></p>
+<ul>
+<li>
+<p><strong><em>Threshold Activation Function</em></strong>
+     is a commonly used activation function.It gives 1 as output of the input is either 0 or positive. If the input is negative, it gives 0 as output.
+     <img alt="ai6" src="../photos/ai6.png" /></p>
+</li>
+<li>
+<p><strong><em>Sigmoid Activation Function</em></strong>
+    Sigmoid Function is the most commonly used activation function in neural networks. It is the go-to model when it comes to predicting the probability as an output. Since probability of anything exists only between the range of 0 and 1, sigmoid has the ability to takes any real value as input and outputs values in the range of 0 to 1.
+      <img alt="ai4" src="../photos/ai4.png" /></p>
+</li>
+<li>
+<p><strong><em>Rectified Activation Function</em></strong>
+    is the most popularly used activation function in the areas of convolutional neural networks and deep learning. It is of the form:
+    <img alt="ai7" src="../photos/ai7.png" /></p>
+</li>
+<li>
+<p><strong><em>Hyperbolic Tangent Activation Function</em></strong>
+    It is bipolar in nature. Similar to sigmoid, except a different output range of -1 to 1. In Tanh, the larger the input (more positive), the closer the output value will be to 1.0, whereas the smaller the input (more negative), the closer the output will be to -1.0.
+    <img alt="ai5" src="../photos/ai5.png" /></p>
+</li>
+</ul>
 <h3 id="machine-learning-in-anns">Machine Learning in ANNs</h3>
 <p>These ML algorithms help to solve different business problems like Forecasting, Regression, Clustering, Classification, and Associations, etc.
-Machine learning is divided into mainly four types, which are:</p>
+ Machine learning is divided into mainly four types, which are:</p>
 <ul>
 <li>
 <p><strong><em>Supervised Machine Learning</em></strong> -
@@ -167,6 +207,8 @@ Machine learning is divided into mainly four types, which are:</p>
 </li>
 </ul>
 <p>For more on this section, see this javatpoint Link: <a href="https://www.javatpoint.com/types-of-machine-learning">Click-Link</a></p>
+<h3 id="weight_1">Weight</h3>
+<p>Weight is the parameter within a neural network that transforms input data within the network's hidden layers. </p>
               
             </div>
           </div><footer>
