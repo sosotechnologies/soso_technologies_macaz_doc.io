@@ -67,6 +67,43 @@ Put in context, artificial intelligence refers to the general ability of compute
     It is bipolar in nature. Similar to sigmoid, except a different output range of -1 to 1. In Tanh, the larger the input (more positive), the closer the output value will be to 1.0, whereas the smaller the input (more negative), the closer the output will be to -1.0.
     ![ai5](photos/ai5.png)
 
+### How do Neural Networks Work?
+   Example Case: Real Estate Price prediction using a trained NN. 
+   ![ai8](photos/ai8.png)
+
+ - Looking at the ***Red*** arrows, this synapses connects Age, Area, bedroom to a neuron. 
+   So, this neuron is paying attention to properties that maybe:
+   Newer,
+   That have at least 3 bedrooms or more,
+   And which the homes have a larger area.
+
+ - Looking at the ***Blue*** arrows, this synapses connects Schools Ratings and bedroom to a neuron. 
+   So, this neuron is paying   attention to properties that maybe:
+   Families with Kids in school
+   Homes that have more bedrooms for the parents and kids.
+
+ - Looking at the ***Green*** arrows, this synapses connects Just the Age of the property.
+   So, this neuron is paying attention to properties that maybe:
+   Newly built, or
+   Properties that are historic, valuable properties, like above 100years old. 
+   A rectifier function can be used here, stating that, the moment the property turns 100 years, 
+   the rectifier functions kicks from 0 to 1. 
+
+ - Looking at the ***Yellow*** arrows, this synapses connects Area (SqFt) and Bedrooms of the property. 
+   So, this neuron is paying attention to properties that maybe:
+   The homes here have a larger Area Sq and have many rooms. These may be homes that are mansions. 
+
+ - Looking at the ***black*** arrows, this synapses connects all the input functions. So, this neuron is 
+   paying attention to properties because all the inputs match the criteria for the price of the property
+
+   So, all these different neuron communications will predict the price of the property
+
+
+
+
+
+
+
 ### Machine Learning in ANNs
  These ML algorithms help to solve different business problems like Forecasting, Regression, Clustering, Classification, and Associations, etc.
  Machine learning is divided into mainly four types, which are:

@@ -81,6 +81,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#neural-network-activation-function">Neural Network Activation Function?</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-do-neural-networks-work">How do Neural Networks Work?</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#machine-learning-in-anns">Machine Learning in ANNs</a>
     </li>
         </ul>
@@ -178,6 +180,42 @@ Put in context, artificial intelligence refers to the general ability of compute
     <img alt="ai5" src="../photos/ai5.png" /></p>
 </li>
 </ul>
+<h3 id="how-do-neural-networks-work">How do Neural Networks Work?</h3>
+<p>Example Case: Real Estate Price prediction using a trained NN. 
+   <img alt="ai8" src="../photos/ai8.png" /></p>
+<ul>
+<li>
+<p>Looking at the <strong><em>Red</em></strong> arrows, this synapses connects Age, Area, bedroom to a neuron. 
+   So, this neuron is paying attention to properties that maybe:
+   Newer,
+   That have at least 3 bedrooms or more,
+   And which the homes have a larger area.</p>
+</li>
+<li>
+<p>Looking at the <strong><em>Blue</em></strong> arrows, this synapses connects Schools Ratings and bedroom to a neuron. 
+   So, this neuron is paying   attention to properties that maybe:
+   Families with Kids in school
+   Homes that have more bedrooms for the parents and kids.</p>
+</li>
+<li>
+<p>Looking at the <strong><em>Green</em></strong> arrows, this synapses connects Just the Age of the property.
+   So, this neuron is paying attention to properties that maybe:
+   Newly built, or
+   Properties that are historic, valuable properties, like above 100years old. 
+   A rectifier function can be used here, stating that, the moment the property turns 100 years, 
+   the rectifier functions kicks from 0 to 1. </p>
+</li>
+<li>
+<p>Looking at the <strong><em>Yellow</em></strong> arrows, this synapses connects Area (SqFt) and Bedrooms of the property. 
+   So, this neuron is paying attention to properties that maybe:
+   The homes here have a larger Area Sq and have many rooms. These may be homes that are mansions. </p>
+</li>
+<li>
+<p>Looking at the <strong><em>black</em></strong> arrows, this synapses connects all the input functions. So, this neuron is 
+   paying attention to properties because all the inputs match the criteria for the price of the property</p>
+</li>
+</ul>
+<p>So, all these different neuron communications will predict the price of the property</p>
 <h3 id="machine-learning-in-anns">Machine Learning in ANNs</h3>
 <p>These ML algorithms help to solve different business problems like Forecasting, Regression, Clustering, Classification, and Associations, etc.
  Machine learning is divided into mainly four types, which are:</p>
