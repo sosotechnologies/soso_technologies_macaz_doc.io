@@ -83,6 +83,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#how-do-neural-networks-work">How do Neural Networks Work?</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-do-neural-networks-learn">How do Neural Networks Learn?</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#machine-learning-in-anns">Machine Learning in ANNs</a>
     </li>
         </ul>
@@ -92,6 +94,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../week2/elk/">ELK</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../Random/random/">Random Topics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Azure/azure/">Azure</a>
                   </li>
               </ul>
       </div>
@@ -216,6 +220,20 @@ Put in context, artificial intelligence refers to the general ability of compute
 </li>
 </ul>
 <p>So, all these different neuron communications will predict the price of the property</p>
+<h3 id="how-do-neural-networks-learn">How do Neural Networks Learn?</h3>
+<p>ANN can be categorized by how the data flows from the input node to the output node. B
+Some of the neural networks are some examples:</p>
+<p><strong><em>Gradient descent</em></strong>
+    is an optimization algorithm which is commonly-used to train machine learning models and neural networks. 
+    Training data helps these models learn over time, and the cost function within gradient descent specifically 
+    acts as a barometer, gauging its accuracy with each iteration of parameter updates.</p>
+<p><strong><em>Backpropagation algorithm</em></strong>
+    Artificial neural networks learn continuously by using corrective feedback loops to improve their predictive analytics. In simple terms, you can think of the data flowing from the input node to the output node through many different paths in the neural network. Only one path is the correct one that maps the input node to the correct output node. To find this path, the neural network uses a feedback loop, which works as follows:</p>
+<p>Each node makes a guess about the next node in the path.
+It checks if the guess was correct. Nodes assign higher weight values to paths that lead to more correct guesses and lower weight values to node paths that lead to incorrect guesses.
+For the next data point, the nodes make a new prediction using the higher weight paths and then repeat Step 1.
+Convolutional neural networks
+The hidden layers in convolutional neural networks perform specific mathematical functions, like summarizing or filtering, called convolutions. They are very useful for image classification because they can extract relevant features from images that are useful for image recognition and classification. The new form is easier to process without losing features that are critical for making a good prediction. Each hidden layer extracts and processes different image features, like edges, color, and depth.</p>
 <h3 id="machine-learning-in-anns">Machine Learning in ANNs</h3>
 <p>These ML algorithms help to solve different business problems like Forecasting, Regression, Clustering, Classification, and Associations, etc.
  Machine learning is divided into mainly four types, which are:</p>
