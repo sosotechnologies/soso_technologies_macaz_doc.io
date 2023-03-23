@@ -98,9 +98,23 @@ Put in context, artificial intelligence refers to the general ability of compute
 
    So, all these different neuron communications will predict the price of the property
 
+### How do Neural Networks Learn?
+ANN can be categorized by how the data flows from the input node to the output node. B
+Some of the neural networks are some examples:
 
+ ***Gradient descent***
+    is an optimization algorithm which is commonly-used to train machine learning models and neural networks. 
+    Training data helps these models learn over time, and the cost function within gradient descent specifically 
+    acts as a barometer, gauging its accuracy with each iteration of parameter updates.
 
+ ***Backpropagation algorithm***
+    Artificial neural networks learn continuously by using corrective feedback loops to improve their predictive analytics. In simple terms, you can think of the data flowing from the input node to the output node through many different paths in the neural network. Only one path is the correct one that maps the input node to the correct output node. To find this path, the neural network uses a feedback loop, which works as follows:
 
+Each node makes a guess about the next node in the path.
+It checks if the guess was correct. Nodes assign higher weight values to paths that lead to more correct guesses and lower weight values to node paths that lead to incorrect guesses.
+For the next data point, the nodes make a new prediction using the higher weight paths and then repeat Step 1.
+Convolutional neural networks
+The hidden layers in convolutional neural networks perform specific mathematical functions, like summarizing or filtering, called convolutions. They are very useful for image classification because they can extract relevant features from images that are useful for image recognition and classification. The new form is easier to process without losing features that are critical for making a good prediction. Each hidden layer extracts and processes different image features, like edges, color, and depth.
 
 
 

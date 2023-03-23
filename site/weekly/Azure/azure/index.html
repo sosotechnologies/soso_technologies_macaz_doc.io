@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>Terraform - SosoTech External Documentation</title>
+    <title>Azure - SosoTech External Documentation</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Terraform";
-        var mkdocs_page_input_path = "weekly\\Terraform\\terraform.md";
+        var mkdocs_page_name = "Azure";
+        var mkdocs_page_input_path = "weekly\\Azure\\azure.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -54,12 +54,12 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Weekly Lectures</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../../Cloud-Technologies/intro-aws/">Cloud Technologies</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../GitHub/github/">GitHub</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="../github.md">Terraform</a>
+                  <li class="toctree-l1"><a class="" href="../../Terraform/github.md">Terraform</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../Docker/docker/">Docker</a>
                   </li>
@@ -73,7 +73,21 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../Random/random/">Random Topics</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../Azure/azure/">Azure</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Azure</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#whats-hierarchy">Whats hierarchy</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#set-a-budget">Set a budget</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#azure-storage-types">Azure Storage types</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#azure-networking-service">Azure Networking Service</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#azure-active-directory">Azure Active Directory</a>
+    </li>
+    </ul>
                   </li>
               </ul>
       </div>
@@ -90,9 +104,10 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Terraform</li>
+          <li>Weekly Lectures &raquo;</li>
+      <li>Azure</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/weekly/Terraform/terraform.md">Edit on soso_technologies_macaz_doc.io</a>
+          <a href="https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/weekly/Azure/azure.md">Edit on soso_technologies_macaz_doc.io</a>
     </li>
   </ul>
   <hr/>
@@ -100,10 +115,49 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="azure">Azure</h1>
+<p>Free azure account and go to the postal link:</p>
+<ul>
+<li><a href="https://azure.microsoft.com/free/">Free account-Link</a></li>
+<li><a href="https://portal.azure.com/">Portal-Link</a></li>
+</ul>
+<h2 id="whats-hierarchy">Whats hierarchy</h2>
+<p>Azure provides four levels of management: 
+<strong><em>management groups -&gt; Subscriptions -&gt; Resource Groups -&gt; Resources</em></strong>
+ <img alt="hierarchy" src="../photos/hierarchy.png" /></p>
+<p><strong><em>Management groups</em></strong> help you manage access, policy, and compliance for 
+multiple subscriptions. All subscriptions in a management group automatically 
+inherit the conditions that are applied to the management group.</p>
+<p><strong><em>Subscriptions</em></strong> associate user accounts with the resources that they create. </p>
+<p><strong><em>Resource groups</em></strong> are logical containers where you can deploy and manage 
+Azure resources like web apps, databases, and storage accounts.</p>
+<p><strong><em>Resources</em></strong> are instances of services that you can create, such as virtual 
+machines, storage, and SQL databases.</p>
+<h3 id="set-a-budget">Set a budget</h3>
+<p><img alt="budget" src="../photos/budget.png" /></p>
+<h3 id="azure-storage-types">Azure Storage types</h3>
+<p>Azure Storage offers five core services:</p>
+<p><strong><em>Blob Storage</em></strong> helps you create data lakes for your analytics needs, and provides storage 
+ to build powerful cloud-native and mobile apps.</p>
+<p><strong><em>File Storage</em></strong>: Managed file shares for cloud or on-premises deployments.</p>
+<p><strong><em>Queue Storage</em></strong>: A messaging store for reliable messaging between application components.</p>
+<p><strong><em>Table Storage</em></strong>: A NoSQL store for schemaless storage of structured data.</p>
+<p><strong><em>Managed Disk Storage</em></strong>: Block-level storage volumes for Azure VMs.</p>
+<p><strong><em>Azure Elastic SAN (preview)</em></strong>: A fully integrated solution that simplifies deploying, 
+scaling, managing, and configuring a SAN in Azure.</p>
+<p>Azure also offers a list of SQL Data and non-SQL Databases.
+For More on Azure Storage, see link<a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction">Azure Storage Link</a></p>
+<h3 id="azure-networking-service">Azure Networking Service</h3>
+<p>For More on Azure networking, see link<a href="https://learn.microsoft.com/en-us/azure/networking/fundamentals/networking-overview">Azure networking Link</a></p>
+<h2 id="azure-active-directory">Azure Active Directory</h2>
+<p>Azure AD part of Microsoft <a href="https://www.microsoft.com/en-us/security/business/microsoft-entra">Entra</a>, is an identity and Access Management service that provides single sign-on, multifactor 
+authentication, and conditional access to guard against 99.9 percent of cybersecurity attacks.</p>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../Random/random/" class="btn btn-neutral float-left" title="Random Topics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
 
   <hr/>
 
@@ -125,6 +179,8 @@
   <div class="rst-versions" role="note" aria-label="Versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
+    
+      <span><a href="../../Random/random/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>
