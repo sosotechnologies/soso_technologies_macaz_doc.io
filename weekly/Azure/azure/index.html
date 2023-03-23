@@ -75,13 +75,15 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Azure</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#whats-azure">Whats Azure</a>
+    <li class="toctree-l2"><a class="reference internal" href="#whats-hierarchy">Whats hierarchy</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#subscriptions">Subscriptions</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#set-a-budget">Set a budget</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#azure-storage-types">Azure Storage types</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#set-a-budget">Set a budget</a>
+    <li class="toctree-l3"><a class="reference internal" href="#azure-networking-service">Azure Networking Service</a>
     </li>
         </ul>
     </li>
@@ -119,23 +121,31 @@
 <li><a href="https://azure.microsoft.com/free/">Free account-Link</a></li>
 <li><a href="https://portal.azure.com/">Portal-Link</a></li>
 </ul>
-<h2 id="whats-azure">Whats Azure</h2>
+<h2 id="whats-hierarchy">Whats hierarchy</h2>
+<p>Azure provides four levels of management: 
+<strong><em>management groups -&gt; Subscriptions -&gt; Resource Groups -&gt; Resources</em></strong>
+ <img alt="budget" src="../photos/hierarchy.png" /></p>
 <h3 id="subscriptions">Subscriptions</h3>
-<p>There is a subscription by default, that comes with the account.</p>
-<h3 id="azure-storage-types">Azure Storage types</h3>
-<p>Azure Storage offers five core services:
-<strong><em>Blob Storage</em></strong>: 
- helps you create data lakes for your analytics needs, and provides storage 
- to build powerful cloud-native and mobile apps.
-<strong><em>File Storage</em></strong>: Managed file shares for cloud or on-premises deployments.
-<strong><em>Queue Storage</em></strong>: A messaging store for reliable messaging between application components.
-<strong><em>Table Storage</em></strong>: A NoSQL store for schemaless storage of structured data.
-<strong><em>Managed Disk Storage</em></strong>: Block-level storage volumes for Azure VMs.
-<strong><em>Azure Elastic SAN (preview)</em></strong>: A fully integrated solution that simplifies deploying, 
-scaling, managing, and configuring a SAN in Azure.</p>
-<p>For More on Azure Storage, see link<a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction">Azure Storage Link</a></p>
+<p><strong><em>Azure account</em></strong> is a global unique entity that gets you access to Azure services 
+and your Azure subscriptions. 
+<strong><em>An Azure subscription</em></strong> is a logical container used to provision resources in Azure. 
+It holds the details of all your resources like virtual machines (VMs), databases, etc.</p>
 <h3 id="set-a-budget">Set a budget</h3>
 <p><img alt="budget" src="../photos/budget.png" /></p>
+<h3 id="azure-storage-types">Azure Storage types</h3>
+<p>Azure Storage offers five core services:</p>
+<p><strong><em>Blob Storage</em></strong> helps you create data lakes for your analytics needs, and provides storage 
+ to build powerful cloud-native and mobile apps.</p>
+<p><strong><em>File Storage</em></strong>: Managed file shares for cloud or on-premises deployments.</p>
+<p><strong><em>Queue Storage</em></strong>: A messaging store for reliable messaging between application components.</p>
+<p><strong><em>Table Storage</em></strong>: A NoSQL store for schemaless storage of structured data.</p>
+<p><strong><em>Managed Disk Storage</em></strong>: Block-level storage volumes for Azure VMs.</p>
+<p><strong><em>Azure Elastic SAN (preview)</em></strong>: A fully integrated solution that simplifies deploying, 
+scaling, managing, and configuring a SAN in Azure.</p>
+<p>Azure also offers a list of SQL Data and non-SQL Databases.
+For More on Azure Storage, see link<a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction">Azure Storage Link</a></p>
+<h3 id="azure-networking-service">Azure Networking Service</h3>
+<p>For More on Azure networking, see link<a href="https://learn.microsoft.com/en-us/azure/networking/fundamentals/networking-overview">Azure networking Link</a></p>
               
             </div>
           </div><footer>
