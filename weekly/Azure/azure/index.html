@@ -77,8 +77,6 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#whats-hierarchy">Whats hierarchy</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#subscriptions">Subscriptions</a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#set-a-budget">Set a budget</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#azure-storage-types">Azure Storage types</a>
@@ -124,12 +122,15 @@
 <h2 id="whats-hierarchy">Whats hierarchy</h2>
 <p>Azure provides four levels of management: 
 <strong><em>management groups -&gt; Subscriptions -&gt; Resource Groups -&gt; Resources</em></strong>
- <img alt="budget" src="../photos/hierarchy.png" /></p>
-<h3 id="subscriptions">Subscriptions</h3>
-<p><strong><em>Azure account</em></strong> is a global unique entity that gets you access to Azure services 
-and your Azure subscriptions. 
-<strong><em>An Azure subscription</em></strong> is a logical container used to provision resources in Azure. 
-It holds the details of all your resources like virtual machines (VMs), databases, etc.</p>
+ <img alt="hierarchy" src="../photos/hierarchy.png" /></p>
+<p><strong><em>Management groups</em></strong> help you manage access, policy, and compliance for 
+multiple subscriptions. All subscriptions in a management group automatically 
+inherit the conditions that are applied to the management group.</p>
+<p><strong><em>Subscriptions</em></strong> associate user accounts with the resources that they create. </p>
+<p><strong><em>Resource groups</em></strong> are logical containers where you can deploy and manage 
+Azure resources like web apps, databases, and storage accounts.</p>
+<p><strong><em>Resources</em></strong> are instances of services that you can create, such as virtual 
+machines, storage, and SQL databases.</p>
 <h3 id="set-a-budget">Set a budget</h3>
 <p><img alt="budget" src="../photos/budget.png" /></p>
 <h3 id="azure-storage-types">Azure Storage types</h3>
