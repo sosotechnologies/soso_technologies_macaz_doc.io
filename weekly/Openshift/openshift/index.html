@@ -154,23 +154,21 @@ There are <strong><em>Two</em></strong> Cluster-Setup options to choose: a custo
 </ul>
 </li>
 <li>
-<p>Create an SSH Key in the root directory
-    <code>[root@ip-172-31-12-23 ~]# ssh-keygen -t rsa -b 4096 -N '' -f id_rsa</code></p>
+<p>Create an SSH Key in the root directory</p>
+<p><code>[root@ip-172-31-12-23 ~]# ssh-keygen -t rsa -b 4096 -N '' -f id_rsa</code></p>
 </li>
 <li>
-<p>Evaluate and add to root
-    <code>[root@ip-172-31-12-23 ~]# eval "$(ssh-agent -s)"
-    [root@ip-172-31-12-23 ~]# ssh-add id_rsa</code></p>
+<p>Evaluate and add to root</p>
+<p><code>[root@ip-172-31-12-23 ~]# eval "$(ssh-agent -s)"
+[root@ip-172-31-12-23 ~]# ssh-add id_rsa</code>
+  - <strong><em>Copy</em></strong> and <strong><em>cd</em></strong> to the rsa keys to the /usr/local/bin/ folder </p>
 </li>
-<li>
-<p><strong><em>Copy</em></strong> and <strong><em>cd</em></strong> to the rsa keys to the /usr/local/bin/ folder 
-   <code>cp id_rsa id_rsa.pub /usr/local/bin/</code>
+</ul>
+<p><code>cp id_rsa id_rsa.pub /usr/local/bin/</code>
    <code>cd /usr/local/bin/</code></p>
-</li>
-<li>
-<p>Now install Openshift
-  <code>./openshift-install create cluster</code> </p>
-</li>
+<ul>
+<li>Now install Openshift
+  <code>./openshift-install create cluster</code> </li>
 </ul>
 <p>SEE MY workflow process</p>
 <p><code>[ec2-user@ip-172-31-12-23 s]$ ls
