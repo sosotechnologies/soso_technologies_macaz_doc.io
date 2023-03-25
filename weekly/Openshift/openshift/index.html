@@ -128,8 +128,15 @@ There are <strong><em>Two</em></strong> Cluster-Setup options to choose: a custo
 <ul>
 <li>Install the Openshift installer and client on your local computer.</li>
 <li>Move that file to your remote linux machine. You're see the client and installer.</li>
-<li><code>cp openshift-install /usr/local/bin/</code></li>
-<li><code>which openshift-install</code></li>
+<li>Extract the installer and client: 
+     <code>tar xvf openshift-install-linux.tar.gz</code>
+     <code>tar xvf openshift-client-linux.tar.gz</code></li>
+<li>Move the oc, kubectl and installer to usr/bin directoory
+    <code>sudo mv oc /usr/local/bin/</code>
+    <code>sudo mv kubectl /usr/local/bin/</code>
+    <code>sudo cp openshift-install /usr/local/bin/</code>
+    <code>which openshift-install</code>
+    <code>oc help</code></li>
 <li>Copy the secret content and paste in a file. This secret is from the redhad account, 
     used to Map the AWS Cluster with the redHat account.</li>
 <li><strong><em>In the AWS Console, setup the following:</em></strong><ul>
@@ -139,6 +146,23 @@ There are <strong><em>Two</em></strong> Cluster-Setup options to choose: a custo
 </ul>
 </li>
 </ul>
+<p>SEE MY workflow process
+ <code>[ec2-user@ip-172-31-12-23 s]$ ls
+ openshift-install-linux.tar.gz  README.md
+ [ec2-user@ip-172-31-12-23 s]$ tar xvf openshift-install-linux.tar.gz 
+ README.md
+ openshift-install
+ [ec2-user@ip-172-31-12-23 s]$ ls
+ openshift-install  openshift-install-linux.tar.gz  README.md
+ [ec2-user@ip-172-31-12-23 s]$ ls
+ openshift-client-linux.tar.gz  openshift-install  openshift-install-linux.tar.gz  README.md
+ [ec2-user@ip-172-31-12-23 s]$ tar xvf openshift-client-linux.tar.gz 
+ README.md
+ oc
+ kubectl
+ [ec2-user@ip-172-31-12-23 s]$ ls
+ kubectl  oc  openshift-client-linux.tar.gz  openshift-install  openshift-install-linux.tar.gz  README.md
+ [ec2-user@ip-172-31-12-23 s]$</code></p>
 <p>https://www.youtube.com/watch?v=vP-epd-Fyx0&amp;t=4s</p>
 <p>https://github.com/cloudacademy/openshift-voteapp-demo</p>
 <p>AWS Openshift installation Link: <a href="https://docs.openshift.com/container-platform/4.1/installing/installing_aws/installing-aws-account.html">See-Link</a></p>
