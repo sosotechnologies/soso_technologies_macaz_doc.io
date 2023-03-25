@@ -92,8 +92,26 @@
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#azure-active-directory">Azure Active Directory</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#accounts-and-subscriptions">Accounts and subscriptions</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#users">users</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#optional-create-a-new-tenant-for-your-organization">Optional: Create a new tenant for your organization</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#storage">Storage</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#storage-access-control-iam">Storage Access Control (IAM)</a>
+    </li>
+        </ul>
     </li>
     </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Openshift/openshift/">OpenShift</a>
                   </li>
               </ul>
       </div>
@@ -183,11 +201,30 @@ Copy the info created. In my case:</p>
 <h2 id="azure-active-directory">Azure Active Directory</h2>
 <p>Azure AD part of Microsoft <a href="https://www.microsoft.com/en-us/security/business/microsoft-entra">Entra</a>, is an identity and Access Management service that provides single sign-on, multifactor 
 authentication, and conditional access to guard against 99.9 percent of cybersecurity attacks.</p>
+<h3 id="accounts-and-subscriptions">Accounts and subscriptions</h3>
+<ul>
+<li><strong><em>Account:</em></strong> </li>
+<li><strong><em>Subscription:</em></strong></li>
+<li><strong><em>Tenant:</em></strong></li>
+<li><strong><em>Resource Groups:</em></strong></li>
+</ul>
+<h4 id="users">users</h4>
+<p>There are three types of user accounts that you can have in Azure AD:
+<strong><em>federated</em></strong>
+<strong><em>synchronized</em></strong>
+<strong><em>cloud</em></strong></p>
+<h4 id="optional-create-a-new-tenant-for-your-organization">Optional: Create a new tenant for your organization</h4>
+<p>For more info see: <a href="https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-access-create-new-tenant">To create a new tenant</a></p>
+<p>After creating tenant, it comes with nothin installed, so I will have to add subscriptions...
+<strong><em>Note</em></strong>: You can switch between tenants</p>
+<h2 id="storage">Storage</h2>
+<h3 id="storage-access-control-iam">Storage Access Control (IAM)</h3>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../../Random/random/" class="btn btn-neutral float-left" title="Random Topics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../Openshift/openshift/" class="btn btn-neutral float-right" title="OpenShift">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -213,6 +250,8 @@ authentication, and conditional access to guard against 99.9 percent of cybersec
     
       <span><a href="../../Random/random/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
+    
+      <span><a href="../../Openshift/openshift/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
