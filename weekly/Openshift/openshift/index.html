@@ -139,6 +139,7 @@ There are <strong><em>Two</em></strong> Cluster-Setup options to choose: a custo
 <code>sudo mv kubectl /usr/local/bin/</code>
 <code>sudo cp openshift-install /usr/local/bin/</code>
 <code>which openshift-install</code>
+<code>openshift-install version</code>
 <code>oc help</code></p>
 </li>
 <li>
@@ -149,8 +150,12 @@ There are <strong><em>Two</em></strong> Cluster-Setup options to choose: a custo
 <p><strong><em>In the AWS Console, setup the following:</em></strong></p>
 <ul>
 <li>Route53 public Hoster Zone</li>
+<li>Create IAM Role aith Adminstrative access and add to instance
+      OR<ul>
 <li>IAM Adminstrative User</li>
 <li>Create Access and Secret Keys for the user</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -167,9 +172,78 @@ There are <strong><em>Two</em></strong> Cluster-Setup options to choose: a custo
 <p><code>cp id_rsa id_rsa.pub /usr/local/bin/</code>
    <code>cd /usr/local/bin/</code></p>
 <ul>
-<li>Now install Openshift
-  <code>./openshift-install create cluster</code> </li>
+<li>
+<p><strong><em>Now install Openshift</em></strong>. A prompt will begin. The last prompt will be the secret
+    Copy and paste the secret characters that we had saved earlier.</p>
+<ul>
+<li><code>openshift-install create install-config</code> </li>
 </ul>
+</li>
+<li>
+<p>Copy the install-config.yaml to install-config.yaml.bak</p>
+<ul>
+<li><code>install-config.yaml to install-config.yaml.bak</code></li>
+<li><code>vi install-config.yaml.bak</code></li>
+</ul>
+</li>
+<li>
+<p>paste the below content in the file. edit the file to suite ur options.</p>
+</li>
+</ul>
+<pre><code class="language-yaml">        cat &gt; install-config.yaml &lt;&lt; EOF
+apiVersion: v1
+baseDomain: marcollogistics.com
+controlPlane:
+  hyperthreading: Enabled
+  name: master
+  platform:
+    aws:
+      zones:
+      - us-east-1a
+      #- us-east-1b
+      #- us-east-1c
+      rootVolume:
+        size: 100
+        type: gp2
+      type: m4.xlarge
+  replicas: 3
+compute:
+- hyperthreading: Enabled
+  name: worker
+  platform:
+    aws:
+      zones:
+      - us-east-1a
+      #- us-east-1b
+      #- us-east-1c
+      rootVolume:
+        size: 100
+        type: gp2
+      type: m4.xlarge
+  replicas: 1
+metadata:
+  name: openshift
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 192.168.0.0/20
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  aws:
+    region: us-east-1
+    userTags:
+      adminContact: Collins
+      costCenter: 123
+      email: cafanwi@sosotechnologies.com
+publish: External
+pullSecret: ''
+sshKey: 
+EOF
+</code></pre>
 <p>SEE MY workflow process</p>
 <p><code>[ec2-user@ip-172-31-12-23 s]$ ls
  openshift-install-linux.tar.gz  README.md
