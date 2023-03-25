@@ -79,7 +79,7 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#getting-started-steps">Getting Started - Steps</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#_1"></a>
+    <li class="toctree-l3"><a class="reference internal" href="#install-openshift-on-aws">Install OpenShift on AWS</a>
     </li>
         </ul>
     </li>
@@ -115,15 +115,43 @@
 <p>Red Hat OpenShift, the industry's leading hybrid cloud application platform powered by Kubernetes, 
 brings together tested and trusted services to reduce the friction of developing, modernizing,
 deploying, running, and managing applications. 
-See offiv=cial link: <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift">Openshift</a></p>
+See official link: <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift">Openshift</a></p>
 <h2 id="getting-started-steps">Getting Started - Steps</h2>
 <ul>
 <li>Signup/signin to Openshift account: <a href="https://cloud.redhat.com/openshift/install">See-Link</a></li>
-<li>Navigate to: Clusters -&gt; Cluster Type -&gt; Amazon Web Services -&gt; Installer-provisioned infrastructure</li>
+<li>Navigate to: Clusters -&gt; Cluster Type -&gt; Amazon Web Services -&gt; Installer-provisioned infrastructure
+   <img alt="openshift" src="../photos/install.png" /></li>
+</ul>
+<h3 id="install-openshift-on-aws">Install OpenShift on AWS</h3>
+<p>AWS Openshift installation Link: <a href="https://console.redhat.com/openshift/install/aws/installer-provisioned">See-Link</a>
+There are <strong><em>Two</em></strong> Cluster-Setup options to choose: a customized cluster <strong><em>or</em></strong> quickly install.</p>
+<ul>
+<li>Install the Openshift installer and client on your local computer.</li>
+<li>Move that file to your remote linux machine. You're see the client and installer.</li>
+<li><code>cp openshift-install /usr/local/bin/</code></li>
+<li><code>which openshift-install</code></li>
+<li>Copy the secret content and paste in a file. This secret is from the redhad account, 
+    used to Map the AWS Cluster with the redHat account.</li>
+<li><strong><em>In the AWS Console, setup the following:</em></strong><ul>
+<li>Route53 public Hoster Zone</li>
+<li>IAM Adminstrative User</li>
+<li>Create Access and Secret Keys for the user</li>
+</ul>
+</li>
 </ul>
 <p>https://www.youtube.com/watch?v=vP-epd-Fyx0&amp;t=4s</p>
 <p>https://github.com/cloudacademy/openshift-voteapp-demo</p>
-<h3 id="_1"></h3>
+<p>AWS Openshift installation Link: <a href="https://docs.openshift.com/container-platform/4.1/installing/installing_aws/installing-aws-account.html">See-Link</a></p>
+<p>cp openshift-install /usr/local/bin/
+which openshift-install</p>
+<p>mkdir key &amp;&amp; touch so.sh
+ssh-keygen -t rsa -b 4096 -N '' -f keys/so.sh</p>
+<p>chmod 400 ssh-add keys/so.sh
+ssh-add keys/so.sh </p>
+<p>curl -O https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.11.0/openshift-install-mac-4.11.0.tar.gz
+tar -xvf openshift-install-mac-4.11.0.tar.gz
+cp openshift-install /usr/local/bin/
+which openshift-install</p>
               
             </div>
           </div><footer>
