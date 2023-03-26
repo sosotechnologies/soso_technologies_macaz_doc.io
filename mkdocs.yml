@@ -70,12 +70,13 @@ nav:
  - Weekly Lectures: 
    - Cloud Technologies: weekly/Cloud-Technologies/intro-aws.md
    - GitHub: weekly/GitHub/github.md
+   - GitHub Action: weekly/Gitaction/gitaction.md
    - Terraform: weekly/Terraform/github.md
    - Docker: weekly/Docker/docker.md
    - Kubernetes: weekly/Kubernetes/Kubernetes.md
    - Jenkins: weekly/Jenkins/jenkins.md
    - AI: weekly/AI/ai.md
-   - ELK: weekly/week2/elk.md
+   - ELK: weekly/ELK/elk.md
    - Random Topics: weekly/Random/random.md
    - Azure: weekly/Azure/azure.md
    - OpenShift: weekly/Openshift/openshift.md
