@@ -178,7 +178,9 @@ oc help</code></p>
 <p><strong><em>Cat and export the konfig file</em></strong></p>
 <p><code>cat soso-dir/auth/kubeconfig
     export KUBECONFIG=/root/soso-dir/auth/kubeconfig
-    oc whoami</code></p>
+    oc whoami</code>
+  ### Destroy the cluster
+  <code>./openshift-install destroy cluster --dir /root/soso-dir/ --log-level debug</code> </p>
 <p><strong><em>OR OR OR OR OR</em></strong></p>
 <ul>
 <li>
@@ -192,7 +194,7 @@ oc help</code></p>
 <li>
 <p>Copy the install-config.yaml to install-config.yaml.bak</p>
 <ul>
-<li><code>install-config.yaml to install-config.yaml.bak</code></li>
+<li><code>cp install-config.yaml install-config.yaml.bak</code></li>
 <li><code>vi install-config.yaml.bak</code></li>
 </ul>
 </li>
@@ -249,13 +251,13 @@ platform:
       costCenter: 123
       email: cafanwi@sosotechnologies.com
 publish: External
-pullSecret: '{&quot;auths&quot;:{&quot;cloud.openshift.com&quot;:{&quot;auth&quot;:&quot;b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfMjlkYTQ2MDVjNWY4NGRlY2FmZDg0ZTA4ZjhhNDA3Mzc6Q0wxQVRYVEhOTEFLNkhCWkdORTY5WjI4VVU1NFY3OUE2VVY2MjBDQTBCWUc0TjBHUERDQk1NTE9LRk1SRElQSg==&quot;,&quot;email&quot;:&quot;sosotechglobal@gmail.com&quot;},&quot;quay.io&quot;:{&quot;auth&quot;:&quot;b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfMjlkYTQ2MDVjNWY4NGRlY2FmZDg0ZTA4ZjhhNDA3Mzc6Q0wxQVRYVEhOTEFLNkhCWkdORTY5WjI4VVU1NFY3OUE2VVY2MjBDQTBCWUc0TjBHUERDQk1NTE9LRk1SRElQSg==&quot;,&quot;email&quot;:&quot;sosotechglobal@gmail.com&quot;},&quot;registry.connect.redhat.com&quot;:{&quot;auth&quot;:&quot;fHVoYy1wb29sLTQwYzk3MTE5LTNmNTUtNGE2ZC1iMDE4LTZlY2M4YzVkNWUwODpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSmpOR05sTXpSa1lXWmtPV1UwWkRaaU9ERm1OR0l3T0daaU5HWXlNR0ppTXlKOS5wdm5NNlBNSlRwajZ0STdwcS03Qko2R2EzNTJERUVHQnRnM2tqNUxuQUpRU3F0anR5aUJhR3lqcFhDVFdYWS1vYnZVVWRDMHlVY3hkYTFzQWNPNXFBcDlOTkJZcTFzdWtGM2hudUdwZE04eUE2bUdwNXNPcmVLOVVQZ1VubmZVcGV2RzdYZk9XNVdLRXZXSXMwV2NMV0h6a3lHMDh5Q3d4VUZUams4T1RaUjlZNkFBSzhyeklFNGxGbExtRE8zWlVjSWxIUkFYcjR1ZU5qR1pyOEsxaUQyQTM2SlU5VFU2LVdldV9DRkZMQWpUR3NwTTZhQzdHb0QtMEphUlp5cnhTVTdJUFdrWXpPbEZ4X2VVQUJMVC1kTjNqUGsxNkFKVFJyRzAwdnFCT1ptal9sSVhSbWVPWkZKZTM1Y0l2QkRIMGVJQVJXcVVObkpLaFlzVG42RjUtM0RJeHdnT1h6eEFKejZOQ2U1Smg3ZFlqSUUyVkpTa29Lb3JuWGd4YnB0TUQ1U2p0VjZsVUhVMnBVS1IwcmRSX3YxVFRaQ1VpOHhobjJaaWlfaVhUM1prVnlLVmhNR29EeXZDRnNHWV95c2tJdVp5a3FpOF9DeWNlMzZxcDVYTlNZcXNteWdfa1p0dS1XeW5pNGNQRURxamhMVUVaang4LXVGV3JKT3BpNWM1UkdjRTFnTEJzUllpVnktUjBKOWlJUnZ1TEtGZkFibDdObGwyd09SbVdCRHdIYTJOcjBOdTFTNTFMWU9RV1kzZUJrWlVJRnZmcFZvTDRyUkt5M3JFdkV3cUdCaE1LVkMzT0pZclYzdDIwRWxMSUtJdUpEWGV2emthX0hKUGVwQzJELWlINWZxRlZJQjh5eDRaVC0xTG1kRFZZNHJLNFpPRnRYbWpYVUR3Qkc2UQ==&quot;,&quot;email&quot;:&quot;sosotechglobal@gmail.com&quot;},&quot;registry.redhat.io&quot;:{&quot;auth&quot;:&quot;fHVoYy1wb29sLTQwYzk3MTE5LTNmNTUtNGE2ZC1iMDE4LTZlY2M4YzVkNWUwODpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSmpOR05sTXpSa1lXWmtPV1UwWkRaaU9ERm1OR0l3T0daaU5HWXlNR0ppTXlKOS5wdm5NNlBNSlRwajZ0STdwcS03Qko2R2EzNTJERUVHQnRnM2tqNUxuQUpRU3F0anR5aUJhR3lqcFhDVFdYWS1vYnZVVWRDMHlVY3hkYTFzQWNPNXFBcDlOTkJZcTFzdWtGM2hudUdwZE04eUE2bUdwNXNPcmVLOVVQZ1VubmZVcGV2RzdYZk9XNVdLRXZXSXMwV2NMV0h6a3lHMDh5Q3d4VUZUams4T1RaUjlZNkFBSzhyeklFNGxGbExtRE8zWlVjSWxIUkFYcjR1ZU5qR1pyOEsxaUQyQTM2SlU5VFU2LVdldV9DRkZMQWpUR3NwTTZhQzdHb0QtMEphUlp5cnhTVTdJUFdrWXpPbEZ4X2VVQUJMVC1kTjNqUGsxNkFKVFJyRzAwdnFCT1ptal9sSVhSbWVPWkZKZTM1Y0l2QkRIMGVJQVJXcVVObkpLaFlzVG42RjUtM0RJeHdnT1h6eEFKejZOQ2U1Smg3ZFlqSUUyVkpTa29Lb3JuWGd4YnB0TUQ1U2p0VjZsVUhVMnBVS1IwcmRSX3YxVFRaQ1VpOHhobjJaaWlfaVhUM1prVnlLVmhNR29EeXZDRnNHWV95c2tJdVp5a3FpOF9DeWNlMzZxcDVYTlNZcXNteWdfa1p0dS1XeW5pNGNQRURxamhMVUVaang4LXVGV3JKT3BpNWM1UkdjRTFnTEJzUllpVnktUjBKOWlJUnZ1TEtGZkFibDdObGwyd09SbVdCRHdIYTJOcjBOdTFTNTFMWU9RV1kzZUJrWlVJRnZmcFZvTDRyUkt5M3JFdkV3cUdCaE1LVkMzT0pZclYzdDIwRWxMSUtJdUpEWGV2emthX0hKUGVwQzJELWlINWZxRlZJQjh5eDRaVC0xTG1kRFZZNHJLNFpPRnRYbWpYVUR3Qkc2UQ==&quot;,&quot;email&quot;:&quot;sosotechglobal@gmail.com&quot;}}}'
-sshKey: {&quot;auths&quot;:{&quot;cloud.openshift.com&quot;:{&quot;auth&quot;:&quot;b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfMjlkYTQ2MDVjNWY4NGRlY2FmZDg0ZTA4ZjhhNDA3Mzc6Q0wxQVRYVEhOTEFLNkhCWkdORTY5WjI4VVU1NFY3OUE2VVY2MjBDQTBCWUc0TjBHUERDQk1NTE9LRk1SRElQSg==&quot;,&quot;email&quot;:&quot;sosotechglobal@gmail.com&quot;},&quot;quay.io&quot;:{&quot;auth&quot;:&quot;b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfMjlkYTQ2MDVjNWY4NGRlY2FmZDg0ZTA4ZjhhNDA3Mzc6Q0wxQVRYVEhOTEFLNkhCWkdORTY5WjI4VVU1NFY3OUE2VVY2MjBDQTBCWUc0TjBHUERDQk1NTE9LRk1SRElQSg==&quot;,&quot;email&quot;:&quot;sosotechglobal@gmail.com&quot;},&quot;registry.connect.redhat.com&quot;:{&quot;auth&quot;:&quot;fHVoYy1wb29sLTQwYzk3MTE5LTNmNTUtNGE2ZC1iMDE4LTZlY2M4YzVkNWUwODpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSmpOR05sTXpSa1lXWmtPV1UwWkRaaU9ERm1OR0l3T0daaU5HWXlNR0ppTXlKOS5wdm5NNlBNSlRwajZ0STdwcS03Qko2R2EzNTJERUVHQnRnM2tqNUxuQUpRU3F0anR5aUJhR3lqcFhDVFdYWS1vYnZVVWRDMHlVY3hkYTFzQWNPNXFBcDlOTkJZcTFzdWtGM2hudUdwZE04eUE2bUdwNXNPcmVLOVVQZ1VubmZVcGV2RzdYZk9XNVdLRXZXSXMwV2NMV0h6a3lHMDh5Q3d4VUZUams4T1RaUjlZNkFBSzhyeklFNGxGbExtRE8zWlVjSWxIUkFYcjR1ZU5qR1pyOEsxaUQyQTM2SlU5VFU2LVdldV9DRkZMQWpUR3NwTTZhQzdHb0QtMEphUlp5cnhTVTdJUFdrWXpPbEZ4X2VVQUJMVC1kTjNqUGsxNkFKVFJyRzAwdnFCT1ptal9sSVhSbWVPWkZKZTM1Y0l2QkRIMGVJQVJXcVVObkpLaFlzVG42RjUtM0RJeHdnT1h6eEFKejZOQ2U1Smg3ZFlqSUUyVkpTa29Lb3JuWGd4YnB0TUQ1U2p0VjZsVUhVMnBVS1IwcmRSX3YxVFRaQ1VpOHhobjJaaWlfaVhUM1prVnlLVmhNR29EeXZDRnNHWV95c2tJdVp5a3FpOF9DeWNlMzZxcDVYTlNZcXNteWdfa1p0dS1XeW5pNGNQRURxamhMVUVaang4LXVGV3JKT3BpNWM1UkdjRTFnTEJzUllpVnktUjBKOWlJUnZ1TEtGZkFibDdObGwyd09SbVdCRHdIYTJOcjBOdTFTNTFMWU9RV1kzZUJrWlVJRnZmcFZvTDRyUkt5M3JFdkV3cUdCaE1LVkMzT0pZclYzdDIwRWxMSUtJdUpEWGV2emthX0hKUGVwQzJELWlINWZxRlZJQjh5eDRaVC0xTG1kRFZZNHJLNFpPRnRYbWpYVUR3Qkc2UQ==&quot;,&quot;email&quot;:&quot;sosotechglobal@gmail.com&quot;},&quot;registry.redhat.io&quot;:{&quot;auth&quot;:&quot;fHVoYy1wb29sLTQwYzk3MTE5LTNmNTUtNGE2ZC1iMDE4LTZlY2M4YzVkNWUwODpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSmpOR05sTXpSa1lXWmtPV1UwWkRaaU9ERm1OR0l3T0daaU5HWXlNR0ppTXlKOS5wdm5NNlBNSlRwajZ0STdwcS03Qko2R2EzNTJERUVHQnRnM2tqNUxuQUpRU3F0anR5aUJhR3lqcFhDVFdYWS1vYnZVVWRDMHlVY3hkYTFzQWNPNXFBcDlOTkJZcTFzdWtGM2hudUdwZE04eUE2bUdwNXNPcmVLOVVQZ1VubmZVcGV2RzdYZk9XNVdLRXZXSXMwV2NMV0h6a3lHMDh5Q3d4VUZUams4T1RaUjlZNkFBSzhyeklFNGxGbExtRE8zWlVjSWxIUkFYcjR1ZU5qR1pyOEsxaUQyQTM2SlU5VFU2LVdldV9DRkZMQWpUR3NwTTZhQzdHb0QtMEphUlp5cnhTVTdJUFdrWXpPbEZ4X2VVQUJMVC1kTjNqUGsxNkFKVFJyRzAwdnFCT1ptal9sSVhSbWVPWkZKZTM1Y0l2QkRIMGVJQVJXcVVObkpLaFlzVG42RjUtM0RJeHdnT1h6eEFKejZOQ2U1Smg3ZFlqSUUyVkpTa29Lb3JuWGd4YnB0TUQ1U2p0VjZsVUhVMnBVS1IwcmRSX3YxVFRaQ1VpOHhobjJaaWlfaVhUM1prVnlLVmhNR29EeXZDRnNHWV95c2tJdVp5a3FpOF9DeWNlMzZxcDVYTlNZcXNteWdfa1p0dS1XeW5pNGNQRURxamhMVUVaang4LXVGV3JKT3BpNWM1UkdjRTFnTEJzUllpVnktUjBKOWlJUnZ1TEtGZkFibDdObGwyd09SbVdCRHdIYTJOcjBOdTFTNTFMWU9RV1kzZUJrWlVJRnZmcFZvTDRyUkt5M3JFdkV3cUdCaE1LVkMzT0pZclYzdDIwRWxMSUtJdUpEWGV2emthX0hKUGVwQzJELWlINWZxRlZJQjh5eDRaVC0xTG1kRFZZNHJLNFpPRnRYbWpYVUR3Qkc2UQ==&quot;,&quot;email&quot;:&quot;sosotechglobal@gmail.com&quot;}}}
+pullSecret: ''
+sshKey: 
 
-</code></pre>
-<p>openshift-install create cluster --log-level-debug</p>
-<p>SEE MY workflow process</p>
-<p><code>[ec2-user@ip-172-31-12-23 s]$ ls
+ SEE MY workflow process
+
+ ```
+ [ec2-user@ip-172-31-12-23 s]$ ls
  openshift-install-linux.tar.gz  README.md
  [ec2-user@ip-172-31-12-23 s]$ tar xvf openshift-install-linux.tar.gz 
  README.md
@@ -270,14 +272,9 @@ sshKey: {&quot;auths&quot;:{&quot;cloud.openshift.com&quot;:{&quot;auth&quot;:&q
  kubectl
  [ec2-user@ip-172-31-12-23 s]$ ls
  kubectl  oc  openshift-client-linux.tar.gz  openshift-install  openshift-install-linux.tar.gz  README.md
- [ec2-user@ip-172-31-12-23 s]$</code></p>
-<p>https://www.youtube.com/watch?v=vP-epd-Fyx0&amp;t=4s</p>
-<p>https://github.com/cloudacademy/openshift-voteapp-demo</p>
+ [ec2-user@ip-172-31-12-23 s]$ 
+</code></pre>
 <p>AWS Openshift installation Link: <a href="https://docs.openshift.com/container-platform/4.1/installing/installing_aws/installing-aws-account.html">See-Link</a></p>
-<p>mkdir key &amp;&amp; touch so.sh
-ssh-keygen -t rsa -b 4096 -N '' -f root/id_rsa/so.sh</p>
-<p>chmod 400 ssh-add keys/so.sh
-ssh-add keys/so.sh </p>
               
             </div>
           </div><footer>
