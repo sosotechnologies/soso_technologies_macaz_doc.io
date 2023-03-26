@@ -133,6 +133,7 @@ platform:
 publish: External
 pullSecret: ''
 sshKey: 
+```
 
  SEE MY workflow process
 
@@ -154,7 +155,6 @@ sshKey:
  kubectl  oc  openshift-client-linux.tar.gz  openshift-install  openshift-install-linux.tar.gz  README.md
  [ec2-user@ip-172-31-12-23 s]$ 
 ```
-
 
 AWS Openshift installation Link: [See-Link](https://docs.openshift.com/container-platform/4.1/installing/installing_aws/installing-aws-account.html)
 

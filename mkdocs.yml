@@ -1,11 +1,11 @@
 site_name: SosoTech External Documentation
 site_description: SosoTech External Documentation for Tenants
 repo_name: soso_technologies_macaz_doc.io
+site_url: https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/
 repo_url: https://github.com/sosotechnologies/soso_technologies_macaz_doc.io
-edit_uri: https://github.com/sosotechnologies/soso_technologies_macaz_doc.io
+edit_uri: https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/repo/blob/main/docs/index.md
 copyright: SosoTech LLC - Documentation
 theme:
-  # name: readthedocs
   name: readthedocs
   features:
     - announce.dismiss
@@ -24,7 +24,7 @@ theme:
     - search.share
     - search.suggest
     - toc.follow
-    # - toc.integrate
+    - toc.integrate
   palette:
     - scheme: default
       primary: indigo
