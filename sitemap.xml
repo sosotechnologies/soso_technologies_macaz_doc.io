@@ -36,7 +36,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/ELK/elk/</loc>
+         <lastmod>2023-03-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/GitHub/github/</loc>
+         <lastmod>2023-03-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Gitaction/gitaction/</loc>
          <lastmod>2023-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -62,11 +72,6 @@
     </url>
     <url>
          <loc>https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Terraform/terraform/</loc>
-         <lastmod>2023-03-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/week2/elk/</loc>
          <lastmod>2023-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
