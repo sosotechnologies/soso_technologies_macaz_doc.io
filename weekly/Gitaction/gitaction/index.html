@@ -60,6 +60,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../GitHub/github/">GitHub</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">GitHub Action</a>
+    <ul class="current">
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../Terraform/github.md">Terraform</a>
                   </li>
@@ -105,7 +107,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="getting-started">Getting Started</h1>
+<p>GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows 
+you to automate your build, test, and deployment pipeline. You can create workflows that build 
+and test every pull request to your repository, or deploy merged pull requests to production.</p>
+<p><img alt="action1" src="../photos/action1.png" /></p>
+<p>for more information on workflows. <a href="https://docs.github.com/en/actions/using-workflows">see site-link:</a></p>
+<pre><code class="language-yml">name: Publish docs via GitHub Pages
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: 'Deploy docs'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checkout private actions
+        uses: sosotechnologies/mkdocs_gitactions_.io@v1
+        env:
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          CONFIG_FILE: folder/mkdocs.yml
+          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+</code></pre>
               
             </div>
           </div><footer>
