@@ -61,6 +61,8 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">GitHub Action</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#description-of-the-below-yaml-file">Description of the below yaml file</a>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../Terraform/github.md">Terraform</a>
@@ -111,24 +113,45 @@
 <p>GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows 
 you to automate your build, test, and deployment pipeline. You can create workflows that build 
 and test every pull request to your repository, or deploy merged pull requests to production.</p>
+<p>Github actions has three main components: Events -&gt; Workflows -&gt; Actions
+Workflow triggers are events that cause a workflow to run.<br />
+Events provide status updates from GitHub repos from code commits or other event of a project.</p>
 <p><img alt="action1" src="../photos/action1.png" /></p>
-<p>for more information on workflows. <a href="https://docs.github.com/en/actions/using-workflows">see site-link:</a></p>
+<p>For more information on workflows. <a href="https://docs.github.com/en/actions/using-workflows">see site-link:</a>
+For more information about how to use workflow triggers: See <a href="https://docs.github.com/en/actions/using-workflows/triggering-a-workflow">workflow triggers</a></p>
+<h2 id="description-of-the-below-yaml-file">Description of the below yaml file</h2>
+<ul>
+<li>name: is straightforward, you can name what ever name you choose</li>
+<li>The events is the line thet starts with On. In the yaml file, we have an event to push.</li>
+<li>actions/checkout@v3: is already defined in Github. You can see more Here: <a href="https://github.com/orgs/actions/repositories">github actions</a></li>
+<li>create a personal access token in your HitHub account and name: PERSONAL_TOKEN</li>
+</ul>
 <pre><code class="language-yml">name: Publish docs via GitHub Pages
 on:
   push:
     branches:
       - main
+permissions:
+  contents: write
+
 jobs:
-  build:
-    name: 'Deploy docs'
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Checkout private actions
-        uses: sosotechnologies/mkdocs_gitactions_.io@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - uses: actions/cache@v2
+        with:
+          key: ${{ github.ref }}
+          path: .cache
+      - run: pip install mkdocs-material 
+      - run: mkdocs gh-deploy --force
         env:
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           CONFIG_FILE: folder/mkdocs.yml
+          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 </code></pre>
               
