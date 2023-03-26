@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Random/random/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Gitaction/gitaction/" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>Random Topics - SosoTech External Documentation</title>
+    <title>GitHub Action - SosoTech External Documentation</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
@@ -13,9 +13,9 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Random Topics";
-        var mkdocs_page_input_path = "weekly\\Random\\random.md";
-        var mkdocs_page_url = "/soso_technologies_macaz_doc.io/weekly/Random/random/";
+        var mkdocs_page_name = "GitHub Action";
+        var mkdocs_page_input_path = "weekly\\Gitaction\\gitaction.md";
+        var mkdocs_page_url = "/soso_technologies_macaz_doc.io/weekly/Gitaction/gitaction/";
       </script>
     
     <script src="../../../js/jquery-3.6.0.min.js" defer></script>
@@ -59,7 +59,9 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../GitHub/github/">GitHub</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../Gitaction/gitaction/">GitHub Action</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">GitHub Action</a>
+    <ul class="current">
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../Terraform/github.md">Terraform</a>
                   </li>
@@ -73,7 +75,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../ELK/elk/">ELK</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Random Topics</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Random/random/">Random Topics</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../Azure/azure/">Azure</a>
                   </li>
@@ -95,9 +97,9 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
           <li>Weekly Lectures &raquo;</li>
-      <li>Random Topics</li>
+      <li>GitHub Action</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/repo/blob/main/docs/index.md/weekly/Random/random.md">Edit on soso_technologies_macaz_doc.io</a>
+          <a href="https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/repo/blob/main/docs/index.md/weekly/Gitaction/gitaction.md">Edit on soso_technologies_macaz_doc.io</a>
     </li>
   </ul>
   <hr/>
@@ -105,28 +107,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <table>
-<thead>
-<tr>
-<th>Tables</th>
-<th align="center">Are</th>
-<th align="right">Cool</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>col 1 is</td>
-<td align="center">b    sdvvrbbbbbbbbrggg</td>
-<td align="right">$1600</td>
-</tr>
-</tbody>
-</table>
+                <h1 id="getting-started">Getting Started</h1>
+<p>GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows 
+you to automate your build, test, and deployment pipeline. You can create workflows that build 
+and test every pull request to your repository, or deploy merged pull requests to production.</p>
+<p><img alt="action1" src="../photos/action1.png" /></p>
+<p>for more information on workflows. <a href="https://docs.github.com/en/actions/using-workflows">see site-link:</a></p>
+<pre><code class="language-yml">name: Publish docs via GitHub Pages
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: 'Deploy docs'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checkout private actions
+        uses: sosotechnologies/mkdocs_gitactions_.io@v1
+        env:
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          CONFIG_FILE: folder/mkdocs.yml
+          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../ELK/elk/" class="btn btn-neutral float-left" title="ELK"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../Azure/azure/" class="btn btn-neutral float-right" title="Azure">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../GitHub/github/" class="btn btn-neutral float-left" title="GitHub"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../Docker/docker/" class="btn btn-neutral float-right" title="Docker">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -150,10 +160,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../ELK/elk/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../GitHub/github/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../Azure/azure/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../Docker/docker/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
