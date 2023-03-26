@@ -135,12 +135,11 @@ There are <strong><em>Two</em></strong> Cluster-Setup options to choose: a custo
 </li>
 <li>
 <p>Move the oc, kubectl and installer to usr/bin directoory</p>
-<p><code>sudo mv oc /usr/local/bin/</code>
-<code>sudo mv kubectl /usr/local/bin/</code>
-<code>sudo cp openshift-install /usr/local/bin/</code>
-<code>which openshift-install</code>
-<code>openshift-install version</code>
-<code>oc help</code></p>
+<p><code>sudo mv oc /usr/local/bin/
+sudo mv kubectl /usr/local/bin/
+sudo cp openshift-install /usr/local/bin/
+which openshift-install
+oc help</code></p>
 </li>
 <li>
 <p>Copy the secret content and paste in a file. This secret is from the redhad account, 
@@ -174,7 +173,13 @@ There are <strong><em>Two</em></strong> Cluster-Setup options to choose: a custo
   <code>./openshift-install create cluster --dir /root/soso-dir/ --log-level debug</code> </p>
 </li>
 </ul>
-<p><strong><em> OR OR OR OR OR</em></strong></p>
+<p>After installation, you should have your results as seen in the below image:
+  <img alt="openshift" src="../photos/install1.png" /></p>
+<p><strong><em>Cat and export the konfig file</em></strong></p>
+<p><code>cat soso-dir/auth/kubeconfig
+    export KUBECONFIG=/root/soso-dir/auth/kubeconfig
+    oc whoami</code></p>
+<p><strong><em>OR OR OR OR OR</em></strong></p>
 <ul>
 <li>
 <p><strong><em>install Openshift using the config, so you can customize</em></strong>. 

@@ -22,12 +22,13 @@ There are ***Two*** Cluster-Setup options to choose: a customized cluster ***or*
 
   - Move the oc, kubectl and installer to usr/bin directoory
 
-    ```sudo mv oc /usr/local/bin/```
-    ```sudo mv kubectl /usr/local/bin/```
-    ```sudo cp openshift-install /usr/local/bin/```
-    ```which openshift-install```
-    ```openshift-install version```
-    ```oc help```
+    ```
+    sudo mv oc /usr/local/bin/
+    sudo mv kubectl /usr/local/bin/
+    sudo cp openshift-install /usr/local/bin/
+    which openshift-install
+    oc help
+    ```
 
   - Copy the secret content and paste in a file. This secret is from the redhad account, 
     used to Map the AWS Cluster with the redHat account.
@@ -54,8 +55,19 @@ There are ***Two*** Cluster-Setup options to choose: a customized cluster ***or*
   - Now install Openshift
   ```./openshift-install create cluster --dir /root/soso-dir/ --log-level debug``` 
 
+  After installation, you should have your results as seen in the below image:
+  ![openshift](photos/install1.png)
 
-  *** OR OR OR OR OR***
+  ***Cat and export the konfig file***
+  
+  ```
+    cat soso-dir/auth/kubeconfig
+    export KUBECONFIG=/root/soso-dir/auth/kubeconfig
+    oc whoami
+  ```
+
+
+  ***OR OR OR OR OR***
   
   - ***install Openshift using the config, so you can customize***. 
     A prompt will begin. The last prompt will be the secret
