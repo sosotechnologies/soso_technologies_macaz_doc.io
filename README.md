@@ -1,4 +1,4 @@
-MiddleWareBCBSNC Elasticsearch Documentation
+SosoTech LLC Documentation
 =============================
 
 
