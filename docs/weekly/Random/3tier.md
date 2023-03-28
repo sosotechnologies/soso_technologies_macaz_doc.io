@@ -31,10 +31,10 @@ depending on how much processing power the application requires.
 saved in the database... it can be hosted on-prem or in the cloud. Popular database 
 systems for managing read/write access include MySQL, PostgreSQL, Microsoft 
   
-  ![tier1](3tier-photos/tier1.png)
+  ![tier1](photos/tier1.png)
 
   Sample AWS 3-Tier Application
-  ![tier2](3tier-photos/tier2.png) 
+  ![tier2](photos/tier2.png) 
 
   ***The Presentation tier***
     1.	A Public Route Table — associated with 2 Public Subnets (1/AZ)

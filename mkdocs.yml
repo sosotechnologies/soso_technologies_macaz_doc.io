@@ -82,8 +82,8 @@ nav:
    - OpenShift: weekly/Openshift/openshift.md
    - Random Topics: 
      - 3 Tier App: weekly/Random/3tier.md
-     - Add: weekly/Random/random.md
-     - add: weekly/Random/add.md
+     - Kubernetes API: weekly/Random/k8sapi.md
+     - OS Types Commands: weekly/Random/operating-systems.md
   
  
  
