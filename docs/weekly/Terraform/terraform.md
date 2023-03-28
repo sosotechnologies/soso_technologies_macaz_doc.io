@@ -1,0 +1,1 @@
+for more information see link: [Sosotech Terraform Repo](https://github.com/sosotechnologies/soso-terraform)

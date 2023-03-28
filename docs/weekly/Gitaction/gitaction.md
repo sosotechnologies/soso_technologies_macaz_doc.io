@@ -47,3 +47,10 @@ jobs:
           #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+.github/workflows
+
+[mkdocs github actions](https://squidfunk.github.io/mkdocs-material/publishing-your-site/#material-for-mkdocs)
+
+[managing-a-custom-domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
+
