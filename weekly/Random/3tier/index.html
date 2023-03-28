@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Docker/docker/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Random/3tier/" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>Docker - SosoTech External Documentation</title>
+    <title>3 Tier App - SosoTech External Documentation</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
@@ -13,9 +13,9 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Docker";
-        var mkdocs_page_input_path = "weekly\\Docker\\docker.md";
-        var mkdocs_page_url = "/soso_technologies_macaz_doc.io/weekly/Docker/docker/";
+        var mkdocs_page_name = "3 Tier App";
+        var mkdocs_page_input_path = "weekly\\Random\\3tier.md";
+        var mkdocs_page_url = "/soso_technologies_macaz_doc.io/weekly/Random/3tier/";
       </script>
     
     <script src="../../../js/jquery-3.6.0.min.js" defer></script>
@@ -65,7 +65,7 @@
                   </li>
                   <li class="toctree-l1"><a class="" href="../../Terraform/github.md">Terraform</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Docker</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Docker/docker/">Docker</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../Kubernetes/Kubernetes.md">Kubernetes</a>
                   </li>
@@ -79,13 +79,21 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../Openshift/openshift/">OpenShift</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="#">Random Topics</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../Random/3tier/">3 Tier App</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Random Topics</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">3 Tier App</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#benefits-of-a-3-tier-application">Benefits of a 3 tier Application?</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#the-3-different-layers-explained">The 3 different layers explained</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="../../Random/random/">Add</a>
+                <li class="toctree-l2"><a class="reference internal" href="../random/">Add</a>
                 </li>
-                <li class="toctree-l2"><a class="" href="../../Random/add.md">add</a>
+                <li class="toctree-l2"><a class="" href="../add.md">add</a>
                 </li>
     </ul>
                   </li>
@@ -105,9 +113,10 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
           <li>Weekly Lectures &raquo;</li>
-      <li>Docker</li>
+          <li>Random Topics &raquo;</li>
+      <li>3 Tier App</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/repo/blob/main/docs/index.md/weekly/Docker/docker.md">Edit on soso_technologies_macaz_doc.io</a>
+          <a href="https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/repo/blob/main/docs/index.md/weekly/Random/3tier.md">Edit on soso_technologies_macaz_doc.io</a>
     </li>
   </ul>
   <hr/>
@@ -115,13 +124,54 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="what-is-a-3-tier-application">What is a 3 tier Application?</h1>
+<p>A 3-tier application will compose of 3 layers: a Presentation tier, an Application tier, and a Data tier.</p>
+<h2 id="benefits-of-a-3-tier-application">Benefits of a 3 tier Application?</h2>
+<p>The benefits of using a 3-tier architecture include improved horizontal scalability, 
+performance, and availability. With three tiers, each part can be developed concurrently 
+by a different team of programmers coding in different languages from the other tier developers. 
+Because the programming for a tier can be changed or relocated without affecting the other 
+tiers, the 3-tier model makes it easier for an enterprise or software packager to continually 
+evolve an application as new needs and opportunities arise. Existing applications or critical 
+parts can be permanently or temporarily retained and encapsulated within the new tier of 
+which it becomes a component.</p>
+<h3 id="the-3-different-layers-explained">The 3 different layers explained</h3>
+<p>An example 3 tier application will compose of 3 layers: 
+a Presentation tier, an application tier, and a Data tier. </p>
+<p><strong><em>The Presentation tier</em></strong> is a graphical user interface (GUI) that communicates with 
+the other two tiers…in this layer, the users can directly access the web page, or an operating 
+system's GUI. The is written in languages like built with HTML5, cascading style sheets (CSS) 
+and JavaScript, and the presentation tier communicates with the other tiers through application 
+program interface (API) calls.</p>
+<p><strong><em>Application tier</em></strong> also known as the business logic tier… controls how the application 
+functions. The application layer is written in a programming language such as Java and contains 
+the business logic that supports the application's core functions. The underlying application 
+tier can either be hosted on distributed servers in the cloud or on a dedicated in-house server, 
+depending on how much processing power the application requires. </p>
+<p><strong><em>Data tier</em></strong> contains the database servers, file shares, and anything that will be 
+saved in the database... it can be hosted on-prem or in the cloud. Popular database 
+systems for managing read/write access include MySQL, PostgreSQL, Microsoft </p>
+<p><img alt="tier1" src="../3tier-photos/tier1.png" /></p>
+<p>Sample AWS 3-Tier Application
+  <img alt="tier2" src="../3tier-photos/tier2.png" /> </p>
+<p><strong><em>The Presentation tier</em></strong>
+    1.  A Public Route Table — associated with 2 Public Subnets (1/AZ)
+    2.  At least 2 EC2 instances with a boot strapped Static Web Page — managed by an Auto Scaling Group
+    3.  EC2 Web Server Security Group</p>
+<p><strong><em>The Application tier</em></strong> 
+    1.  A Private Route Table — associated with 2 Private Subnets (1/AZ)
+    2.  At least 2 EC2 instances managed by an Auto Scaling Group
+    3.  EC2 Application Server Security Group</p>
+<p><strong><em>The Data tier</em></strong>
+    1.  A Private Route Table — associated with 2 Private Subnets (1/AZ)
+    2.  A Database Security Group
+    3.  A free Tier MySQL RDS Database</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../Gitaction/gitaction/" class="btn btn-neutral float-left" title="GitHub Action"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../Jenkins/jenkins/" class="btn btn-neutral float-right" title="Jenkins">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../Openshift/openshift/" class="btn btn-neutral float-left" title="OpenShift"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../random/" class="btn btn-neutral float-right" title="Add">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -145,10 +195,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../Gitaction/gitaction/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../Openshift/openshift/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../Jenkins/jenkins/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../random/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
