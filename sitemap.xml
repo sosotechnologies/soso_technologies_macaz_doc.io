@@ -76,7 +76,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Random/random/</loc>
+         <loc>https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Random/k8sapi%20copy/</loc>
+         <lastmod>2023-03-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Random/k8sapi/</loc>
+         <lastmod>2023-03-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Random/operating-systems/</loc>
          <lastmod>2023-03-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
