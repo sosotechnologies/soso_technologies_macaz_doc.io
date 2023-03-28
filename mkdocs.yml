@@ -80,8 +80,9 @@ nav:
    - ELK: weekly/ELK/elk.md
    - Azure: weekly/Azure/azure.md
    - OpenShift: weekly/Openshift/openshift.md
-   - Random Topics: weekly/Random/random.md
+   - Random Topics: 
      - 3 Tier App: weekly/Random/3tier.md
+     - Add: weekly/Random/random.md
      - add: weekly/Random/add.md
   
  
