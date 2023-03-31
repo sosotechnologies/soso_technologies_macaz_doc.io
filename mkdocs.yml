@@ -84,6 +84,7 @@ nav:
      - 3 Tier App: weekly/Random/3tier.md
      - Kubernetes API: weekly/Random/k8sapi.md
      - OS Types Commands: weekly/Random/operating-systems.md
+     - EKS-IAM: weekly/Random/eks-iam.md
   
  
  
