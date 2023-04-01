@@ -76,6 +76,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Random/Helm-Terraform-jenkins/</loc>
+         <lastmod>2023-04-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Random/eks-iam/</loc>
          <lastmod>2023-04-01</lastmod>
          <changefreq>daily</changefreq>

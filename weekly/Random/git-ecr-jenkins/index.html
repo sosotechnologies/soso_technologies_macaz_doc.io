@@ -125,7 +125,25 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bonus">Bonus!!!</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#simple-jenkins-pipeline-scripts-for-aws">Simple Jenkins pipeline Scripts for AWS</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#pipeline-version-2">Pipeline version 2</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#pipeline-version-3">Pipeline version 3</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#pipeline-version-4">Pipeline version 4</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#pipeline-version-5">Pipeline version 5</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#pipeline-version-6">Pipeline version 6</a>
+    </li>
+        </ul>
+    </li>
     </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../Helm-Terraform-jenkins/">Helm-Terraform-jenkins</a>
                 </li>
     </ul>
                   </li>
@@ -200,13 +218,11 @@ app to our end users.</p>
 </li>
 <li>
 <h3 id="return-to-the-jenkins-ui-and-install-these-2-plugins">Return to the Jenkins UI and install these 2 plugins:</h3>
-</li>
-<li>Docker</li>
-<li>
-<p>Docker Pipeline</p>
+<p>Install the pluginn called <strong><em>Docker</em></strong> and <strong><em>Docker Pipeline</em></strong></p>
 </li>
 <li>
 <h3 id="update-iam-role-and-and-attach-to-instance-to-give-instance-ecr-permissions">Update IAM role and and attach to instance, To Give instance ECR permissions</h3>
+<p>Create an IAM role with Admin Or with the needed permissions for ECR and other services.</p>
 </li>
 <li>
 <h3 id="create-ecr-repo-vis-same-link-scroll-to-bottom-of-the-page">Create ECR Repo vis same link, scroll to bottom of the page</h3>
@@ -290,11 +306,125 @@ aws ecr get-login-password --region us-east-1 | docker login --username AWS --pa
     }
 }
 </code></pre>
+<h2 id="bonus">Bonus!!!</h2>
+<p>Test your pipeline with example codes</p>
+<h3 id="simple-jenkins-pipeline-scripts-for-aws">Simple Jenkins pipeline Scripts for AWS</h3>
+<p>Pipeline version 1</p>
+<pre><code>pipeline {
+  agent any
+  stages {
+    stage('Welcome to sosotech') {
+      steps {
+        sh '''
+          aws --version
+        '''
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="pipeline-version-2">Pipeline version 2</h3>
+<pre><code>pipeline {
+  agent any
+  stages {
+    stage('Welcome to sosotech') {
+      steps {
+        sh '''
+          aws --version
+          aws ec2 describe-instances
+        '''
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="pipeline-version-3">Pipeline version 3</h3>
+<pre><code>pipeline {
+  agent any
+  environment {
+    AWS_DEFAULT_REGION=&quot;us-east-1&quot;
+  }
+  stages {
+    stage('Welcome to sosotech') {
+      steps {
+        sh '''
+          aws --version
+          aws ec2 describe-instances --filters &quot;Name=instance-type,Values=t2.micro&quot; --query &quot;Reservations[].Instances[].InstanceId&quot;
+        '''
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="pipeline-version-4">Pipeline version 4</h3>
+<pre><code>pipeline {
+  agent any
+  environment {
+    AWS_DEFAULT_REGION=&quot;us-east-1&quot;
+  }
+  stages {
+    stage('Welcome to sosotech') {
+      steps {
+        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'all-in-one-devops', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+          sh '''
+            aws --version
+            aws ec2 describe-instances --filters &quot;Name=instance-type,Values=t2.micro&quot; --query &quot;Reservations[].Instances[].InstanceId&quot;
+          '''
+        }
+      }
+    }
+  }
+}
+
+
+</code></pre>
+<h3 id="pipeline-version-5">Pipeline version 5</h3>
+<p>For this step, i'll list buckets</p>
+<pre><code>pipeline {
+  agent any
+  environment {
+    AWS_DEFAULT_REGION=&quot;us-east-1&quot;
+  }
+  stages {
+    stage('Welcome to sosotech') {
+      steps {
+        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'all-in-one-devops', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+          sh '''
+            aws --version
+            aws s3api list-buckets --query &quot;Buckets[].Name&quot;
+          '''
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="pipeline-version-6">Pipeline version 6</h3>
+<p>For this step, i'll create an IRSA and save IAM role in Jenkins credentials as 'irsa-creds'</p>
+<pre><code>pipeline {
+  agent any
+  environment {
+    AWS_DEFAULT_REGION=&quot;us-east-1&quot;
+    WE_KNOW_TECHNOLOGY=credentials('irsa-creds')
+  }
+  stages {
+    stage('Hello') {
+      steps {
+        sh '''
+          aws --version
+          aws ec2 describe-instances --filters &quot;Name=instance-type,Values=t2.micro&quot; --query &quot;Reservations[].Instances[].InstanceId&quot;
+        '''
+      }
+    }
+  }
+}
+</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../eks-iam/" class="btn btn-neutral float-left" title="EKS-IAM"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Helm-Terraform-jenkins/" class="btn btn-neutral float-right" title="Helm-Terraform-jenkins">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -320,6 +450,8 @@ aws ecr get-login-password --region us-east-1 | docker login --username AWS --pa
     
       <span><a href="../eks-iam/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
+    
+      <span><a href="../Helm-Terraform-jenkins/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
