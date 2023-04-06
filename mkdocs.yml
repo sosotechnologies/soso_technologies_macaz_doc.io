@@ -85,6 +85,8 @@ nav:
      - Kubernetes API: weekly/Random/k8sapi.md
      - OS Types Commands: weekly/Random/operating-systems.md
      - EKS-IAM: weekly/Random/eks-iam.md
+     - ECR-Jenkins: weekly/Random/git-ecr-jenkins.md
+     - Helm-Terraform-jenkins: weekly/Random/Helm-Terraform-jenkins.md
   
  
  

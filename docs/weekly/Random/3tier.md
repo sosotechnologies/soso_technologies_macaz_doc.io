@@ -256,8 +256,6 @@ choose from. Some common Linux distributions are Debian, Fedora and Red Hat, Ubu
 | 28. | To query Internet name servers interactively. | nslookup | nslookup | 
 | 29. | For disk usage. | chdisk | du -s | 
 
-![](RackMultipart20230328-1-3n7yyt_html_a41da7069ac2fb23.png)
-
 [https://www.geeksforgeeks.org/linux-vs-windows-commands/](https://www.geeksforgeeks.org/linux-vs-windows-commands/)
 
 [https://home.csulb.edu/~murdock/attrib.html#:~:text=Using%20the%20ATTRIB%20command%2C%20you,to%20as%20read%2Fwrite](https://home.csulb.edu/~murdock/attrib.html#:~:text=Using%20the%20ATTRIB%20command%2C%20you,to%20as%20read%2Fwrite)). //for windows attributed
