@@ -51,3 +51,8 @@ choose from. Some common Linux distributions are Debian, Fedora and Red Hat, Ubu
 [https://www.geeksforgeeks.org/linux-vs-windows-commands/](https://www.geeksforgeeks.org/linux-vs-windows-commands/)
 
 [https://home.csulb.edu/~murdock/attrib.html#:~:text=Using%20the%20ATTRIB%20command%2C%20you,to%20as%20read%2Fwrite](https://home.csulb.edu/~murdock/attrib.html#:~:text=Using%20the%20ATTRIB%20command%2C%20you,to%20as%20read%2Fwrite)). //for windows attributed -->
+
+
+linux commands
+
+```cat /etc/os-release```
