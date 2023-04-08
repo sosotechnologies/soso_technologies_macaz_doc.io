@@ -50,13 +50,26 @@ check to see if you can successfully login to ecr [my example ecr code below, US
 
 ```
 sudo su -
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 368085106192.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 088789840359.dkr.ecr.us-east-1.amazonaws.com
 ```
 
-13. ### Install AWS [ CloudBees AWS Credentials ] Plugin and configure
+***EXIT ROOT***
+
+13. ### Build and Push Docker
+```sudo docker build -t sosodocs .```
+
+***Tag the sosodoc image***
+
+```sudo docker tag sosodocs 088789840359.dkr.ecr.us-east-1.amazonaws.com/soso-repository:mkdocs-v1```
+
+***Push image to repo***
+
+```sudo docker push 088789840359.dkr.ecr.us-east-1.amazonaws.com/soso-repository:mkdocs-v1```
+
+14. ### Install AWS [ CloudBees AWS Credentials ] Plugin and configure
   ***Dashboard*** --> ***Manage Jenkins*** --> ***Plugin Manager***
 
-14. ### setup aws credentials, get your AWS Access Key ID & Secret Access Key
+15. ### setup aws credentials, get your AWS Access Key ID & Secret Access Key
 Dashboard --> Manage Jenkins --> Manage Credentials --> System --> Global credentials (unrestricted)
     AWS Credentials
           |_ID
@@ -64,7 +77,7 @@ Dashboard --> Manage Jenkins --> Manage Credentials --> System --> Global creden
           |_Access Key ID
           |_Secret Access Key
 
-15. ### Create new Pipeline Job using below pipeline script with my aws creds
+16. ### Create new Pipeline Job using below pipeline script with my aws creds
 - use pool scm * * * * *
 
 ```sh

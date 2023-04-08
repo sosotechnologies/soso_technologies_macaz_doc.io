@@ -14,8 +14,18 @@ sudo systemctl status docker
 sudo systemctl start docker
 sudo systemctl enable docker
 ```
+13. ### Build and Push Docker
+```sudo docker build -t sosodocs .```
 
-```docker build -t sosodocs .```
+***Tag the sosodoc image***
+
+```sudo docker tag sosodocs 088789840359.dkr.ecr.us-east-1.amazonaws.com/soso-repository:mkdocs-v1```
+
+***Push image to repo***
+
+```sudo docker push 088789840359.dkr.ecr.us-east-1.amazonaws.com/soso-repository:mkdocs-v1```
+
+***Run the image with any one of the 2 commands, set yout ip:80***
 
 ```docker run -itd -p 80:80 --rm sosodocs```
 
@@ -23,7 +33,8 @@ sudo systemctl enable docker
 
 And that is all, you should be able to navigate to http://127.0.0.1:80 and see the documentation website running.
 
-***BONUS!!!***: ***DEPLOY TO AN EXISTING EKS CLUSTER***  
+
+***Optional BONUS!!!: DEPLOY TO AN EXISTING EKS CLUSTER***  
 
 ```
 k expose deploy mkdocs --name=mkdocs-svc --port=80 --type=LoadBalancer --targetPort=80 --dry-run=client -o yaml > deploy.yaml
@@ -32,8 +43,6 @@ k expose deploy mkdocs --name=mkdocs-svc --port=80 --type=LoadBalancer --targetP
 ```
 k expose deploy mkdocs --name=mkdocs-svc --port=80 --type=LoadBalancer --target-port=80 --dry-run=client -o yaml > service.yaml
 ```
-
-
 
 ***Optional***
 Tag Your docker image with a version 
