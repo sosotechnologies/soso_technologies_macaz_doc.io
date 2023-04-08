@@ -117,6 +117,8 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#check-authentication-to-ecr">Check authentication to ECR</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#build-and-push-docker">Build and Push Docker</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#install-aws-cloudbees-aws-credentials-plugin-and-configure">Install AWS [ CloudBees AWS Credentials ] Plugin and configure</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#setup-aws-credentials-get-your-aws-access-key-id-secret-access-key">setup aws credentials, get your AWS Access Key ID &amp; Secret Access Key</a>
@@ -239,8 +241,18 @@ See the link for Creating a container image: <a href="https://docs.aws.amazon.co
 check to see if you can successfully login to ecr [my example ecr code below, USE YOURS ], you have to be root, </li>
 </ol>
 <pre><code>sudo su -
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 368085106192.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 088789840359.dkr.ecr.us-east-1.amazonaws.com
 </code></pre>
+<p><strong><em>EXIT ROOT</em></strong></p>
+<ol>
+<li>
+<h3 id="build-and-push-docker">Build and Push Docker</h3>
+<code>sudo docker build -t sosodocs .</code></li>
+</ol>
+<p><strong><em>Tag the sosodoc image</em></strong></p>
+<p><code>sudo docker tag sosodocs 088789840359.dkr.ecr.us-east-1.amazonaws.com/soso-repository:mkdocs-v1</code></p>
+<p><strong><em>Push image to repo</em></strong></p>
+<p><code>sudo docker push 088789840359.dkr.ecr.us-east-1.amazonaws.com/soso-repository:mkdocs-v1</code></p>
 <ol>
 <li>
 <h3 id="install-aws-cloudbees-aws-credentials-plugin-and-configure">Install AWS [ CloudBees AWS Credentials ] Plugin and configure</h3>

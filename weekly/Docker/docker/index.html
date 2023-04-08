@@ -71,6 +71,8 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#1-docker-and-mkdocs">1. Docker and Mkdocs</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#build-and-push-docker">Build and Push Docker</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -143,11 +145,20 @@ sudo systemctl status docker
 sudo systemctl start docker
 sudo systemctl enable docker
 </code></pre>
-<p><code>docker build -t sosodocs .</code></p>
+<ol>
+<li>
+<h3 id="build-and-push-docker">Build and Push Docker</h3>
+<code>sudo docker build -t sosodocs .</code></li>
+</ol>
+<p><strong><em>Tag the sosodoc image</em></strong></p>
+<p><code>sudo docker tag sosodocs 088789840359.dkr.ecr.us-east-1.amazonaws.com/soso-repository:mkdocs-v1</code></p>
+<p><strong><em>Push image to repo</em></strong></p>
+<p><code>sudo docker push 088789840359.dkr.ecr.us-east-1.amazonaws.com/soso-repository:mkdocs-v1</code></p>
+<p><strong><em>Run the image with any one of the 2 commands, set yout ip:80</em></strong></p>
 <p><code>docker run -itd -p 80:80 --rm sosodocs</code></p>
 <p><code>docker run -t -i -p 80:80 sosodocs</code></p>
 <p>And that is all, you should be able to navigate to http://127.0.0.1:80 and see the documentation website running.</p>
-<p><strong><em>BONUS!!!</em></strong>: <strong><em>DEPLOY TO AN EXISTING EKS CLUSTER</em></strong>  </p>
+<p><strong><em>Optional BONUS!!!: DEPLOY TO AN EXISTING EKS CLUSTER</em></strong>  </p>
 <pre><code>k expose deploy mkdocs --name=mkdocs-svc --port=80 --type=LoadBalancer --targetPort=80 --dry-run=client -o yaml &gt; deploy.yaml
 </code></pre>
 <pre><code>k expose deploy mkdocs --name=mkdocs-svc --port=80 --type=LoadBalancer --target-port=80 --dry-run=client -o yaml &gt; service.yaml
