@@ -9,6 +9,11 @@ See official link: [Openshift](https://www.redhat.com/en/technologies/cloud-comp
 - Navigate to: Clusters -> Cluster Type -> Amazon Web Services -> Installer-provisioned infrastructure
    ![openshift](photos/install.png)
 
+***Install OpenShift on AWS with user-provisioned infrastructure***
+
+See the site: [/openshift/install/aws](https://console.redhat.com/openshift/install/aws/user-provisioned)
+  ![openshift](photos/instal0.png)
+
 ### Install OpenShift on AWS
 AWS Openshift installation Link: [See-Link](https://console.redhat.com/openshift/install/aws/installer-provisioned)
 There are ***Two*** Cluster-Setup options to choose: a customized cluster ***or*** quickly install.

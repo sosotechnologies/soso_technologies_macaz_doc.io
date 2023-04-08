@@ -24,5 +24,7 @@ For your mount_path = "/data", any data in the mountpath will be store in your E
 
 MY ADVISE - use different S3 buckets for critical backends, so If an s3 is mistakenly deleted some how, you can create a new bucket and re-initialize that specific resource group.
 
+For modules: [See link](https://www.bogotobogo.com/DevOps/Terraform/Terraform-modules.php)
+
 ### StateFile
 ```terraform state list
