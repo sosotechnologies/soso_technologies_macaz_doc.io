@@ -66,6 +66,14 @@
                   <li class="toctree-l1"><a class="" href="../../Terraform/github.md">Terraform</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Docker</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#sample-use-cases">Sample use cases</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-docker-and-mkdocs">1. Docker and Mkdocs</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../Kubernetes/Kubernetes.md">Kubernetes</a>
                   </li>
@@ -92,6 +100,8 @@
                 <li class="toctree-l2"><a class="reference internal" href="../../Random/git-ecr-jenkins/">ECR-Jenkins</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../../Random/Helm-Terraform-jenkins/">Helm-Terraform-jenkins</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../Random/Disaster-rec/">Disaster Recovery</a>
                 </li>
     </ul>
                   </li>
@@ -121,7 +131,40 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="install-docker">Install docker</h1>
+<h2 id="sample-use-cases">Sample use cases</h2>
+<p>5 Sample Build Deploy </p>
+<h3 id="1-docker-and-mkdocs">1. Docker and Mkdocs</h3>
+<p>Build and deploy push Mkdocs to ECR/DockerHub
+Clone this repo: <a href="https://github.com/sosotechnologies/docs_docker_io.git">docs_docker_io</a></p>
+<p><strong><em>Install Docker</em></strong></p>
+<pre><code>sudo yum install docker -y
+sudo systemctl status docker
+sudo systemctl start docker
+sudo systemctl enable docker
+</code></pre>
+<p><code>docker build -t sosodocs .</code></p>
+<p><code>docker run -itd -p 80:80 --rm sosodocs</code></p>
+<p><code>docker run -t -i -p 80:80 sosodocs</code></p>
+<p>And that is all, you should be able to navigate to http://127.0.0.1:80 and see the documentation website running.</p>
+<p><strong><em>BONUS!!!</em></strong>: <strong><em>DEPLOY TO AN EXISTING EKS CLUSTER</em></strong>  </p>
+<pre><code>k expose deploy mkdocs --name=mkdocs-svc --port=80 --type=LoadBalancer --targetPort=80 --dry-run=client -o yaml &gt; deploy.yaml
+</code></pre>
+<pre><code>k expose deploy mkdocs --name=mkdocs-svc --port=80 --type=LoadBalancer --target-port=80 --dry-run=client -o yaml &gt; service.yaml
+</code></pre>
+<p><strong><em>Optional</em></strong>
+Tag Your docker image with a version </p>
+<p><code>sudo docker tag sosodocs sosodocs:v1</code></p>
+<p>Delete the existing running container, 26b43376e040 is mine, get yours.</p>
+<p><code>sudo docker rm 26b43376e040</code>  <br />
+           OR
+<code>sudo docker rm 26b43376e040 --force</code></p>
+<p>Re-run the new versioned-image</p>
+<p><code>sudo docker run -itd -p 80:80 --rm sosodocs:v1</code></p>
+<p>To remove container or image:</p>
+<pre><code>docker rm [container]
+docker rmi [image]
+</code></pre>
               
             </div>
           </div><footer>
