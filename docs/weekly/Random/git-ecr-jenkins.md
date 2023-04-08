@@ -53,8 +53,6 @@ sudo su -
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 088789840359.dkr.ecr.us-east-1.amazonaws.com
 ```
 
-***EXIT ROOT***
-
 13. ### Build and Push Docker
 ```sudo docker build -t sosodocs .```
 
