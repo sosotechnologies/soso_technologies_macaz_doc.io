@@ -87,6 +87,7 @@ nav:
      - EKS-IAM: weekly/Random/eks-iam.md
      - ECR-Jenkins: weekly/Random/git-ecr-jenkins.md
      - Helm-Terraform-jenkins: weekly/Random/Helm-Terraform-jenkins.md
+     - Disaster Recovery: weekly/Random/Disaster-rec.md
   
  
  

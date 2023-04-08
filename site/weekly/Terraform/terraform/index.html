@@ -93,6 +93,8 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../../Random/Helm-Terraform-jenkins/">Helm-Terraform-jenkins</a>
                 </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../Random/Disaster-rec/">Disaster Recovery</a>
+                </li>
     </ul>
                   </li>
               </ul>
@@ -130,6 +132,15 @@
 <li><a href="https://github.com/stacksimplify/kubernetes-fundamentals">Kubernetes Fundamentals</a></li>
 <li><strong>Important Note:</strong> Please go to these repositories and FORK these repositories and make use of them during the course.</li>
 </ul>
+<p>Scorage class: <a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/storage_class_v1">Link</a></p>
+<p>Persistent volume: <a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/persistent_volume">Link</a></p>
+<p><strong>Note</strong>. You Must have an understanding of <strong><em>volume_handle</em></strong> - (Required) A map that specifies static properties of a volume. For more info see Kubernetes reference. This is the way I am mapping the EFS I.D  to the Volume.
+   The volume handles is not neccessary for dynamic provisioning, because you will not creating a PV file, and you will be using storage Provisioner to dynamically create the PV's. Pass the provisioner in your storage Class Object.</p>
+<p>For your mount_path = "/data", any data in the mountpath will be store in your EFS. You can name to whatever u choose</p>
+<p><code>k exec --stdin --tty soso-pod --/bin/sh</code></p>
+<p>MY ADVISE - use different S3 buckets for critical backends, so If an s3 is mistakenly deleted some how, you can create a new bucket and re-initialize that specific resource group.</p>
+<h3 id="statefile">StateFile</h3>
+<p>```terraform state list</p>
               
             </div>
           </div><footer>
