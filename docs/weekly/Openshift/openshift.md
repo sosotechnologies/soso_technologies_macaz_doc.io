@@ -10,11 +10,17 @@ See official link: [Openshift](https://www.redhat.com/en/technologies/cloud-comp
    ![openshift](photos/install.png)
 
 ***Install OpenShift on AWS with user-provisioned infrastructure***
+ Select the option [Full control]
 
 See the site: [/openshift/install/aws](https://console.redhat.com/openshift/install/aws/user-provisioned)
-  ![openshift](photos/instal0.png)
+
+  ![openshift](photos/openshiftl0.png)
 
 ### Install OpenShift on AWS
+- ***make*** a new directory for the installation, mine is soso-dir
+
+   ```mkdir soso-dir/```
+
 AWS Openshift installation Link: [See-Link](https://console.redhat.com/openshift/install/aws/installer-provisioned)
 There are ***Two*** Cluster-Setup options to choose: a customized cluster ***or*** quickly install.
 
@@ -31,6 +37,7 @@ There are ***Two*** Cluster-Setup options to choose: a customized cluster ***or*
     sudo mv oc /usr/local/bin/
     sudo mv kubectl /usr/local/bin/
     sudo cp openshift-install /usr/local/bin/
+    sudo cp openshift-install /root/
     which openshift-install
     oc help
     ```
@@ -42,22 +49,27 @@ There are ***Two*** Cluster-Setup options to choose: a customized cluster ***or*
       - Add OpenShift port 6443 to instance security groups
       - Create 
         - Create Access and Secret Keys for the Root-user and configure aws
+
           ```aws configure```
 
-  - Create an SSH Key in the root directory
+  - CD to ***ROOT*** and Create an SSH Key in the root directory
+    
+    ```sudo su -```
+
+    ```mkdir soso-dir/```
 
     ```[root@ip-172-31-12-23 ~]# ssh-keygen -t rsa -b 4096 -N '' -f id_rsa```
 
-  - Evaluate and add to root
+  - Evaluate and add to root. This will starts ssh-agent and configures the 
+  environment (via eval) of the running shell to point to that agent.
 
     ```
        [root@ip-172-31-12-23 ~]# eval "$(ssh-agent -s)"
     [root@ip-172-31-12-23 ~]# ssh-add /root/id_rsa
     ```
-   - ***make*** a new directory for the installation, mine is soso-dir
-   ```mkdir soso-dir/```
-  
+     
   - Now install Openshift
+
   ```./openshift-install create cluster --dir /root/soso-dir/ --log-level debug``` 
 
   After installation, you should have your results as seen in the below image:
