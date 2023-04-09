@@ -83,6 +83,7 @@ There are ***Two*** Cluster-Setup options to choose: a customized cluster ***or*
     oc whoami
   ```
   ### Destroy the cluster
+  
   ```./openshift-install destroy cluster --dir /root/soso-dir/ --log-level debug``` 
 
 
@@ -91,6 +92,7 @@ There are ***Two*** Cluster-Setup options to choose: a customized cluster ***or*
   - ***install Openshift using the config, so you can customize***. 
     A prompt will begin. The last prompt will be the secret
     Copy and paste the secret characters that we had saved earlier.
+
       - ```openshift-install create install-config``` 
 
   - Copy the install-config.yaml to install-config.yaml.bak
