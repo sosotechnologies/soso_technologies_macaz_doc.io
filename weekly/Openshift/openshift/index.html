@@ -147,6 +147,10 @@ See official link: <a href="https://www.redhat.com/en/technologies/cloud-computi
 <p>See the site: <a href="https://console.redhat.com/openshift/install/aws/user-provisioned">/openshift/install/aws</a></p>
 <p><img alt="openshift" src="photos/openshiftl0.png" /></p>
 <h3 id="install-openshift-on-aws">Install OpenShift on AWS</h3>
+<ul>
+<li><strong><em>make</em></strong> a new directory for the installation, mine is soso-dir</li>
+</ul>
+<p><code>mkdir soso-dir/</code></p>
 <p>AWS Openshift installation Link: <a href="https://console.redhat.com/openshift/install/aws/installer-provisioned">See-Link</a>
 There are <strong><em>Two</em></strong> Cluster-Setup options to choose: a customized cluster <strong><em>or</em></strong> quickly install.</p>
 <ul>
@@ -162,6 +166,7 @@ There are <strong><em>Two</em></strong> Cluster-Setup options to choose: a custo
 <p><code>sudo mv oc /usr/local/bin/
 sudo mv kubectl /usr/local/bin/
 sudo cp openshift-install /usr/local/bin/
+sudo cp openshift-install /root/
 which openshift-install
 oc help</code></p>
 </li>
@@ -174,29 +179,32 @@ oc help</code></p>
 <ul>
 <li>Route53 public Hoster Zone</li>
 <li>Add OpenShift port 6443 to instance security groups</li>
-<li>Create <ul>
-<li>Create Access and Secret Keys for the Root-user and configure aws
-  <code>aws configure</code></li>
+<li>
+<p>Create </p>
+<ul>
+<li>Create Access and Secret Keys for the Root-user and configure aws</li>
 </ul>
+<p><code>aws configure</code></p>
 </li>
 </ul>
 </li>
 <li>
-<p>Create an SSH Key in the root directory</p>
+<p>CD to <strong><em>ROOT</em></strong> and Create an SSH Key in the root directory</p>
+<p><code>sudo su -</code></p>
+<p><code>mkdir soso-dir/</code></p>
 <p><code>[root@ip-172-31-12-23 ~]# ssh-keygen -t rsa -b 4096 -N '' -f id_rsa</code></p>
 </li>
 <li>
-<p>Evaluate and add to root</p>
+<p>Evaluate and add to root. This will starts ssh-agent and configures the 
+  environment (via eval) of the running shell to point to that agent.</p>
 <p><code>[root@ip-172-31-12-23 ~]# eval "$(ssh-agent -s)"
-[root@ip-172-31-12-23 ~]# ssh-add /root/id_rsa</code>
-   - <strong><em>make</em></strong> a new directory for the installation, mine is soso-dir
-   <code>mkdir soso-dir/</code></p>
+[root@ip-172-31-12-23 ~]# ssh-add /root/id_rsa</code></p>
 </li>
 <li>
-<p>Now install Openshift
-  <code>./openshift-install create cluster --dir /root/soso-dir/ --log-level debug</code> </p>
+<p>Now install Openshift</p>
 </li>
 </ul>
+<p><code>./openshift-install create cluster --dir /root/soso-dir/ --log-level debug</code> </p>
 <p>After installation, you should have your results as seen in the below image:
   <img alt="openshift" src="../photos/install1.png" /></p>
 <p><strong><em>Cat and export the konfig file</em></strong></p>
