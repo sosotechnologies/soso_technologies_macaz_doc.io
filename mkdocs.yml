@@ -77,6 +77,7 @@ nav:
    - Kubernetes: weekly/Kubernetes/Kubernetes.md
    - Jenkins: weekly/Jenkins/jenkins.md
    - AI: weekly/AI/ai.md
+   - Kafka: weekly/Kafka/kafka.md
    - ELK: weekly/ELK/elk.md
    - Azure: weekly/Azure/azure.md
    - OpenShift: weekly/Openshift/openshift.md
@@ -88,6 +89,7 @@ nav:
      - ECR-Jenkins: weekly/Random/git-ecr-jenkins.md
      - Helm-Terraform-jenkins: weekly/Random/Helm-Terraform-jenkins.md
      - Disaster Recovery: weekly/Random/Disaster-rec.md
+     - Domain Git GoDaddy: weekly/Random/domain-github.md
   
  
  

@@ -77,6 +77,24 @@ JDK | Git | MAVEV
 
 ![cicd](cicd-photos/cicd2.png)
 
+### Configure Credentials
+Configure the following credentials
+  - AWS
+  - DockerHub --> (generate Token) My account --> security --> secret text
+  - k8s Config
+  - sonarqube --> (generate Token) My account --> security --> secret text
+
+
+Navigate to: ***Jenkins UI --> manage Jenkins --> Manage Credentials --> System --> Global credentials***
+
+![cicd](cicd-photos/cicd4.png)
+
+#### configure Dockerhub
+  1. Log into your dockerhub account and create a token in settings --> security: [LINK](https://hub.docker.com/settings/security)
+  ![cicd](cicd-photos/cicd5.png)
+
+  2. 
+
 ### Jenkins Jobs
 Demo Jobs
 
