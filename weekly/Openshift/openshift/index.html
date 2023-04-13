@@ -73,6 +73,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../AI/ai/">AI</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Kafka/kafka/">Kafka</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../ELK/elk/">ELK</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../Azure/azure/">Azure</a>
@@ -82,6 +84,10 @@
     <li class="toctree-l2"><a class="reference internal" href="#getting-started-steps">Getting Started - Steps</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#install-openshift-on-aws">Install OpenShift on AWS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-the-cluster">Install the cluster</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#working-on-cluster">Working on cluster</a>
     </li>
         </ul>
     </li>
@@ -102,6 +108,8 @@
                 <li class="toctree-l2"><a class="reference internal" href="../../Random/Helm-Terraform-jenkins/">Helm-Terraform-jenkins</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../../Random/Disaster-rec/">Disaster Recovery</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../Random/domain-github/">Domain Git GoDaddy</a>
                 </li>
     </ul>
                   </li>
@@ -148,6 +156,8 @@ See official link: <a href="https://www.redhat.com/en/technologies/cloud-computi
 <p><img alt="openshift" src="photos/openshiftl0.png" /></p>
 <h3 id="install-openshift-on-aws">Install OpenShift on AWS</h3>
 <ul>
+<li>Setup an AWS Instance and add security group number [6443]</li>
+<li>Setup a Route53 DNS</li>
 <li><strong><em>make</em></strong> a new directory for the installation, mine is soso-dir</li>
 </ul>
 <p><code>mkdir soso-dir/</code></p>
@@ -169,6 +179,10 @@ sudo cp openshift-install /usr/local/bin/
 sudo cp openshift-install /root/
 which openshift-install
 oc help</code></p>
+<p><strong><em>Install AWSCLI</em></strong></p>
+<p><code>curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install</code></p>
 </li>
 <li>
 <p>Copy the secret content and paste in a file. This secret is from the redhad account, 
@@ -191,30 +205,17 @@ oc help</code></p>
 <li>
 <p>CD to <strong><em>ROOT</em></strong> and Create an SSH Key in the root directory</p>
 <p><code>sudo su -</code></p>
-<p><code>mkdir soso-dir/</code></p>
-<p><code>[root@ip-172-31-12-23 ~]# ssh-keygen -t rsa -b 4096 -N '' -f id_rsa</code></p>
+<p><code>ssh-keygen -t rsa -b 4096 -N '' -f id_rsa</code></p>
 </li>
 <li>
 <p>Evaluate and add to root. This will starts ssh-agent and configures the 
   environment (via eval) of the running shell to point to that agent.</p>
-<p><code>[root@ip-172-31-12-23 ~]# eval "$(ssh-agent -s)"
-[root@ip-172-31-12-23 ~]# ssh-add /root/id_rsa</code></p>
+<p><code>eval "$(ssh-agent -s)"
+ssh-add /root/id_rsa</code></p>
 </li>
 <li>
-<p>Now install Openshift</p>
+<p>Now start the prompt to install Openshift</p>
 </li>
-</ul>
-<p><code>./openshift-install create cluster --dir /root/soso-dir/ --log-level debug</code> </p>
-<p>After installation, you should have your results as seen in the below image:
-  <img alt="openshift" src="../photos/install1.png" /></p>
-<p><strong><em>Cat and export the konfig file</em></strong></p>
-<p><code>cat soso-dir/auth/kubeconfig
-    export KUBECONFIG=/root/soso-dir/auth/kubeconfig
-    oc whoami</code>
-  ### Destroy the cluster</p>
-<p><code>./openshift-install destroy cluster --dir /root/soso-dir/ --log-level debug</code> </p>
-<p><strong><em>OR OR OR OR OR</em></strong></p>
-<ul>
 <li>
 <p><strong><em>install Openshift using the config, so you can customize</em></strong>. 
     A prompt will begin. The last prompt will be the secret
@@ -224,18 +225,18 @@ oc help</code></p>
 </ul>
 </li>
 <li>
-<p>Copy the install-config.yaml to install-config.yaml.bak</p>
-<ul>
-<li><code>cp install-config.yaml install-config.yaml.bak</code></li>
-<li><code>vi install-config.yaml.bak</code></li>
+<p>OPTIONAL: Make a copy of the file: </p>
+</li>
 </ul>
-</li>
-<li>
-<p>paste the below content in the file. edit the file to suite ur options.</p>
-</li>
+<p><code>cp -r install-config.yaml soso-config.yaml</code></p>
+<ul>
+<li>paste the below content in the file. edit the file to suite ur options.
+  <strong><em>Note</em></strong>: Two keys will be added to the yaml file:</li>
+<li>The sshKey: <code>cat id_rsa.pub</code></li>
+<li>The openShift Key we copied and pasted.</li>
 </ul>
 <pre><code class="language-yaml">apiVersion: v1
-baseDomain: marcollogistics.com
+baseDomain: macazzzzz.com
 controlPlane:
   hyperthreading: Enabled
   name: master
@@ -286,24 +287,68 @@ publish: External
 pullSecret: ''
 sshKey: 
 </code></pre>
-<p>SEE MY workflow process</p>
-<p><code>[ec2-user@ip-172-31-12-23 s]$ ls
- openshift-install-linux.tar.gz  README.md
- [ec2-user@ip-172-31-12-23 s]$ tar xvf openshift-install-linux.tar.gz 
- README.md
- openshift-install
- [ec2-user@ip-172-31-12-23 s]$ ls
- openshift-install  openshift-install-linux.tar.gz  README.md
- [ec2-user@ip-172-31-12-23 s]$ ls
- openshift-client-linux.tar.gz  openshift-install  openshift-install-linux.tar.gz  README.md
- [ec2-user@ip-172-31-12-23 s]$ tar xvf openshift-client-linux.tar.gz 
- README.md
- oc
- kubectl
- [ec2-user@ip-172-31-12-23 s]$ ls
- kubectl  oc  openshift-client-linux.tar.gz  openshift-install  openshift-install-linux.tar.gz  README.md
- [ec2-user@ip-172-31-12-23 s]$</code></p>
+<h3 id="install-the-cluster">Install the cluster</h3>
+<p>In the same directory of the openshift-install file, Run command to install:</p>
+<pre><code>openshift-install create cluster --log-level debug
+</code></pre>
+<p>***Cluster done installing, you should see as below image, your creds and url.
+<img alt="openshift" src="photos/install12.png" /></p>
+<p>After installation, you should have your results as seen in the below image:
+  <img alt="openshift" src="../photos/install1.png" /></p>
+<p><strong><em>Cat and export the konfig file</em></strong></p>
+<p><code>cat auth/kubeconfig
+    export KUBECONFIG=/root/auth/kubeconfig
+    oc whoami</code></p>
+<p><strong><em>Get Cluster URL with the below command</em></strong></p>
+<pre><code> oc cluster-info
+ cd auth/
+</code></pre>
+<h3 id="working-on-cluster">Working on cluster</h3>
+<p>Some command commands:
+<strong><em>Create a new project called soso-project</em></strong></p>
+<pre><code>oc new-project soso-project --display-name 'Soso Project'
+oc project soso-project
+</code></pre>
+<p><strong>Sample use case:</strong>
+- Clone this repo: <a href="https://github.com/sosotechnologies/docs_docker_io">My docs dockerfile repo</a>
+- Install Docker on terminal
+- Create a repo in Dockerdesktop called:  sosotech/docs-repo-sosodocs</p>
+<p><code>docker build -t sosodocs .</code></p>
+<p><code>docker tag sosodocs sosotech/docs-repo/sosodocs:v1</code></p>
+<p><code>oc cluster-info</code></p>
+<p><strong><em>Openshift Image</em></strong></p>
+<pre><code>oc get is
+oc new-app --image=&quot;sosotech/docs-repo/sosodocs:v1&quot; --as-deployment-config
+oc expose service/docs-repo-sosodocs
+
+</code></pre>
+<p><strong><em>OTHER COMMANDS</em></strong>
+1. Delete image string called: macaz
+<code>oc delete is macaz</code></p>
+<p><strong>Sample use case:</strong>
+- Clone this repo: <a href="https://github.com/sosotechnologies/docs_docker_io">My docs dockerfile repo</a>
+- Install Docker/podman:  </p>
+<p><code>docker build -t sosodocs .</code></p>
+<p><code>oc cluster-info</code></p>
+<p><code>sudo docker tag sosodocs default-route-openshift-image-registry.apps.openshift.macazzz.com/sosorepo:v1</code></p>
+<p><code>docker login</code></p>
+<p><code>docker search registry.redhat.io/nginx</code></p>
+<p>For more commands on OpenShift: <a href="https://docs.openshift.com/container-platform/4.10/cli_reference/openshift_cli/developer-cli-commands.html">See the developer-cli-commands Link</a></p>
 <p>AWS Openshift installation Link: <a href="https://docs.openshift.com/container-platform/4.1/installing/installing_aws/installing-aws-account.html">See-Link</a></p>
+<p><code>./openshift-install create cluster --dir /root/ --log-level debug</code> </p>
+<p>### Destroy the cluster</p>
+<p><code>./openshift-install destroy cluster --dir /root/ --log-level debug</code> </p>
+<p><a href="https://console.redhat.com/openshift"><strong><em>web console Link:</em></strong> </a></p>
+<p>https://console-openshift-console.apps.openshift.macazzz.com/k8s/ns/soso-project/image.openshift.io~v1~ImageStream
+kubeadmin
+7JdHf-X34nV-ubmSh-ijSA4</p>
+<p>docker-registry-default.127.0.0.1.nip.io</p>
+<p><a href="https://console-openshift-console.apps.openshift.macazzz.com/deploy-image/ns/soso-project">Deploy Image</a></p>
+<p><strong><em>Docker config path</em></strong></p>
+<pre><code>sudo vi /root/.docker/config.json
+</code></pre>
+<p><strong><em>OC TROUBLESHOOT</em></strong>
+oc get service -n default  kubernetes -o 'jsonpath={.spec.clusterIP}'</p>
               
             </div>
           </div><footer>
