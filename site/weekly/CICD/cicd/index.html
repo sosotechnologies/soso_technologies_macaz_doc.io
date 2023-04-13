@@ -56,6 +56,52 @@
               <p class="caption"><span class="caption-text">Weekly Lectures</span></p>
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">CICD</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#nexus">Nexus</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#configure-nexus">Configure Nexus</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sonarqube">SonarQube</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#sonar-installation">Sonar Installation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configure-sonar">Configure Sonar</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#jenkins">Jenkins</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#install">Install</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-jenkins-plugins">Install Jenkins plugins</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#global-tool-configuration">Global Tool Configuration</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configure-systems">Configure Systems</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configure-credential">Configure Credential</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#credential-dockerhub-credential">Credential Dockerhub Credential</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#configure-sonarqube-credential">Configure SonarQube Credential</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#configure-aws-credential">Configure AWS Credential</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jenkins-jobs">Jenkins Jobs</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#freestyle-project">Freestyle Project</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#pipeline">Pipeline</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../Cloud-Technologies/intro-aws/">Cloud Technologies</a>
                   </li>
@@ -72,6 +118,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../Jenkins/jenkins/">Jenkins</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../AI/ai/">AI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Kafka/kafka/">Kafka</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../ELK/elk/">ELK</a>
                   </li>
@@ -94,6 +142,8 @@
                 <li class="toctree-l2"><a class="reference internal" href="../../Random/Helm-Terraform-jenkins/">Helm-Terraform-jenkins</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../../Random/Disaster-rec/">Disaster Recovery</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../Random/domain-github/">Domain Git GoDaddy</a>
                 </li>
     </ul>
                   </li>
@@ -123,7 +173,585 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="install-servers">Install servers</h1>
+<p>Install Individuals servers for:
+- Nexus
+- Sonarqube
+- Jenkins</p>
+<h2 id="nexus">Nexus</h2>
+<ul>
+<li>Centos 7 (Amazon Market place)</li>
+<li>TCP Port <strong><em>8081</em></strong> from MyIP and Jenkins-SG</li>
+</ul>
+<pre><code class="language-sh">#!/bin/bash
+yum install java-1.8.0-openjdk.x86_64 wget -y   
+mkdir -p /opt/nexus/   
+mkdir -p /tmp/nexus/                           
+cd /tmp/nexus/
+NEXUSURL=&quot;https://download.sonatype.com/nexus/3/latest-unix.tar.gz&quot;
+wget $NEXUSURL -O nexus.tar.gz
+EXTOUT=`tar xzvf nexus.tar.gz`
+NEXUSDIR=`echo $EXTOUT | cut -d '/' -f1`
+rm -rf /tmp/nexus/nexus.tar.gz
+rsync -avzh /tmp/nexus/ /opt/nexus/
+useradd nexus
+chown -R nexus.nexus /opt/nexus 
+cat &lt;&lt;EOT&gt;&gt; /etc/systemd/system/nexus.service
+[Unit]                                                                          
+Description=nexus service                                                       
+After=network.target                                                            
+
+[Service]                                                                       
+Type=forking                                                                    
+LimitNOFILE=65536                                                               
+ExecStart=/opt/nexus/$NEXUSDIR/bin/nexus start                                  
+ExecStop=/opt/nexus/$NEXUSDIR/bin/nexus stop                                    
+User=nexus                                                                      
+Restart=on-abort                                                                
+
+[Install]                                                                       
+WantedBy=multi-user.target                                                      
+EOT
+echo 'run_as_user=&quot;nexus&quot;' &gt; /opt/nexus/$NEXUSDIR/bin/nexus.rc
+systemctl daemon-reload
+systemctl start nexus
+systemctl enable nexus
+
+</code></pre>
+<h3 id="configure-nexus">Configure Nexus</h3>
+<p>Login:
+- <strong><em>username:</em></strong> admin
+- <strong><em>Get Password:</em></strong> <code>cat /opt/nexus/sonatype-work/nexus3/admin.password</code></p>
+<p><strong><em>Check and start the nexus service</em></strong></p>
+<pre><code>sudo systemctl status nexus
+</code></pre>
+<h2 id="sonarqube">SonarQube</h2>
+<ul>
+<li>Ubuntu VERSION="18.04"</li>
+<li>TCP Port <strong><em>9000</em></strong></li>
+<li>TCP Port <strong><em>80</em></strong> from MyIP and Jenkins-SG</li>
+</ul>
+<h3 id="sonar-installation">Sonar Installation</h3>
+<p>Script</p>
+<pre><code class="language-sh">#!/bin/bash
+cp /etc/sysctl.conf /root/sysctl.conf_backup
+cat &lt;&lt;EOT&gt; /etc/sysctl.conf
+vm.max_map_count=262144
+fs.file-max=65536
+ulimit -n 65536
+ulimit -u 4096
+EOT
+cp /etc/security/limits.conf /root/sec_limit.conf_backup
+cat &lt;&lt;EOT&gt; /etc/security/limits.conf
+sonarqube   -   nofile   65536
+sonarqube   -   nproc    409
+EOT
+sudo apt-get update -y
+sudo apt-get install openjdk-11-jdk -y
+sudo update-alternatives --config java
+java -version
+sudo apt update
+wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
+sudo sh -c 'echo &quot;deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main&quot; &gt;&gt; /etc/apt/sources.list.d/pgdg.list'
+sudo apt install postgresql postgresql-contrib -y
+#sudo -u postgres psql -c &quot;SELECT version();&quot;
+sudo systemctl enable postgresql.service
+sudo systemctl start  postgresql.service
+sudo echo &quot;postgres:admin123&quot; | chpasswd
+runuser -l postgres -c &quot;createuser sonar&quot;
+sudo -i -u postgres psql -c &quot;ALTER USER sonar WITH ENCRYPTED PASSWORD 'admin123';&quot;
+sudo -i -u postgres psql -c &quot;CREATE DATABASE sonarqube OWNER sonar;&quot;
+sudo -i -u postgres psql -c &quot;GRANT ALL PRIVILEGES ON DATABASE sonarqube to sonar;&quot;
+systemctl restart  postgresql
+#systemctl status -l   postgresql
+netstat -tulpena | grep postgres
+sudo mkdir -p /sonarqube/
+cd /sonarqube/
+sudo curl -O https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.3.0.34182.zip
+sudo apt-get install zip -y
+sudo unzip -o sonarqube-8.3.0.34182.zip -d /opt/
+sudo mv /opt/sonarqube-8.3.0.34182/ /opt/sonarqube
+sudo groupadd sonar
+sudo useradd -c &quot;SonarQube - User&quot; -d /opt/sonarqube/ -g sonar sonar
+sudo chown sonar:sonar /opt/sonarqube/ -R
+cp /opt/sonarqube/conf/sonar.properties /root/sonar.properties_backup
+cat &lt;&lt;EOT&gt; /opt/sonarqube/conf/sonar.properties
+sonar.jdbc.username=sonar
+sonar.jdbc.password=admin123
+sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
+sonar.web.host=0.0.0.0
+sonar.web.port=9000
+sonar.web.javaAdditionalOpts=-server
+sonar.search.javaOpts=-Xmx512m -Xms512m -XX:+HeapDumpOnOutOfMemoryError
+sonar.log.level=INFO
+sonar.path.logs=logs
+EOT
+cat &lt;&lt;EOT&gt; /etc/systemd/system/sonarqube.service
+[Unit]
+Description=SonarQube service
+After=syslog.target network.target
+[Service]
+Type=forking
+ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
+ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
+User=sonar
+Group=sonar
+Restart=always
+LimitNOFILE=65536
+LimitNPROC=4096
+[Install]
+WantedBy=multi-user.target
+EOT
+systemctl daemon-reload
+systemctl enable sonarqube.service
+#systemctl start sonarqube.service
+#systemctl status -l sonarqube.service
+apt-get install nginx -y
+rm -rf /etc/nginx/sites-enabled/default
+rm -rf /etc/nginx/sites-available/default
+cat &lt;&lt;EOT&gt; /etc/nginx/sites-available/sonarqube
+server{
+    listen      80;
+    server_name sonarqube.groophy.in;
+    access_log  /var/log/nginx/sonar.access.log;
+    error_log   /var/log/nginx/sonar.error.log;
+    proxy_buffers 16 64k;
+    proxy_buffer_size 128k;
+    location / {
+        proxy_pass  http://127.0.0.1:9000;
+        proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+        proxy_redirect off;
+
+        proxy_set_header    Host            \$host;
+        proxy_set_header    X-Real-IP       \$remote_addr;
+        proxy_set_header    X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto http;
+    }
+}
+EOT
+ln -s /etc/nginx/sites-available/sonarqube /etc/nginx/sites-enabled/sonarqube
+systemctl enable nginx.service
+#systemctl restart nginx.service
+sudo ufw allow 80,9000,9001/tcp
+echo &quot;System reboot in 30 sec&quot;
+sleep 30
+reboot
+</code></pre>
+<h3 id="configure-sonar">Configure Sonar</h3>
+<p>Check and start the sonarqube service</p>
+<pre><code>sudo systemctl status sonarqube
+</code></pre>
+<p>Login:
+- <strong><em>username:</em></strong> admin
+- <strong><em>Password:</em></strong> admin</p>
+<h2 id="jenkins">Jenkins</h2>
+<ul>
+<li>Ubuntu VERSION="20.04.6 LTS </li>
+<li>TCP Port <strong><em>8080</em></strong> from Anywhere - IPv4 and IPv6</li>
+</ul>
+<h3 id="install">Install</h3>
+<p>If you have any issues, then: curl the IP address if you had any issues.</p>
+<p><code>curl http://[your-put-IP]/latest/user-data LIKE SO: --&gt; curl http://56.22.1.2/latest/user-data</code>
+Also refer to site to update your code: <a href="https://www.jenkins.io/blog/2023/03/27/repository-signing-keys-changing/">Optional-Link</a></p>
+<p>Ubuntu installation script for <strong><em>VERSION="20.04.6 LTS</em></strong></p>
+<pre><code class="language-sh">#!/bin/bash
+sudo apt update
+sudo apt install openjdk-11-jdk -y
+sudo apt install maven -y
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc &gt; /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list &gt; /dev/null
+sudo apt-get update
+sudo apt-get install jenkins -y
+</code></pre>
+<p><strong><em>Check and start the jenkins service</em></strong></p>
+<pre><code>sudo systemctl status jenkins
+sudo systemctl status jenkins
+java -version
+whereis git
+</code></pre>
+<p><strong><em>Get Jenkins Password</em></strong></p>
+<pre><code>sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+</code></pre>
+<p><strong><em>INSTALL JDK8 On the Jenkins Server</em></strong>
+In Server terminal, Install Maven and JDK8</p>
+<pre><code>sudo apt update
+sudo apt install openjdk-8-jdk -y
+</code></pre>
+<p><strong><em>INSTALL MAVEN On the Jenkins Server</em></strong>
+Go to the Maven site and get latest version: <a href="https://maven.apache.org/download.cgi">Right-click and copy .tar link</a>
+<img alt="cicd" src="../cicd-photos/cicd3.png" /></p>
+<pre><code>sudo su -
+cd /opt
+apt install wget
+wget https://dlcdn.apache.org/maven/maven-3/3.9.1/binaries/apache-maven-3.9.1-bin.tar.gz
+tar -xvzf apache-maven-3.9.1-bin.tar
+mv apache-maven-3.9.1 maven
+rm -rf apache-maven-3.9.1-bin.tar.gz 
+</code></pre>
+<h3 id="install-jenkins-plugins">Install Jenkins plugins</h3>
+<p><strong><em>Dashboard --&gt; Manage Jenkins --&gt; Plugin Manager</em></strong>
+Install the following Plugins</p>
+<p>Pipeline Maven Integration
+Pipeline Utility Steps
+Github Integration Plugin
+Nexus Artifact Uploader
+SonarQube Scanner for Jenkins
+Slack Notification Plugin
+Build Timestamp Plugin</p>
+<h3 id="global-tool-configuration">Global Tool Configuration</h3>
+<p>Navigate to: <strong><em>Jenkins UI --&gt; manage Jenkins --&gt; Manage Credentials --&gt; System --&gt; Global credentials</em></strong></p>
+<p><strong><em>Configure CI [Git, Maven, JVM, SonarQube Scanner ]on Jenkins GUI</em></strong>.
+In the Jenkins UI --&gt; manage Jenkins --&gt; Global Tool Configuration [save]</p>
+<table>
+<thead>
+<tr>
+<th>Services</th>
+<th align="center">Configured Names</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JDK</td>
+<td align="center">SosoJDK8</td>
+</tr>
+<tr>
+<td>git</td>
+<td align="center">Git</td>
+</tr>
+<tr>
+<td>MAVEN</td>
+<td align="center">SOSOMAVEN3</td>
+</tr>
+<tr>
+<td>SonarQube Scanner</td>
+<td align="center">sososonar4.7</td>
+</tr>
+<tr>
+<td></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>See the Maven, Git and JDK configuration images
+<img alt="cicd" src="../cicd-photos/cicd2.png" /></p>
+<p>See the SonarQube Configuration image
+<img alt="cicd7-sonar" src="../cicd-photos/cicd7-sonar.png" /></p>
+<p><strong><em>Get JDK8 Path from the Jenkins Server</em></strong>
+CD to ROOT and Copy the java path. The path to add in Jenkins will be:
+ <strong><em>/usr/lib/jvm/java-1.8.0-openjdk-amd64</em></strong>. See below Photo</p>
+<pre><code>sudo su -
+ls /usr/lib/jvm
+</code></pre>
+<p><img alt="cicd" src="../cicd-photos/cicd1.png" /></p>
+<h3 id="configure-systems">Configure Systems</h3>
+<p>Navigate to: <strong><em>Jenkins UI --&gt; manage Jenkins --&gt; Configure System</em></strong></p>
+<table>
+<thead>
+<tr>
+<th>Services</th>
+<th align="center">Configured Names</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>xxx</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>xxx</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>xxx</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>SonarQube Servers</td>
+<td align="center">sososonar</td>
+</tr>
+<tr>
+<td></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configure-credential">Configure Credential</h3>
+<table>
+<thead>
+<tr>
+<th>Services</th>
+<th align="center">Credential ID</th>
+<th align="right">UserName/Password/secret-text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td align="center"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>AWS</td>
+<td align="center"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>MAVEN</td>
+<td align="center"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>SonarQube</td>
+<td align="center">sososonartoken</td>
+<td align="right">secret-text</td>
+</tr>
+<tr>
+<td></td>
+<td align="center"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>In the Jenkins UI:
+Configure the following credentials
+  - AWS
+  - DockerHub --&gt; (generate Token) My account --&gt; security --&gt; secret text
+  - k8s Config
+  - sonarqube --&gt; (generate Token) My account --&gt; security --&gt; secret text</p>
+<h4 id="credential-dockerhub-credential">Credential Dockerhub Credential</h4>
+<ol>
+<li>Log into your dockerhub account and create a token in settings --&gt; security: <a href="https://hub.docker.com/settings/security">LINK</a></li>
+</ol>
+<p><img alt="cicd" src="../cicd-photos/cicd4.png" /></p>
+<p><img alt="cicd" src="../cicd-photos/cicd5.png" /></p>
+<ol>
+<li></li>
+</ol>
+<h4 id="configure-sonarqube-credential">Configure SonarQube Credential</h4>
+<ol>
+<li>Login to the sonarQube UI, go to Myaccount --&gt; security</li>
+</ol>
+<p><img alt="sonar-token" src="../cicd-photos/sonar-token.png" /></p>
+<ol>
+<li>Add a credential called: <strong><em>jenkins</em></strong>   3722a3d4c426a2a18297640295f3df3cd2eff14a</li>
+</ol>
+<h4 id="configure-aws-credential">Configure AWS Credential</h4>
+<h3 id="jenkins-jobs">Jenkins Jobs</h3>
+<p>There are some Jenkins Jobs Demo'd here, like Pipeline, Freestyle:</p>
+<h4 id="freestyle-project">Freestyle Project</h4>
+<p>Use this repo: <a href="https://github.com/sosotechnologies/cicd-maven.git">https://github.com/sosotechnologies/cicd-maven.git</a>
+It's a public repo, so credentials are optional
+See the image to guide you during setup.</p>
+<p><img alt="cicd" src="../cicd-photos/cicd6.png" /></p>
+<h4 id="pipeline">Pipeline</h4>
+<p>There are 2 Options to use here:
+  - Pipeline script
+  - Pipeline script from SCM</p>
+<pre><code>Some Sample Pipeline Scripts:
+</code></pre>
+<ol>
+<li><strong><em>Jenkins, Maven simple pipeline</em></strong></li>
+</ol>
+<pre><code class="language-Jenkinfile">pipeline {
+    agent any
+    tools {
+        maven &quot;SOSOMAVEN3&quot;
+        jdk &quot;SosoJDK8&quot;
+    }
+    stages{
+        stage('Fetch code') {
+          steps{
+              git branch: 'master', url:'https://github.com/sosotechnologies/cicd-maven.git'
+          }  
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn install'
+            }
+            post {
+                success {
+                    echo &quot;Now Archiving.&quot;
+                    archiveArtifacts artifacts: '**/*.war'
+                }
+            }
+        }
+        stage('Test'){
+            steps {
+                sh 'mvn test'
+            }
+        }
+    }
+ }
+
+</code></pre>
+<ol>
+<li><strong><em>Jenkins, Maven, Sonar-Analysis simple pipeline</em></strong></li>
+</ol>
+<pre><code class="language-Jenkinfile">pipeline {
+    agent any
+    tools {
+        maven &quot;SOSOMAVEN3&quot;
+        jdk &quot;SosoJDK8&quot;
+    }
+    stages{
+        stage('Fetch code') {
+          steps{
+              git branch: 'master', url:'https://github.com/sosotechnologies/cicd-maven.git'
+          }  
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean install -DskipTests'
+            }
+            post {
+                success {
+                    echo &quot;Now Archiving.&quot;
+                    archiveArtifacts artifacts: '**/*.war'
+                }
+            }
+        }
+        stage('Test'){
+            steps {
+                sh 'mvn test'
+            }
+
+        }
+
+        stage('Checkstyle Analysis'){
+            steps {
+                sh 'mvn checkstyle:checkstyle'
+            }
+        }
+
+        stage('Sonar Analysis') {
+            environment {
+                scannerHome = tool 'sonar4.7'
+            }
+            steps {
+               withSonarQubeEnv('sonar') {
+                   sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
+                   -Dsonar.projectName=vprofile \
+                   -Dsonar.projectVersion=1.0 \
+                   -Dsonar.sources=src/ \
+                   -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+                   -Dsonar.junit.reportsPath=target/surefire-reports/ \
+                   -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+                   -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+              }
+            }
+        }
+    }
+}
+
+
+
+
+ 3. ***FULL Pipeline***
+
+```Jenkinfile
+pipeline {
+    agent any
+    tools {
+        maven &quot;SOSOMAVEN3&quot;
+        jdk &quot;SosoJDK8&quot;
+    }
+    stages{
+        stage('Fetch code') {
+          steps{
+              git branch: 'master', url:'https://github.com/sosotechnologies/cicd-maven.git'
+          }  
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean install -DskipTests'
+            }
+            post {
+                success {
+                    echo &quot;Now Archiving.&quot;
+                    archiveArtifacts artifacts: '**/*.war'
+                }
+            }
+        }
+        stage('Test'){
+            steps {
+                sh 'mvn test'
+            }
+
+        }
+
+        stage('Checkstyle Analysis'){
+            steps {
+                sh 'mvn checkstyle:checkstyle'
+            }
+        }
+
+        stage('Sonar Analysis') {
+            environment {
+                scannerHome = tool 'sonar4.7'
+            }
+            steps {
+               withSonarQubeEnv('sonar') {
+                   sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
+                   -Dsonar.projectName=vprofile \
+                   -Dsonar.projectVersion=1.0 \
+                   -Dsonar.sources=src/ \
+                   -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+                   -Dsonar.junit.reportsPath=target/surefire-reports/ \
+                   -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+                   -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+              }
+            }
+        }
+
+        stage(&quot;Quality Gate&quot;) {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
+        stage(&quot;UploadArtifact&quot;){
+            steps{
+                nexusArtifactUploader(
+                  nexusVersion: 'nexus3',
+                  protocol: 'http',
+                  nexusUrl: '172.31.18.28:8081',
+                  groupId: 'QA',
+                  version: &quot;${env.BUILD_ID}-${env.BUILD_TIMESTAMP}&quot;,
+                  repository: 'vprofile-repo',
+                  credentialsId: 'nexuslogin',
+                  artifacts: [
+                    [artifactId: 'vproapp',
+                     classifier: '',
+                     file: 'target/vprofile-v2.war',
+                     type: 'war']
+    ]
+ )
+            }
+        }
+
+
+
+    }
+}
+</code></pre>
+<p>In Global Tools Configuration, I named Maven and Jenkins like so</p>
+<h1 id="maven">Maven</h1>
+<p>His: MAVEN3
+mine: SOSOMAVEN3</p>
+<p>JDK
+His: OracleJDK8
+Mine: SosoJDK8</p>
+<h2 id="docker">Docker</h2>
               
             </div>
           </div><footer>
