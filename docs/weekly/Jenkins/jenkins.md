@@ -12,3 +12,9 @@ Install Jdk [click-here](https://techviewleo.com/install-java-openjdk-on-amazon-
 https://www.ashnik.com/install-jenkins-on-aws-ec2-instance-using-terraform/
 
 after installing, you have to connect slave with the master
+
+
+
+if your jenkins server restarts and you forgot the password, run this command:
+
+```sudo cat /var/lib/jenkins/users```

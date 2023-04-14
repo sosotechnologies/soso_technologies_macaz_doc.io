@@ -181,6 +181,29 @@ Login:
 - ***username:*** admin
 - ***Password:*** admin
 
+## Slack
+SetUp Slack
+Steps:
+- A workspace: sosotech
+- Create a Channel(s): sosochannel1
+- Add teammates to the channel
+- Add Jenkins credentials: sososlacktoken
+ Get the Jenkins app from the : [Slack App Directory](https://sosotech.slack.com/apps)
+
+ ![slack1](cicd-photos/slack1.png)
+
+ - Add to Slack and select the channel
+
+ - Add the CI Jenkins Integration: Im using #sosochannel1
+
+ ![slack2](cicd-photos/slack2.png)
+
+ - Copy the Token in Step 3 and go create a Slack Credential In Jenkins credentials
+ 
+ ![slack3](cicd-photos/slack3.png)
+
+- Scroll docn and save.
+- No Go to jenkins and configure credentials called: sososlacktoken
 ## Jenkins
 - Ubuntu VERSION="20.04.6 LTS 
 - TCP Port ***8080*** from Anywhere - IPv4 and IPv6
@@ -230,6 +253,20 @@ sudo apt update
 sudo apt install openjdk-8-jdk -y
 ```
 
+***Get JDK8 Path from the Jenkins Server***
+
+CD to ROOT and Copy the java path. 
+Copy the path in a node Path for use in Jenkins Global Tool Configuration.
+
+ ***/usr/lib/jvm/java-1.8.0-openjdk-amd64***. See below Photo
+
+```
+sudo su -
+ls /usr/lib/jvm
+```
+
+![cicd](cicd-photos/cicd1.png)
+
 ***INSTALL MAVEN On the Jenkins Server***
 Go to the Maven site and get latest version: [Right-click and copy .tar link](https://maven.apache.org/download.cgi)
 ![cicd](cicd-photos/cicd3.png)
@@ -245,20 +282,20 @@ rm -rf apache-maven-3.9.1-bin.tar.gz
 ```
 ### Install Jenkins plugins 
 ***Dashboard --> Manage Jenkins --> Plugin Manager***
-Install the following Plugins
 
-Pipeline Maven Integration
-Pipeline Utility Steps
-Github Integration Plugin
-Nexus Artifact Uploader
-SonarQube Scanner for Jenkins
-Slack Notification Plugin
-Build Timestamp Plugin
+- Pipeline Maven Integration
+- Pipeline Utility Steps
+- Github Integration Plugin
+- Nexus Artifact Uploader
+- SonarQube Scanner for Jenkins
+- Slack Notification Plugin
+- Build Timestamp Plugin
 
 ### Global Tool Configuration
 Navigate to: ***Jenkins UI --> manage Jenkins --> Manage Credentials --> System --> Global credentials***
 
-***Configure CI [Git, Maven, JVM, SonarQube Scanner ]on Jenkins GUI***.
+***Configure CI [Git, Maven, JVM, SonarQube Scanner ] on Jenkins GUI***.
+
 In the Jenkins UI --> manage Jenkins --> Global Tool Configuration [save]
 
 
@@ -276,46 +313,55 @@ See the Maven, Git and JDK configuration images
 See the SonarQube Configuration image
 ![cicd7-sonar](cicd-photos/cicd7-sonar.png)
 
-***Get JDK8 Path from the Jenkins Server***
-CD to ROOT and Copy the java path. The path to add in Jenkins will be:
- ***/usr/lib/jvm/java-1.8.0-openjdk-amd64***. See below Photo
-
-```
-sudo su -
-ls /usr/lib/jvm
-```
-
-![cicd](cicd-photos/cicd1.png)
-
 ### Configure Systems
+
 Navigate to: ***Jenkins UI --> manage Jenkins --> Configure System***
 
 | Services          |   Configured Names      |
 |-------------------|:-----------------------:|
 | xxx               |                         | 
 | xxx               |                         |
-| xxx               |                         |
+| Slack             |  sosotech                       |
 | SonarQube Servers |  sososonar              |
 |                   |                         |
+
+#### Configure SonarQube Server
+Configure the sonar server in Jenkins uring the SonarQube Public IP and the sonar credentials.
+![sonar-configure](cicd-photos/sonar-configure.png)
+
+For qualirt gate and analysis, see the sonarQube section 
+
+#### Configure TimeStamp
+change the timestamp pattern [yy-MM-dd_HH-mm](yy-MM-dd_HH-mm) as seen in the image: 
+
+![time-pattern](cicd-photos/time-pattern.png)
+
+#### Configure Slack Notification
+configure the folloring :
+- A workspace: sosotech
+- A Channel(s): sosochannel1
+
+![configure-slack](cicd-photos/configure-slack.png)
 
 ### Configure Credential
 
 | Services          |   Credential ID       | UserName/Password/secret-text   |               
-|-------------------|:---------------------:|--------------------:|
-| Docker            |                 |    |
-| AWS               |                      |    |
-| MAVEN             |               |     |
-| SonarQube         |   sososonartoken          |  secret-text  |
-|                   |                   |      |
+|-------------------|:---------------------:|--------------------------------:|
+| Docker            |  sosodockertoken      |    secret-text    |
+| AWS               |   sosoawstoken        |                |
+| MAVEN             |                       |     |
+| SonarQube         |   sososonartoken      |  secret-text  |
+| Slack             | sososlacktoken        |  secret-text
 
 In the Jenkins UI:
 Configure the following credentials
+
   - AWS
   - DockerHub --> (generate Token) My account --> security --> secret text
   - k8s Config
   - sonarqube --> (generate Token) My account --> security --> secret text
 
-#### Credential Dockerhub Credential
+#### Configure Dockerhub Credential(Token)
   1. Log into your dockerhub account and create a token in settings --> security: [LINK](https://hub.docker.com/settings/security)
 
   ![cicd](cicd-photos/cicd4.png)
@@ -324,12 +370,18 @@ Configure the following credentials
 
   2. 
 
-#### Configure SonarQube Credential
-1. Login to the sonarQube UI, go to Myaccount --> security
+#### Configure SonarQube Credential(Token)
+1. Login to the sonarQube UI, go to Myaccount --> security create a Token
 
 ![sonar-token](cicd-photos/sonar-token.png)
+Add a Token 
 
-2. Add a credential called: ***jenkins***   3722a3d4c426a2a18297640295f3df3cd2eff14a
+2. Add the Token as Credential To jenkins Global credentials
+
+![sonar-credential](cicd-photos/sonar-credential.png) 
+
+#### Configure SLACK Credential
+![slack-creds](cicd-photos/slack-creds.png) 
 
 #### Configure AWS Credential
 
@@ -355,40 +407,44 @@ See the image to guide you during setup.
 
 ```Jenkinfile
 pipeline {
-    agent any
-    tools {
+	agent any
+	tools {
 	    maven "SOSOMAVEN3"
 	    jdk "SosoJDK8"
 	}
-    stages{
-        stage('Fetch code') {
-          steps{
-              git branch: 'master', url:'https://github.com/sosotechnologies/cicd-maven.git'
-          }  
-        }
 
-        stage('Build') {
+	stages {
+	    stage('Fetch code') {
             steps {
-                sh 'mvn install'
+               git branch: 'master', url:'https://github.com/sosotechnologies/cicd-maven.git'
             }
-            post {
-                success {
-                    echo "Now Archiving."
-                    archiveArtifacts artifacts: '**/*.war'
-                }
-            }
-        }
-        stage('Test'){
-            steps {
+
+	    }
+
+	    stage('Build'){
+	        steps{
+	           sh 'mvn install -DskipTests'
+	        }
+
+	        post {
+	           success {
+	              echo 'Now Archiving it...'
+	              archiveArtifacts artifacts: '**/target/*.war'
+	           }
+	        }
+	    }
+
+	    stage('UNIT TEST') {
+            steps{
                 sh 'mvn test'
             }
         }
-    }
- }
+	}
+}
     
 ```
 
-2. ***Jenkins, Maven, Sonar-Analysis simple pipeline***
+2. ***Jenkins, Maven, Checkstyle, Sonar-Analysis and Quality Gate - pipeline***
 
 ```Jenkinfile
 pipeline {
@@ -430,12 +486,12 @@ pipeline {
 
         stage('Sonar Analysis') {
             environment {
-                scannerHome = tool 'sonar4.7'
+                scannerHome = tool 'sososonar4.7'
             }
             steps {
-               withSonarQubeEnv('sonar') {
-                   sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
-                   -Dsonar.projectName=vprofile \
+               withSonarQubeEnv('sososonar') {
+                   sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sosotech \
+                   -Dsonar.projectName=sosotech \
                    -Dsonar.projectVersion=1.0 \
                    -Dsonar.sources=src/ \
                    -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
@@ -445,15 +501,40 @@ pipeline {
               }
             }
         }
+
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
     }
+
+
+        post {
+        always {
+            echo 'Slack Notifications.'
+            slackSend channel: '#sosochannel1',
+                color: COLOR_MAP[currentBuild.currentResult],
+                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
+        }
+    }
+    
 }
+```
 
-
-
+- The nexus server IP in the pipeline is a Private IP of the ec2 nexus server
+- Configure a time stamp
+- Configure a repo in the nexus server called:
 
  3. ***FULL Pipeline***
 
 ```Jenkinfile
+def COLOR_MAP = [
+    'SUCCESS': 'good', 
+    'FAILURE': 'danger',
+]
 pipeline {
     agent any
     tools {
@@ -493,10 +574,10 @@ pipeline {
 
         stage('Sonar Analysis') {
             environment {
-                scannerHome = tool 'sonar4.7'
+                scannerHome = tool 'sososonar4.7'
             }
             steps {
-               withSonarQubeEnv('sonar') {
+               withSonarQubeEnv('sososonar') {
                    sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
                    -Dsonar.projectName=vprofile \
                    -Dsonar.projectVersion=1.0 \
@@ -512,8 +593,6 @@ pipeline {
         stage("Quality Gate") {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
-                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-                    // true = set pipeline to UNSTABLE, false = don't
                     waitForQualityGate abortPipeline: true
                 }
             }
