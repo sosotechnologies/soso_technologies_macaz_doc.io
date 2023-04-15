@@ -60,6 +60,11 @@ curl -O https://bootstrap.pypa.io/get-pip.py
 python3 get-pip.py --user
 ```
 
+### Install python-pip in ubuntu
+```
+sudo apt install python3-pip
+```
+
 ### Install Trivy 
   - [Right-Click to open Link in a New Tab](https://aquasecurity.github.io/trivy/v0.18.3/installation/)
 

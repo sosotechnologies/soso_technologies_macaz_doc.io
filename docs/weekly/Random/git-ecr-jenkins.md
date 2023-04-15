@@ -68,6 +68,10 @@ aws ecr get-login-password --region us-east-1 | docker login --username AWS --pa
   ***Dashboard*** --> ***Manage Jenkins*** --> ***Plugin Manager***
 
 15. ### setup aws credentials, get your AWS Access Key ID & Secret Access Key
+- Create an AWS User called: jenkins
+- Give this user permission to ECR: AmazonEC2ContainerRegistryFullAccess and AmazonECS_FullAccess
+- Create/Download the Access-key for this user.
+
 Dashboard --> Manage Jenkins --> Manage Credentials --> System --> Global credentials (unrestricted)
     AWS Credentials
           |_ID
@@ -82,7 +86,7 @@ Dashboard --> Manage Jenkins --> Manage Credentials --> System --> Global creden
 pipeline {
     agent any
     environment {
-        AWS_ACCOUNT_ID="368085106192"
+        AWS_ACCOUNT_ID="088789840359"
         AWS_DEFAULT_REGION="us-east-1"
         IMAGE_REPO_NAME="soso-repository"
         IMAGE_TAG="latest"

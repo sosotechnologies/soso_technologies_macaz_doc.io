@@ -280,16 +280,68 @@ tar -xvzf apache-maven-3.9.1-bin.tar
 mv apache-maven-3.9.1 maven
 rm -rf apache-maven-3.9.1-bin.tar.gz 
 ```
+
+***Install Docker on the Jenkins Server***
+
+see link: [Reference link](https://docs.docker.com/engine/install/ubuntu/)
+
+```sudo su -```
+
+```sudo apt update -y```
+
+```
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg
+```
+
+```sudo install -m 0755 -d /etc/apt/keyrings```
+
+```curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg```
+
+```sudo chmod a+r /etc/apt/keyrings/docker.gpg```
+
+```
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+```sudo apt-get update -y```
+
+```sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y```
+
+***Add Jenkins User to the docker group***
+
+```id jenkins```
+
+```usermod -a -G docker jenkins```
+
+***Install AWSCLI in Jenkins Server***
+
+```
+sudo apt install awscli -y
+```
+
+***NOW RESTART YOUR JENKINS SERVER***
+
+
+
 ### Install Jenkins plugins 
 ***Dashboard --> Manage Jenkins --> Plugin Manager***
 
 - Pipeline Maven Integration
 - Pipeline Utility Steps
 - Github Integration Plugin
-- Nexus Artifact Uploader
-- SonarQube Scanner for Jenkins
-- Slack Notification Plugin
-- Build Timestamp Plugin
+- SonarQube Scanner
+- Slack Notification
+- Build Timestamp
+- docker pipeline
+- Amazon ECR
+- CloudBees Docker Build and Publish
+- Amazon Web Services SDK :: All
 
 ### Global Tool Configuration
 Navigate to: ***Jenkins UI --> manage Jenkins --> Manage Credentials --> System --> Global credentials***
@@ -303,7 +355,7 @@ In the Jenkins UI --> manage Jenkins --> Global Tool Configuration [save]
 |-------------------|:-----------------------:|
 | JDK               |  SosoJDK8               | 
 | git               |  Git                    |
-| MAVEN             |  SOSOMAVEN3             |
+| MAVEN             |  MAVEN3             |
 | SonarQube Scanner |  sososonar4.7           |
 |                   |                         |
 
@@ -329,7 +381,8 @@ Navigate to: ***Jenkins UI --> manage Jenkins --> Configure System***
 Configure the sonar server in Jenkins uring the SonarQube Public IP and the sonar credentials.
 ![sonar-configure](cicd-photos/sonar-configure.png)
 
-For qualirt gate and analysis, see the sonarQube section 
+For quality gate and analysis, see the sonarQube section 
+***NOTE***: Don't forget to add webhooks
 
 #### Configure TimeStamp
 change the timestamp pattern [yy-MM-dd_HH-mm](yy-MM-dd_HH-mm) as seen in the image: 
@@ -348,7 +401,7 @@ configure the folloring :
 | Services          |   Credential ID       | UserName/Password/secret-text   |               
 |-------------------|:---------------------:|--------------------------------:|
 | Docker            |  sosodockertoken      |    secret-text    |
-| AWS               |   sosoawstoken        |                |
+| AWS - ECR User    |   sosoawstoken        |   UserName/Password             |
 | MAVEN             |                       |     |
 | SonarQube         |   sososonartoken      |  secret-text  |
 | Slack             | sososlacktoken        |  secret-text
@@ -361,6 +414,9 @@ Configure the following credentials
   - k8s Config
   - sonarqube --> (generate Token) My account --> security --> secret text
 
+#### Configure AWS USER Credentials for ECR
+Create credentials for the username and password for the saved Jenkins user.
+![aws-ecr](cicd-photos/aws-ecr.png)
 #### Configure Dockerhub Credential(Token)
   1. Log into your dockerhub account and create a token in settings --> security: [LINK](https://hub.docker.com/settings/security)
 
@@ -510,17 +566,6 @@ pipeline {
             }
         }
     }
-
-
-        post {
-        always {
-            echo 'Slack Notifications.'
-            slackSend channel: '#sosochannel1',
-                color: COLOR_MAP[currentBuild.currentResult],
-                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
-        }
-    }
-    
 }
 ```
 
@@ -528,7 +573,161 @@ pipeline {
 - Configure a time stamp
 - Configure a repo in the nexus server called:
 
- 3. ***FULL Pipeline***
+
+3. ***Implementing DOCKER ECR***
+ Build image of webapp and puch to ECR
+
+ ```Jenkinsfile
+ pipeline {
+    agent any
+    tools {
+	    maven "SOSOMAVEN3"
+	    jdk "SosoJDK8"
+	}
+
+    environment {
+        JenkinsECRCredential = 'ecr:us-east-1:sosoawstoken'
+        sosoappRegistry = "088789840359.dkr.ecr.us-east-1.amazonaws.com/soso-repository"
+        sosotechRegistry = "https://088789840359.dkr.ecr.us-east-1.amazonaws.com"
+    }
+
+  stages {
+    stage('Fetch code'){
+      steps {
+        git branch: 'master', url: 'https://github.com/sosotechnologies/cicd-maven-jenkins-ecr.git'
+      }
+    }
+
+
+    stage('Test'){
+      steps {
+        sh 'mvn test'
+      }
+    }
+
+
+    stage('Build App Image') {
+      steps {
+       
+        script {
+            dockerImage = docker.build( sosoappRegistry + ":$BUILD_NUMBER", "./sosotech-Dockerfiles/sosoapp/multistagebuild/")
+             }
+
+     }
+    
+    }
+
+    stage('Upload App Image') {
+          steps{
+            script {
+              docker.withRegistry( sosotechRegistry, JenkinsECRCredential ) {
+                dockerImage.push("$BUILD_NUMBER")
+                dockerImage.push('latest')
+              }
+            }
+          }
+     }
+
+  }
+}
+
+
+ ```
+4. ***Jenkins, Maven, Checkstyle, Docker, Sonar-Analysis and Quality Gate - pipeline***  
+ 
+```Jenkinsfile
+ pipeline {
+    agent any
+    tools {
+	    maven "SOSOMAVEN3"
+	    jdk "SosoJDK8"
+	}
+
+    environment {
+        JenkinsECRCredential = 'ecr:us-east-1:sosoawstoken'
+        sosoappRegistry = "088789840359.dkr.ecr.us-east-1.amazonaws.com/soso-repository"
+        sosotechRegistry = "https://088789840359.dkr.ecr.us-east-1.amazonaws.com"
+    }
+
+  stages {
+    stage('Fetch code'){
+      steps {
+        git branch: 'master', url: 'https://github.com/sosotechnologies/cicd-maven-jenkins-ecr.git'
+      }
+    }
+
+
+    stage('Test'){
+      steps {
+        sh 'mvn test'
+      }
+    }
+
+    stage ('CODE ANALYSIS WITH CHECKSTYLE'){
+        steps {
+            sh 'mvn checkstyle:checkstyle'
+        }
+        post {
+            success {
+                echo 'Generated Analysis Result'
+            }
+        }
+    }
+
+    stage('build && SonarQube analysis') {
+        environment {
+            scannerHome = tool 'sososonar4.7'
+        }
+        steps {
+            withSonarQubeEnv('sososonar') {
+                sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sosotech \
+                -Dsonar.projectName=sosotech \
+                -Dsonar.projectVersion=1.0 \
+                -Dsonar.sources=src/ \
+                -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+                -Dsonar.junit.reportsPath=target/surefire-reports/ \
+                -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+                -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+            }
+        }
+    }
+
+    stage("Quality Gate") {
+        steps {
+            timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+            }
+        }
+    }
+
+    stage('Build App Image') {
+      steps {
+       
+        script {
+            dockerImage = docker.build( sosoappRegistry + ":$BUILD_NUMBER", "./sosotech-Dockerfiles/sosoapp/multistagebuild/")
+             }
+
+     }
+    
+    }
+
+    stage('Upload App Image') {
+          steps{
+            script {
+              docker.withRegistry( sosotechRegistry, JenkinsECRCredential ) {
+                dockerImage.push("$BUILD_NUMBER")
+                dockerImage.push('latest')
+              }
+            }
+          }
+     }
+
+  }
+} 
+
+ ```
+ 
+ 5. ***FULL Pipeline***
 
 ```Jenkinfile
 def COLOR_MAP = [
@@ -578,8 +777,8 @@ pipeline {
             }
             steps {
                withSonarQubeEnv('sososonar') {
-                   sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
-                   -Dsonar.projectName=vprofile \
+                   sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sosotech \
+                   -Dsonar.projectName=sosotech \
                    -Dsonar.projectVersion=1.0 \
                    -Dsonar.sources=src/ \
                    -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
@@ -597,42 +796,116 @@ pipeline {
                 }
             }
         }
-
-        stage("UploadArtifact"){
-            steps{
-                nexusArtifactUploader(
-                  nexusVersion: 'nexus3',
-                  protocol: 'http',
-                  nexusUrl: '172.31.18.28:8081',
-                  groupId: 'QA',
-                  version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
-                  repository: 'vprofile-repo',
-                  credentialsId: 'nexuslogin',
-                  artifacts: [
-                    [artifactId: 'vproapp',
-                     classifier: '',
-                     file: 'target/vprofile-v2.war',
-                     type: 'war']
-    ]
- )
-            }
-        }
-
-
-
     }
+
+
+        post {
+        always {
+            echo 'Slack Notifications.'
+            slackSend channel: '#sosochannel1',
+                color: COLOR_MAP[currentBuild.currentResult],
+                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
+        }
+    }
+    
+}
+```
+6. ***Building sosotech documentation site***
+
+```Jenkinsfile
+pipeline {
+    agent any
+    
+    environment {
+        JenkinsECRCredential = 'ecr:us-east-1:sosoawstoken'
+        sosoappRegistry = "088789840359.dkr.ecr.us-east-1.amazonaws.com/soso-repository"
+        sosotechRegistry = "https://088789840359.dkr.ecr.us-east-1.amazonaws.com"
+    }
+
+  stages {
+    stage('Fetch code'){
+      steps {
+        git branch: 'main', url: 'https://github.com/sosotechnologies/docs_docker_io.git'
+      }
+    }
+
+
+    stage('Build App Image') {
+      steps {
+       
+        script {
+            dockerImage = docker.build( sosoappRegistry + ":$BUILD_NUMBER", "./")
+             }
+
+     }
+    
+    }
+
+    stage('Upload App Image') {
+          steps{
+            script {
+              docker.withRegistry( sosotechRegistry, JenkinsECRCredential ) {
+                dockerImage.push("$BUILD_NUMBER")
+                dockerImage.push('latest')
+              }
+            }
+          }
+     }
+
+  }
 }
 ```
 
-In Global Tools Configuration, I named Maven and Jenkins like so
-# Maven
-His: MAVEN3
-mine: SOSOMAVEN3
+#### Build Triggers
+Requirements:
+- Set a New private Git Repo
+- Set a new ssh Key:  ```ssh-keygen.exe```
+- Get the content of your id_rsa.pub key from your local pc: ```cat ~/.ssh/id_rsa.pub```  
+- paste the in Github ***SSH and GPC Keys***
 
-JDK
-His: OracleJDK8
-Mine: SosoJDK8
+
+***My repo is***: git@github.com:sosotechnologies/sosojenkinstriggers.git
+
+***Add SSH Key to Github Settings***
+
+![trigger](cicd-photos/trigger.png)
+
+***Make a dir mysosotriggers***: ```mkdir mysosotriggers```
+
+![steps](cicd-photos/steps.png)
+hello-world/webapp/src/main/webapp/WEB-INF/
+***Create a Jenkinsfile in mysosotriggers:***
+
+```cd mysosotriggers```
+```git clone git@github.com:sosotechnologies/sosojenkinstriggers.git```
+```cd sosojenkinstriggers```
+```touch Jenkinsfile```
+```vi Jenkinsfile```
+
+***Add this into the Jenkinsfile***
+
+```Jenkinsfile
+pipeline {
+	agent any
+	stages {
+		stage('Build') {
+			steps{
+				sh 'echo "Looks like the build is Done!"'
+			}
+		}
+	}
+}
+```
+
+
+
 
 
 
 ## Docker
+
+***If you ever encounter NO SPACE issue when building your image***
+
+```
+sudo docker image prune -f && sudo docker container prune -f
+```
