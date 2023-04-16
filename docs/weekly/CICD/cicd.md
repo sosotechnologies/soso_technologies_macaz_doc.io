@@ -339,6 +339,7 @@ sudo apt install awscli -y
 - Slack Notification
 - Build Timestamp
 - docker pipeline
+- docker
 - Amazon ECR
 - CloudBees Docker Build and Publish
 - Amazon Web Services SDK :: All
@@ -404,7 +405,8 @@ configure the folloring :
 | AWS - ECR User    |   sosoawstoken        |   UserName/Password             |
 | MAVEN             |                       |     |
 | SonarQube         |   sososonartoken      |  secret-text  |
-| Slack             | sososlacktoken        |  secret-text
+| Slack             | sososlacktoken        |  secret-text    | 
+| build-trigger     | sososshtrigger        | SSH Username with Private Key  |
 
 In the Jenkins UI:
 Configure the following credentials
@@ -438,6 +440,11 @@ Add a Token
 
 #### Configure SLACK Credential
 ![slack-creds](cicd-photos/slack-creds.png) 
+
+
+
+#### Configure ssh-trigger for Build trigger 
+![ssh-trigger](cicd-photos/ssh-trigger.png) 
 
 #### Configure AWS Credential
 
@@ -856,12 +863,63 @@ pipeline {
 }
 ```
 
+7. ***Building Sosotech Node App***
+
+```Jenkinsfile
+pipeline {
+    agent any
+    
+    environment {
+        JenkinsECRCredential = 'ecr:us-east-1:sosoawstoken'
+        sosoappRegistry = "088789840359.dkr.ecr.us-east-1.amazonaws.com/soso-repository"
+        sosotechRegistry = "https://088789840359.dkr.ecr.us-east-1.amazonaws.com"
+    }
+
+  stages {
+    stage('Fetch code'){
+      steps {
+        git branch: 'master', url: 'https://github.com/sosotechnologies/sosojenkins.git'
+      }
+    }
+
+
+    stage('Build App Image') {
+      steps {
+       
+        script {
+            dockerImage = docker.build( sosoappRegistry + ":$BUILD_NUMBER", "./dockerhub-nodejs")
+             }
+
+     }
+    
+    }
+
+    stage('Upload App Image') {
+          steps{
+            script {
+              docker.withRegistry( sosotechRegistry, JenkinsECRCredential ) {
+                dockerImage.push("$BUILD_NUMBER")
+                dockerImage.push('mkdocss')
+              }
+            }
+          }
+     }
+
+  }
+}
+
+```
+
 #### Build Triggers
 Requirements:
 - Set a New private Git Repo
-- Set a new ssh Key:  ```ssh-keygen.exe```
-- Get the content of your id_rsa.pub key from your local pc: ```cat ~/.ssh/id_rsa.pub```  
-- paste the in Github ***SSH and GPC Keys***
+- Set a new ssh Key:  ```ssh-keygen```
+- Get the content of your id_rsa.pub key: ```cat ~/.ssh/id_rsa.pub```
+  - Register the id_rsa.pub in Github ***SSH and GPC Keys***
+- Get the content of your id_rsa key: ```cat ~/.ssh/id_rsa```
+  - Register the id_rsa key in Jenkins configure credentials.
+
+  ![ssh-trigger](cicd-photos/ssh-trigger.png)
 
 
 ***My repo is***: git@github.com:sosotechnologies/sosojenkinstriggers.git
@@ -872,7 +930,7 @@ Requirements:
 
 ***Make a dir mysosotriggers***: ```mkdir mysosotriggers```
 
-![steps](cicd-photos/steps.png)
+
 hello-world/webapp/src/main/webapp/WEB-INF/
 ***Create a Jenkinsfile in mysosotriggers:***
 
@@ -897,15 +955,82 @@ pipeline {
 }
 ```
 
+***Create a Pipeline Job like in below photo:***
+
+![trigger-job](cicd-photos/trigger-job.png)
+
+##### GitHub webHook Jobs
+Go to video 163
 
 
 
 
 
-## Docker
+# CICD MicroServices
+
+
+## Docker server
+- Ubuntu VERSION="20.04.6 LTS 
+- Create a New AWS instance. T3 medium
+- During instance creation select option [Allow HTTP traffic from the internet]
+- Storage should be 20Gb
+- Add below script in the user data
+
+
+```sh
+#!/bin/bash
+
+# Install Docker
+sudo apt-get update
+   sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release -y
+   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+   echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Install Docker-Compose
+   sudo apt-get update
+   sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+   sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+   sudo chmod +x /usr/local/bin/docker-compose
+
+# Add ubuntu user into Docker Group
+    sudo usermod -a -G docker ubuntu
+
+```
+***Clone the repo***: [Soso-repo](https://github.com/sosotechnologies/cicd-microservices-dockercompose.git)
+
+```
+docker-compose build
+docker-compose up -d
+```
+
+
+For docker, see the official docker section in thus doc
 
 ***If you ever encounter NO SPACE issue when building your image***
 
 ```
 sudo docker image prune -f && sudo docker container prune -f
+```
+
+## Kubernetes
+- Create a New AWS instance. T2 medium
+- Ubuntu VERSION="20.04.6 LTS 
+- Storage should be 20Gb
+
+- create a new git repo and clone the repo: cici-kubernetes-jenkins-pipeline
+
+```
+mkdir cicd-k8s
+git clone https://github.com/sosotechnologies/cici-kubernetes-jenkins-pipeline.git
+git clone https://github.com/sosotechnologies/sosotech-cicd-docker-k8s-helm
+```
+
+```
+mkdir helm && cd helm
 ```

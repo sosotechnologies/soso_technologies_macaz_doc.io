@@ -263,13 +263,18 @@ aws ecr get-login-password --region us-east-1 | docker login --username AWS --pa
 </li>
 <li>
 <h3 id="setup-aws-credentials-get-your-aws-access-key-id-secret-access-key">setup aws credentials, get your AWS Access Key ID &amp; Secret Access Key</h3>
+</li>
+<li>Create an AWS User called: jenkins</li>
+<li>Give this user permission to ECR: AmazonEC2ContainerRegistryFullAccess and AmazonECS_FullAccess</li>
+<li>Create/Download the Access-key for this user.</li>
+</ol>
 <p>Dashboard --&gt; Manage Jenkins --&gt; Manage Credentials --&gt; System --&gt; Global credentials (unrestricted)
     AWS Credentials
           |_ID
           |_Description
           |_Access Key ID
           |_Secret Access Key</p>
-</li>
+<ol>
 <li>
 <h3 id="create-new-pipeline-job-using-below-pipeline-script-with-my-aws-creds">Create new Pipeline Job using below pipeline script with my aws creds</h3>
 </li>
@@ -278,7 +283,7 @@ aws ecr get-login-password --region us-east-1 | docker login --username AWS --pa
 <pre><code class="language-sh">pipeline {
     agent any
     environment {
-        AWS_ACCOUNT_ID=&quot;368085106192&quot;
+        AWS_ACCOUNT_ID=&quot;088789840359&quot;
         AWS_DEFAULT_REGION=&quot;us-east-1&quot;
         IMAGE_REPO_NAME=&quot;soso-repository&quot;
         IMAGE_TAG=&quot;latest&quot;

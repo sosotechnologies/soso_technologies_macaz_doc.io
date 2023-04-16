@@ -56,3 +56,5 @@ choose from. Some common Linux distributions are Debian, Fedora and Red Hat, Ubu
 linux commands
 
 ```cat /etc/os-release```
+
+adduser devops
