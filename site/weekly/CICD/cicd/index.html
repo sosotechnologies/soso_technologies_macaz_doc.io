@@ -657,9 +657,7 @@ See the image to guide you during setup.</p>
   - Pipeline script from SCM</p>
 <pre><code>Some Sample Pipeline Scripts:
 </code></pre>
-<ol>
-<li><strong><em>Jenkins, Maven simple pipeline</em></strong></li>
-</ol>
+<h5 id="pipeline1-jenkins-maven-simple-pipeline">Pipeline1: Jenkins, Maven simple pipeline***</h5>
 <pre><code class="language-Jenkinfile">pipeline {
     agent any
     tools {
@@ -697,9 +695,7 @@ See the image to guide you during setup.</p>
 }
 
 </code></pre>
-<ol>
-<li><strong><em>Jenkins, Maven, Checkstyle, Sonar-Analysis and Quality Gate - pipeline</em></strong></li>
-</ol>
+<h5 id="popeline-2-jenkins-maven-checkstyle-sonar-analysis-and-quality-gate-pipeline">Popeline 2: Jenkins, Maven, Checkstyle, Sonar-Analysis and Quality Gate - pipeline</h5>
 <pre><code class="language-Jenkinfile">pipeline {
     agent any
     tools {
@@ -768,14 +764,10 @@ See the image to guide you during setup.</p>
 <ul>
 <li>The nexus server IP in the pipeline is a Private IP of the ec2 nexus server</li>
 <li>Configure a time stamp</li>
-<li>
-<p>Configure a repo in the nexus server called:</p>
-</li>
-<li>
-<p><strong><em>Implementing DOCKER ECR</em></strong>
- Build image of webapp and puch to ECR</p>
-</li>
+<li>Configure a repo in the nexus server called:</li>
 </ul>
+<h5 id="pipeline-3-implementing-docker-ecr">Pipeline 3: Implementing DOCKER ECR</h5>
+<p>Build image of webapp and puch to ECR</p>
 <p>```Jenkinsfile
  pipeline {
     agent any
@@ -826,8 +818,8 @@ stage('Upload App Image') {
 </code></pre>
 <p>}
 }</p>
-<p>```
-4. <strong><em>Jenkins, Maven, Checkstyle, Docker, Sonar-Analysis and Quality Gate - pipeline</em></strong>  </p>
+<p>```</p>
+<h5 id="popeline-4-jenkins-maven-checkstyle-docker-sonar-analysis-and-quality-gate-pipeline">Popeline 4: Jenkins, Maven, Checkstyle, Docker, Sonar-Analysis and Quality Gate - pipeline</h5>
 <pre><code class="language-Jenkinsfile"> pipeline {
     agent any
     tools {
@@ -917,12 +909,9 @@ stage('Upload App Image') {
   }
 } 
 
- ```
-
- 5. ***FULL Pipeline***
-
-```Jenkinfile
-def COLOR_MAP = [
+</code></pre>
+<h5 id="pipeline-5-full-pipeline">Pipeline 5: FULL Pipeline***</h5>
+<pre><code class="language-Jenkinfile">def COLOR_MAP = [
     'SUCCESS': 'good', 
     'FAILURE': 'danger',
 ]

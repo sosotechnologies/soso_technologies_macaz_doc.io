@@ -466,7 +466,7 @@ See the image to guide you during setup.
 
     Some Sample Pipeline Scripts: 
 
-1. ***Jenkins, Maven simple pipeline***
+##### Pipeline1: Jenkins, Maven simple pipeline***
 
 ```Jenkinfile
 pipeline {
@@ -507,7 +507,7 @@ pipeline {
     
 ```
 
-2. ***Jenkins, Maven, Checkstyle, Sonar-Analysis and Quality Gate - pipeline***
+##### Popeline 2: Jenkins, Maven, Checkstyle, Sonar-Analysis and Quality Gate - pipeline
 
 ```Jenkinfile
 pipeline {
@@ -581,7 +581,8 @@ pipeline {
 - Configure a repo in the nexus server called:
 
 
-3. ***Implementing DOCKER ECR***
+##### Pipeline 3: Implementing DOCKER ECR
+
  Build image of webapp and puch to ECR
 
  ```Jenkinsfile
@@ -640,7 +641,8 @@ pipeline {
 
 
  ```
-4. ***Jenkins, Maven, Checkstyle, Docker, Sonar-Analysis and Quality Gate - pipeline***  
+
+##### Popeline 4: Jenkins, Maven, Checkstyle, Docker, Sonar-Analysis and Quality Gate - pipeline
  
 ```Jenkinsfile
  pipeline {
@@ -732,9 +734,9 @@ pipeline {
   }
 } 
 
- ```
+```
  
- 5. ***FULL Pipeline***
+##### Pipeline 5: FULL Pipeline***
 
 ```Jenkinfile
 def COLOR_MAP = [
@@ -817,6 +819,7 @@ pipeline {
     
 }
 ```
+
 6. ***Building sosotech documentation site***
 
 ```Jenkinsfile
