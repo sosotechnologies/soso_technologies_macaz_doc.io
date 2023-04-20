@@ -76,6 +76,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#install-trivy">Install Trivy</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-kops-on-ubuntu">Install KOPs on Ubuntu</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -174,6 +176,10 @@ aws-iam-authenticator help
 <ul>
 <li><a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">Right-Click to open Link in a New Tab</a></li>
 </ul>
+<p>Install on Ubuntu</p>
+<pre><code>sudo apt update -y
+sudo apt install awscli -y
+</code></pre>
 <h3 id="install-terraform">Install Terraform</h3>
 <ul>
 <li><a href="https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli">Right-Click to open Link in a New Tab</a></li>
@@ -198,6 +204,7 @@ chmod 700 get_helm.sh
 curl -LO &quot;https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256&quot;
 echo &quot;$(&lt;kubectl.sha256)  kubectl&quot; | sha256sum --check
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+[OR] sudo install -o root -g root -m 0755 kubectl /home/ec2-user/bin/kubectl
 kubectl version --client --output=yaml
 </code></pre>
 <h3 id="install-mkdocs">Install MkDocs</h3>
@@ -232,6 +239,76 @@ sudo dpkg -i trivy_0.18.3_Linux-64bit.deb
 trivy i nginx    //scanning nginx image
 trivy i nginx | grep -i critical
 trivy i nginx:alpine | grep -i critical
+</code></pre>
+<h3 id="install-kops-on-ubuntu">Install KOPs on Ubuntu</h3>
+<ul>
+<li><a href="https://kops.sigs.k8s.io/getting_started/aws/">Right-Click to open Link in a New Tab</a></li>
+</ul>
+<p><strong><em>Add KOPS User</em></strong></p>
+<pre><code>sudo adduser kops
+sudo echo &quot;kops  ALL=(ALL) NOPASSWD:ALL&quot; | sudo tee /etc/sudoers.d/kops
+sudo su - kops
+</code></pre>
+<p><strong><em>Installing kOps</em></strong></p>
+<pre><code>curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '&quot;' -f 4)/kops-linux-amd64
+chmod +x ./kops
+sudo mv ./kops /usr/local/bin/
+</code></pre>
+<p><strong><em>Install Python PiP</em></strong></p>
+<pre><code>sudo apt -y update
+sudo apt install python3-pip
+</code></pre>
+<p><strong><em>Install AWSCli</em></strong></p>
+<pre><code> sudo apt  install awscli -y
+</code></pre>
+<p><strong><em>Install Kubectl</em></strong></p>
+<pre><code>curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+</code></pre>
+<p><strong><em>Create S3 Bucket</em></strong></p>
+<pre><code>aws s3 ls
+
+aws s3api create-bucket \
+    --bucket soso-kops-bucket \
+    --region us-east-1 \
+    --acl public-read
+</code></pre>
+<p><strong><em>Add env variables in bashrc</em></strong></p>
+<pre><code>vi .bashrc
+
+export NAME=soso-kops-bucket.k8s.local                               
+export KOPS_STATE_STORE=s3://soso-kops-bucket.local 
+
+source .bashrc
+</code></pre>
+<p><strong><em>Generate an sshkeys before creating cluster</em></strong></p>
+<pre><code>ssh-keygen
+</code></pre>
+<p><strong><em>Install Cluster preconfig file</em></strong></p>
+<pre><code>kops create cluster \
+    --name=${NAME} \
+    --cloud=aws \
+    --zones=us-west-2a \
+    --discovery-store=s3://soso-kops-bucket/${NAME}/discovery
+</code></pre>
+<p><strong><em>Edit the cluster name- OPTIONAL</em></strong></p>
+<pre><code>kops edit cluster --name ${NAME}
+</code></pre>
+<p><strong><em>Install Cluster</em></strong></p>
+<pre><code>kops update cluster --name ${NAME} --yes --admin
+</code></pre>
+<p><strong>NOTE: WAIT 10 Mins before Checking Nodes and Validating cluster</strong>*</p>
+<p><strong><em>Get nodes</em></strong></p>
+<pre><code>kubectl get nodes
+</code></pre>
+<p><strong><em>Validate Cluster</em></strong></p>
+<pre><code>kops validate cluster --wait 10m
+</code></pre>
+<p><strong><em>Delete cluster</em></strong></p>
+<pre><code>kops delete cluster --name ${NAME}
+               [OR]
+kops delete cluster --name ${NAME} --yes
 </code></pre>
               
             </div>

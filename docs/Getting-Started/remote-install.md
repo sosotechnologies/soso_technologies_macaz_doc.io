@@ -16,6 +16,12 @@ aws-iam-authenticator help
 ### Install AWSCLI 
   - [Right-Click to open Link in a New Tab](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
+Install on Ubuntu
+```
+sudo apt update -y
+sudo apt install awscli -y
+```
+
 ### Install Terraform 
   - [Right-Click to open Link in a New Tab](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 
@@ -37,6 +43,7 @@ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stabl
 curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
 echo "$(<kubectl.sha256)  kubectl" | sha256sum --check
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+[OR] sudo install -o root -g root -m 0755 kubectl /home/ec2-user/bin/kubectl
 kubectl version --client --output=yaml
 ```
 
@@ -77,3 +84,115 @@ trivy i nginx    //scanning nginx image
 trivy i nginx | grep -i critical
 trivy i nginx:alpine | grep -i critical
 ```
+
+### Install KOPs on Ubuntu
+
+- [Right-Click to open Link in a New Tab](https://kops.sigs.k8s.io/getting_started/aws/)
+
+
+***Add KOPS User***
+
+```
+sudo adduser kops
+sudo echo "kops  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/kops
+sudo su - kops
+```
+***Installing kOps***
+
+```
+curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+chmod +x ./kops
+sudo mv ./kops /usr/local/bin/
+```
+***Install Python PiP***
+
+```
+sudo apt -y update
+sudo apt install python3-pip
+```
+
+***Install AWSCli***
+
+```
+ sudo apt  install awscli -y
+```
+
+***Install Kubectl***
+
+```
+curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+```
+
+***Create S3 Bucket***
+
+```
+aws s3 ls
+
+aws s3api create-bucket \
+    --bucket soso-kops-bucket \
+    --region us-east-1 \
+    --acl public-read
+```
+
+***Add env variables in bashrc***
+
+```
+vi .bashrc
+
+export NAME=soso-kops-bucket.k8s.local                               
+export KOPS_STATE_STORE=s3://soso-kops-bucket.local 
+ 
+source .bashrc
+```
+
+***Generate an sshkeys before creating cluster***
+
+```
+ssh-keygen
+```
+
+***Install Cluster preconfig file***
+
+```
+kops create cluster \
+    --name=${NAME} \
+    --cloud=aws \
+    --zones=us-west-2a \
+    --discovery-store=s3://soso-kops-bucket/${NAME}/discovery
+```
+
+***Edit the cluster name- OPTIONAL***
+
+```
+kops edit cluster --name ${NAME}
+```
+
+***Install Cluster***
+
+```
+kops update cluster --name ${NAME} --yes --admin
+```
+**NOTE: WAIT 10 Mins before Checking Nodes and Validating cluster***
+
+***Get nodes***
+
+```
+kubectl get nodes
+```
+
+***Validate Cluster***
+
+```
+kops validate cluster --wait 10m
+```
+
+***Delete cluster***
+
+```
+kops delete cluster --name ${NAME}
+               [OR]
+kops delete cluster --name ${NAME} --yes
+```
+

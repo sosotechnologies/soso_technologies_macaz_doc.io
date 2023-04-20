@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Kubernetes/kubernetes/" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>Kubernetes - SosoTech External Documentation</title>
+    <title>KOPS - SosoTech External Documentation</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
@@ -13,7 +13,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Kubernetes";
+        var mkdocs_page_name = "KOPS";
         var mkdocs_page_input_path = "weekly\\Kubernetes\\kubernetes.md";
         var mkdocs_page_url = "/soso_technologies_macaz_doc.io/weekly/Kubernetes/kubernetes/";
       </script>
@@ -116,7 +116,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Kubernetes</li>
+      <li>KOPS</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/repo/blob/main/docs/index.md/weekly/Kubernetes/kubernetes.md">Edit on soso_technologies_macaz_doc.io</a>
     </li>
@@ -126,7 +126,72 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p>To deploy EFS-EKS-using Terraform, <a href="terraform-EFS-Dynamic">clone My repo</a></p>
+                <h1 id="kops">KOPS</h1>
+<p><strong><em>Installing kOps</em></strong></p>
+<pre><code>curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '&quot;' -f 4)/kops-linux-amd64
+chmod +x ./kops
+sudo mv ./kops /usr/local/bin/
+</code></pre>
+<p><strong><em>Install Python PiP</em></strong></p>
+<pre><code>sudo apt -y update
+sudo apt install python3-pip
+</code></pre>
+<p><strong><em>Install AWSCli</em></strong></p>
+<pre><code> sudo apt  install awscli -y
+</code></pre>
+<p><strong><em>Install Kubectl</em></strong></p>
+<pre><code>curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+</code></pre>
+<p><strong><em>Create S3 Bucket</em></strong></p>
+<pre><code>aws s3 ls
+aws s3 mb s3://soso-kops-bucket.local
+</code></pre>
+<p><strong><em>OPTIONAL</em></strong></p>
+<pre><code>aws s3api create-bucket \
+    --bucket soso-kops-bucket \
+    --region us-east-1 
+</code></pre>
+<p><strong><em>Add env variables in bashrc</em></strong></p>
+<pre><code>vi .bashrc
+
+export NAME=soso-kops-bucket.k8s.local                               
+export KOPS_STATE_STORE=s3://soso-kops-bucket.local 
+
+source .bashrc
+</code></pre>
+<p><strong><em>Generate an sshkeys before creating cluster</em></strong></p>
+<pre><code>ssh-keygen
+</code></pre>
+<p><strong><em>Install Cluster preconfig file</em></strong></p>
+<pre><code>kops create cluster \
+    --name=${NAME} \
+    --cloud=aws \
+    --zones=us-west-2a \
+    --node-size t2.medium \
+    --master-size t2.medium \
+    --master-count 1 --node-size t2.medium --node-count=1
+</code></pre>
+<p><strong><em>Edit the cluster name- OPTIONAL</em></strong></p>
+<pre><code>kops edit cluster --name ${NAME}
+</code></pre>
+<p><strong><em>Install Cluster</em></strong></p>
+<pre><code>kops update cluster --name ${NAME} --yes --admin
+</code></pre>
+<p><strong>NOTE: WAIT 10 Mins before Checking Nodes and Validating cluster</strong>*</p>
+<p><strong><em>Get nodes</em></strong></p>
+<pre><code>kubectl get nodes
+</code></pre>
+<p><strong><em>Validate Cluster</em></strong></p>
+<pre><code>kops validate cluster --wait 10m
+</code></pre>
+<p><strong><em>Delete cluster</em></strong></p>
+<pre><code>kops delete cluster --name ${NAME}
+               [OR]
+kops delete cluster --name ${NAME} --yes
+</code></pre>
+<p>To deploy EFS-EKS-using Terraform, <a href="terraform-EFS-Dynamic">clone My repo</a></p>
 <p>You can clone and build this Documentation and use the image <a href="https://github.com/sosotechnologies/docs_docker_io">mkdocs-docker-build</a></p>
               
             </div>

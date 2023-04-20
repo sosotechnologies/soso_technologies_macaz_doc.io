@@ -4,6 +4,11 @@ Install Individuals servers for:
 - Sonarqube
 - Jenkins
 
+***After Installing Servers***
+
+- Add Sonar security group (All Traffic) in the Jenkins server security Group in AWS Console.
+- Also, Jenkins security group (All Traffic) in the Sonar server security Group in AWS Console.
+
 ## Nexus
 - Centos 7 (Amazon Market place)
 - TCP Port ***8081*** from MyIP and Jenkins-SG
@@ -276,9 +281,10 @@ sudo su -
 cd /opt
 apt install wget
 wget https://dlcdn.apache.org/maven/maven-3/3.9.1/binaries/apache-maven-3.9.1-bin.tar.gz
-tar -xvzf apache-maven-3.9.1-bin.tar
+tar -xvzf apache-maven-3.9.1-bin.tar.gz
 mv apache-maven-3.9.1 maven
-rm -rf apache-maven-3.9.1-bin.tar.gz 
+rm -rf apache-maven-3.9.1-bin.tar.gz
+cd ..
 ```
 
 ***Install Docker on the Jenkins Server***
@@ -313,6 +319,15 @@ echo \
 
 ```sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y```
 
+```
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+```
+sudo systemctl status docker
+docker -v
+```
+
 ***Add Jenkins User to the docker group***
 
 ```id jenkins```
@@ -329,7 +344,7 @@ sudo apt install awscli -y
 
 
 
-### Install Jenkins plugins 
+### 1. Install Jenkins plugins 
 ***Dashboard --> Manage Jenkins --> Plugin Manager***
 
 - Pipeline Maven Integration
@@ -344,8 +359,7 @@ sudo apt install awscli -y
 - CloudBees Docker Build and Publish
 - Amazon Web Services SDK :: All
 
-### Global Tool Configuration
-Navigate to: ***Jenkins UI --> manage Jenkins --> Manage Credentials --> System --> Global credentials***
+### 2. Global Tool Configuration
 
 ***Configure CI [Git, Maven, JVM, SonarQube Scanner ] on Jenkins GUI***.
 
@@ -354,9 +368,9 @@ In the Jenkins UI --> manage Jenkins --> Global Tool Configuration [save]
 
 | Services          |   Configured Names      |
 |-------------------|:-----------------------:|
-| JDK               |  SosoJDK8               | 
+| JDK               |  SosoJDK8               |    [/usr/lib/jvm/java-1.8.0-openjdk-amd64]
 | git               |  Git                    |
-| MAVEN             |  MAVEN3             |
+| MAVEN             |  SOSOMAVEN3             |
 | SonarQube Scanner |  sososonar4.7           |
 |                   |                         |
 
@@ -366,7 +380,56 @@ See the Maven, Git and JDK configuration images
 See the SonarQube Configuration image
 ![cicd7-sonar](cicd-photos/cicd7-sonar.png)
 
-### Configure Systems
+### 3. Configure Credential
+Navigate to: ***Jenkins UI --> manage Jenkins --> Manage Credentials --> System --> Global credentials***
+
+| Services          |   Credential ID       | UserName/Password/secret-text   |               
+|-------------------|:---------------------:|--------------------------------:|
+| DockerHub         |  sosodockertoken      |    Username-Password    |
+| AWS - ECR User    |   sosoawstoken        |   UserName/Password             |
+| MAVEN             |                       |     |
+| SonarQube         |   sososonartoken      |  secret-text  |
+| Slack             | sososlacktoken        |  secret-text    | 
+| build-trigger     | sososshtrigger        | SSH Username with Private Key  |
+
+In the Jenkins UI:
+Configure the following credentials
+
+  - AWS
+  - DockerHub --> (generate Token) My account --> security --> secret text
+  - k8s Config
+  - sonarqube --> (generate Token) My account --> security --> secret text
+
+#### Configure AWS USER Credentials for ECR
+Create credentials for the username and password for the saved Jenkins user.
+![aws-ecr](cicd-photos/aws-ecr.png)
+#### Configure Dockerhub Credential(Token)
+  1. Log into your dockerhub account and create username-password --> security: [LINK](https://hub.docker.com/settings/security)
+
+  ![dockerhub](cicd-photos/dockerhub.png)
+ 
+
+#### Configure SonarQube Credential(Token)
+1. Login to the sonarQube UI, go to Myaccount --> security create a Token
+
+![sonar-token](cicd-photos/sonar-token.png)
+Add a Token 
+
+2. Add the Token as Credential To jenkins Global credentials
+
+![sonar-credential](cicd-photos/sonar-credential.png) 
+
+#### Configure SLACK Credential
+![slack-creds](cicd-photos/slack-creds.png) 
+
+
+
+#### Configure ssh-trigger for Build trigger 
+![ssh-trigger](cicd-photos/ssh-trigger.png) 
+
+#### Configure AWS Credential
+
+### 4. Configure Systems
 
 Navigate to: ***Jenkins UI --> manage Jenkins --> Configure System***
 
@@ -397,56 +460,7 @@ configure the folloring :
 
 ![configure-slack](cicd-photos/configure-slack.png)
 
-### Configure Credential
 
-| Services          |   Credential ID       | UserName/Password/secret-text   |               
-|-------------------|:---------------------:|--------------------------------:|
-| Docker            |  sosodockertoken      |    secret-text    |
-| AWS - ECR User    |   sosoawstoken        |   UserName/Password             |
-| MAVEN             |                       |     |
-| SonarQube         |   sososonartoken      |  secret-text  |
-| Slack             | sososlacktoken        |  secret-text    | 
-| build-trigger     | sososshtrigger        | SSH Username with Private Key  |
-
-In the Jenkins UI:
-Configure the following credentials
-
-  - AWS
-  - DockerHub --> (generate Token) My account --> security --> secret text
-  - k8s Config
-  - sonarqube --> (generate Token) My account --> security --> secret text
-
-#### Configure AWS USER Credentials for ECR
-Create credentials for the username and password for the saved Jenkins user.
-![aws-ecr](cicd-photos/aws-ecr.png)
-#### Configure Dockerhub Credential(Token)
-  1. Log into your dockerhub account and create a token in settings --> security: [LINK](https://hub.docker.com/settings/security)
-
-  ![cicd](cicd-photos/cicd4.png)
-
-  ![cicd](cicd-photos/cicd5.png)
-
-  2. 
-
-#### Configure SonarQube Credential(Token)
-1. Login to the sonarQube UI, go to Myaccount --> security create a Token
-
-![sonar-token](cicd-photos/sonar-token.png)
-Add a Token 
-
-2. Add the Token as Credential To jenkins Global credentials
-
-![sonar-credential](cicd-photos/sonar-credential.png) 
-
-#### Configure SLACK Credential
-![slack-creds](cicd-photos/slack-creds.png) 
-
-
-
-#### Configure ssh-trigger for Build trigger 
-![ssh-trigger](cicd-photos/ssh-trigger.png) 
-
-#### Configure AWS Credential
 
 ### Jenkins Jobs
 There are some Jenkins Jobs Demo'd here, like Pipeline, Freestyle:
@@ -463,6 +477,7 @@ See the image to guide you during setup.
  There are 2 Options to use here:
   - Pipeline script
   - Pipeline script from SCM
+  - after build check path: /var/lib/jenkins/workspace
 
     Some Sample Pipeline Scripts: 
 
@@ -491,7 +506,7 @@ pipeline {
 
 	        post {
 	           success {
-	              echo 'Now Archiving it...'
+	              echo 'I think the archieve is All Good...'
 	              archiveArtifacts artifacts: '**/target/*.war'
 	           }
 	        }
@@ -508,6 +523,14 @@ pipeline {
 ```
 
 ##### Popeline 2: Jenkins, Maven, Checkstyle, Sonar-Analysis and Quality Gate - pipeline
+- Add Sonar security gtoup in the Jenkins server security Group in AWS Console.
+- Also, Jenkins  security gtoup in the Sonar server security Group in AWS Console.
+- Note: In this step os the sonar pipeline you will see this Line of code:
+
+steps {
+               withSonarQubeEnv('sososonar') {
+
+- The ***sososonar*** represents the name of the SonarQube Servers in Configure Syatem.
 
 ```Jenkinfile
 pipeline {
@@ -529,7 +552,7 @@ pipeline {
             }
             post {
                 success {
-                    echo "Now Archiving."
+                    echo "I think the archieve is All Good"
                     archiveArtifacts artifacts: '**/*.war'
                 }
             }
@@ -576,17 +599,13 @@ pipeline {
 }
 ```
 
-- The nexus server IP in the pipeline is a Private IP of the ec2 nexus server
-- Configure a time stamp
-- Configure a repo in the nexus server called:
-
-
 ##### Pipeline 3: Implementing DOCKER ECR
 
- Build image of webapp and puch to ECR
+- Create an AWS-ECR repo called: soso-repository
+- Build image of webapp and puch to ECR
 
- ```Jenkinsfile
- pipeline {
+```Jenkinsfile
+pipeline {
     agent any
     tools {
 	    maven "SOSOMAVEN3"
@@ -1022,18 +1041,299 @@ sudo docker image prune -f && sudo docker container prune -f
 ```
 
 ## Kubernetes
-- Create a New AWS instance. T2 medium
-- Ubuntu VERSION="20.04.6 LTS 
-- Storage should be 20Gb
+ - KOPs
+ - EKS
+ - OpenShift
 
-- create a new git repo and clone the repo: cici-kubernetes-jenkins-pipeline
+### KOPS
+- Ubuntu VERSION="20.04.6 LTS 
+- Installing kOps on Ubuntu
+- Install Helm on the Ubuntu server
+- install JDK-8 on server
+- Create a directory called jenkins-slave in /opt
+- Create a New(public) GitHub repo: Mine is: [My repo](https://github.com/sosotechnologies/cicd-kubernetes-jenkins-pipeline.git)
+
+
+***INSTALL JDK8 On the Jenkins Server***
+In Server terminal, Install Maven and JDK8
+
+```
+sudo apt update
+sudo apt install openjdk-8-jdk -y
+```
+
+```
+curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+chmod +x ./kops
+sudo mv ./kops /usr/local/bin/
+```
+***Install Python PiP***
+
+```
+sudo apt -y update
+sudo apt install python3-pip
+```
+
+***Install AWSCli***
+
+```
+ sudo apt  install awscli -y
+```
+
+***Install Kubectl***
+
+```
+curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+```
+
+***Create S3 Bucket***
+
+```
+aws s3 ls
+aws s3 mb s3://soso-kops-bucket.local
+```
+
+***OPTIONAL***
+```
+aws s3api create-bucket \
+    --bucket soso-kops-bucket \
+    --region us-east-1 
+```
+
+***Add env variables in bashrc***
+
+```
+vi .bashrc
+
+export NAME=soso-kops-bucket.k8s.local                               
+export KOPS_STATE_STORE=s3://soso-kops-bucket.local 
+ 
+source .bashrc
+```
+
+***Generate an sshkeys before creating cluster***
+
+```
+ssh-keygen
+```
+
+***Install Cluster preconfig file***
+
+```
+kops create cluster \
+    --name=${NAME} \
+    --cloud=aws \
+    --zones=us-west-2a \
+    --node-size t2.medium \
+    --master-size t2.medium \
+    --master-count 1 --node-size t2.medium --node-count=1
+```
+
+***Edit the cluster name- OPTIONAL***
+
+```
+kops edit cluster --name ${NAME}
+```
+
+***Install Cluster***
+
+```
+kops update cluster --name ${NAME} --yes --admin
+```
+**NOTE: WAIT 10 Mins before Checking Nodes and Validating cluster***
+
+***Get nodes***
+
+```
+kubectl get nodes
+```
+
+***Validate Cluster***
+
+```
+kops validate cluster --wait 10m
+```
+
+***Delete cluster - OPTIONAL***
+
+```
+kops delete cluster --name ${NAME}
+               [OR]
+kops delete cluster --name ${NAME} --yes
+```
+
+***Make directory /opt/jenkins-slave***
+
+```
+sudo mkdir /opt/jenkins-slave
+sudo chown ubuntu.ubuntu /opt/jenkins-slave -R
+```
+
+
+
+
+
+
+
+
+
+
+
+***CICD Work Flow***
+- Remove my helm and make your own helm directory in same path
 
 ```
 mkdir cicd-k8s
-git clone https://github.com/sosotechnologies/cici-kubernetes-jenkins-pipeline.git
-git clone https://github.com/sosotechnologies/sosotech-cicd-docker-k8s-helm
+git clone https://github.com/sosotechnologies/cicd-kubernetes-jenkins-pipeline.git
+cd 
 ```
 
 ```
 mkdir helm && cd helm
+helm create sosotechecharts
+```
+
+replace the yaml files in the template with our yaml files in: 
+cici-kubernetes-jenkins-pipeline/kubernetes/soso-app/templates
+
+```
+cd cici-kubernetes-jenkins-pipeline/helm/sosotechecharts/templates
+rm -rf *
+```
+
+***NOTE***: Set the deployment Image as a variable. Name to what ever but take note
+of the Name, as this name will be passed as a tag when building the Helm Chart'
+
+![app-variable](cicd-photos/app-variable.png)
+
+***Now install the Chart***
+  - cd back into the helm directory and run below command
+  - create a namespace called ***cicd***
+  - helm install --namespace cicd [nameof the chart] --set [the deployment variable]=[built image from dockerhub]
+
+```
+kubectl create ns cicd
+helm install --namespace cicd soso-helm-name --set sosodeploymentvariable=sosotech/sosowebapp:2
+helm list --namerpace cicd
+```
+
+***Delete the Chart***
+
+```
+helm delete soso-helm-name -n cicd
+```
+
+```Jenkinsfile
+pipeline {
+
+    agent any
+/*
+	tools {
+        maven "maven3"
+    }
+*/
+    environment {
+        registry = "sosotech/docs-repo"
+        registryCredential = 'sosodockertoken'
+    }
+
+    stages{
+
+        stage('BUILD'){
+            steps {
+                sh 'mvn clean install -DskipTests'
+            }
+            post {
+                success {
+                    echo 'Now Archiving...'
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
+            }
+        }
+
+        stage('UNIT TEST'){
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('INTEGRATION TEST'){
+            steps {
+                sh 'mvn verify -DskipUnitTests'
+            }
+        }
+
+        stage ('CODE ANALYSIS WITH CHECKSTYLE'){
+            steps {
+                sh 'mvn checkstyle:checkstyle'
+            }
+            post {
+                success {
+                    echo 'Generated Analysis Result'
+                }
+            }
+        }
+
+
+        stage('Building image') {
+            steps{
+              script {
+                dockerImage = docker.build registry + ":$BUILD_NUMBER"
+              }
+            }
+        }
+        
+        stage('Deploy Image') {
+          steps{
+            script {
+              docker.withRegistry( '', registryCredential ) {
+                dockerImage.push("$BUILD_NUMBER")
+                dockerImage.push('latest')
+              }
+            }
+          }
+        }
+
+        stage('Remove Unused docker image') {
+          steps{
+            sh "docker rmi $registry:$BUILD_NUMBER"
+          }
+        }
+
+        stage('CODE ANALYSIS with SONARQUBE') {
+
+            environment {
+                scannerHome = tool 'mysonarscanner4'
+            }
+
+            steps {
+                withSonarQubeEnv('sonar-pro') {
+                    sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
+                   -Dsonar.projectName=vprofile-repo \
+                   -Dsonar.projectVersion=1.0 \
+                   -Dsonar.sources=src/ \
+                   -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+                   -Dsonar.junit.reportsPath=target/surefire-reports/ \
+                   -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+                   -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+                }
+
+                timeout(time: 10, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+        stage('Kubernetes Deploy') {
+	  agent { label 'KOPS' }
+            steps {
+                    sh "helm upgrade --install --force vproifle-stack helm/sosotechecharts --set appimage=${registry}:${BUILD_NUMBER} --namespace prod"
+            }
+        }
+
+    }
+
+
+}
 ```
