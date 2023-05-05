@@ -111,6 +111,10 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../weekly/Openshift/openshift/">OpenShift</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../weekly/web-development/web-dev/">Web Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../weekly/mysql-windows/mysql-windows/">MySQL Windows</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="#">Random Topics</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../../weekly/Random/3tier/">3 Tier App</a>
@@ -128,6 +132,8 @@
                 <li class="toctree-l2"><a class="reference internal" href="../../weekly/Random/Disaster-rec/">Disaster Recovery</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../../weekly/Random/domain-github/">Domain Git GoDaddy</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../weekly/Random/scripts/">Scripts</a>
                 </li>
     </ul>
                   </li>
@@ -176,7 +182,7 @@ aws-iam-authenticator help
 <ul>
 <li><a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">Right-Click to open Link in a New Tab</a></li>
 </ul>
-<p>Install on Ubuntu</p>
+<p><strong><em>Install AWCLI on Ubuntu</em></strong></p>
 <pre><code>sudo apt update -y
 sudo apt install awscli -y
 </code></pre>
@@ -198,11 +204,14 @@ chmod 700 get_helm.sh
 </code></pre>
 <h3 id="install-kubectl">Install Kubectl</h3>
 <ul>
-<li><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html/">Right-Click to open Link in a New Tab</a></li>
+<li><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl">Right-Click to open Link in a New Tab</a></li>
 </ul>
-<pre><code>curl -LO &quot;https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl&quot;
-curl -LO &quot;https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256&quot;
-echo &quot;$(&lt;kubectl.sha256)  kubectl&quot; | sha256sum --check
+<pre><code>curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.24.11/2023-03-17/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mkdir -p $HOME/bin &amp;&amp; cp ./kubectl $HOME/bin/kubectl &amp;&amp; export PATH=$PATH:$HOME/bin
+
+***More Troubleshooting Options***
+
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 [OR] sudo install -o root -g root -m 0755 kubectl /home/ec2-user/bin/kubectl
 kubectl version --client --output=yaml
