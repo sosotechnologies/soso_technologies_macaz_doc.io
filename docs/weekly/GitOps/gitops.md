@@ -403,19 +403,7 @@ cd flux-fleet
 
 So far my flux-weekend folder looks like so:
 
-.
-├── flux-fleet
-│   └── apps
-│       └── flux-system
-│           ├── gotk-components.yaml
-│           ├── gotk-sync.yaml
-│           └── kustomization.yaml
-├── flux-production
-│   ├── apps
-│   └── README.md
-└── flux-staging
-    ├── apps
-    └── README.md
+![arch2](photos/like-this2.png)
 
 ***Create Kustomization and Source in the flux-fleet/ folder***
 - Create source and Kustomize for staging
@@ -457,22 +445,7 @@ git push --set-upstream origin main
 
 ***Now my flux-weekend folder looks like***
 
-.
-├── flux-fleet
-│   └── apps
-│       ├── devops-toolkit.yaml
-│       ├── flux-system
-│       │   ├── gotk-components.yaml
-│       │   ├── gotk-sync.yaml
-│       │   └── kustomization.yaml
-│       ├── production.yaml
-│       └── staging.yaml
-├── flux-production
-│   ├── apps
-│   └── README.md
-└── flux-staging
-    ├── apps
-    └── README.md
+![arch3](photos/like-this3.png)
 
 ```
 watch flux get sources git
@@ -559,24 +532,7 @@ watch kubectl --namespace production get pods
 
 Final Tree
 
-.
-├── flux-fleet
-│   └── apps
-│       ├── devops-toolkit.yaml
-│       ├── flux-system
-│       │   ├── gotk-components.yaml
-│       │   ├── gotk-sync.yaml
-│       │   └── kustomization.yaml
-│       ├── production.yaml
-│       └── staging.yaml
-├── flux-production
-│   ├── apps
-│   │   └── devops-toolkit.yaml
-│   └── README.md
-└── flux-staging
-    ├── apps
-    │   └── devops-toolkit.yaml
-    └── README.md
+![arch4](photos/like-this4.png)
 
 **IT'S ALL FOLKS!**
 
