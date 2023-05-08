@@ -436,19 +436,7 @@ kubectl get cm -n flux-system
 cd flux-fleet
 </code></pre>
 <p>So far my flux-weekend folder looks like so:</p>
-<p>.
-├── flux-fleet
-│   └── apps
-│       └── flux-system
-│           ├── gotk-components.yaml
-│           ├── gotk-sync.yaml
-│           └── kustomization.yaml
-├── flux-production
-│   ├── apps
-│   └── README.md
-└── flux-staging
-    ├── apps
-    └── README.md</p>
+<p><img alt="arch2" src="../photos/like-this2.png" /></p>
 <p><strong><em>Create Kustomization and Source in the flux-fleet/ folder</em></strong>
 - Create source and Kustomize for staging</p>
 <pre><code>flux create source git staging --url https://github.com/sosotechnologies/flux-staging --branch master --interval 30s --export | tee apps/staging.yaml
@@ -473,22 +461,7 @@ git commit -m &quot;added staging folder, production folder and devops-toolkit&q
 git push --set-upstream origin main
 </code></pre>
 <p><strong><em>Now my flux-weekend folder looks like</em></strong></p>
-<p>.
-├── flux-fleet
-│   └── apps
-│       ├── devops-toolkit.yaml
-│       ├── flux-system
-│       │   ├── gotk-components.yaml
-│       │   ├── gotk-sync.yaml
-│       │   └── kustomization.yaml
-│       ├── production.yaml
-│       └── staging.yaml
-├── flux-production
-│   ├── apps
-│   └── README.md
-└── flux-staging
-    ├── apps
-    └── README.md</p>
+<p><img alt="arch3" src="../photos/like-this3.png" /></p>
 <pre><code>watch flux get sources git
 flux get kustomizations
 </code></pre>
@@ -540,24 +513,7 @@ git push --set-upstream origin master
 watch kubectl --namespace production get pods
 </code></pre>
 <p>Final Tree</p>
-<p>.
-├── flux-fleet
-│   └── apps
-│       ├── devops-toolkit.yaml
-│       ├── flux-system
-│       │   ├── gotk-components.yaml
-│       │   ├── gotk-sync.yaml
-│       │   └── kustomization.yaml
-│       ├── production.yaml
-│       └── staging.yaml
-├── flux-production
-│   ├── apps
-│   │   └── devops-toolkit.yaml
-│   └── README.md
-└── flux-staging
-    ├── apps
-    │   └── devops-toolkit.yaml
-    └── README.md</p>
+<p><img alt="arch4" src="../photos/like-this4.png" /></p>
 <p><strong>IT'S ALL FOLKS!</strong></p>
 <p>NEXT TASK</p>
 <p>Configure ECR/OICD-IRSA/GIT tagging for CD deployment</p>
