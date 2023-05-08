@@ -63,13 +63,9 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">GitOps</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#fluxcd">FluxCD</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#example-2">Example 2</a>
+    <li class="toctree-l2"><a class="reference internal" href="#example-1">Example 1</a>
     </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#ex-3">EX 3:</a>
+    <li class="toctree-l2"><a class="reference internal" href="#ex-2">EX 2:</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#repo-1">Repo 1.</a>
     </li>
@@ -161,46 +157,7 @@
               
                 <h1 id="gitops">GitOps</h1>
 <p>my repo: <a href="https://github.com/sosotechnologies/soso-flux">link</a></p>
-<h2 id="fluxcd">FluxCD</h2>
-<p>You can create multiple namespaces to run multiple flux jobs
-- Create a git repo called: soso-flux
-- Install Flux on windows</p>
-<p><strong><em>flux - install flux</em></strong></p>
-<pre><code>curl -s https://fluxcd.io/install.sh | sudo bash
-
-. &lt;(flux completion bash)
-
-flux --version
-</code></pre>
-<p>Create a namespace called: flux</p>
-<pre><code>kubectl create ns flux
-</code></pre>
-<p>export your github username, mine is sosotechnologies</p>
-<pre><code>export GHUSER=&quot;sosotechnologies&quot;
-</code></pre>
-<p>check</p>
-<pre><code>echo $GHUSER
-</code></pre>
-<p>Install flux, I tagged my github username and the repo: [${GHUSER}/soso-flux-demo]
-I have 2 folders in the repo: [namespaces,workloads]. Flux will deploy the contents.</p>
-<pre><code>fluxctl install \
---git-user=${GHUSER} \
---git-email=${GHUSER}@users.noreply.github.com \
---git-url=git@github.com:${GHUSER}/soso-flux \
---git-path=namespaces,workloads \
---namespace=flux | kubectl apply -f -
-</code></pre>
-<p>Check rollout status:</p>
-<pre><code>kubectl -n flux rollout status deployment/flux
-</code></pre>
-<p>Setup up an Deploy key in Github called: flux
-<img alt="gitops1" src="../photos/gitops1.png" /></p>
-<pre><code>fluxctl identity --k8s-fwd-ns flux
-</code></pre>
-<p>Manually Sync the repo </p>
-<pre><code>fluxctl sync --k8s-fwd-ns flux
-</code></pre>
-<h3 id="example-2">Example 2</h3>
+<h2 id="example-1">Example 1</h2>
 <ul>
 <li>my Github name is: sosotechnologies</li>
 <li>Create a new repo called: infra</li>
@@ -236,18 +193,19 @@ cat id_rsa.pub
 <pre><code>git clone git@github.com:sosotechnologies/sosoflux-infra.git
 cd sosoflux-infra
 </code></pre>
-<p>[ec2-user@ip-172-31-145-18 infra]$ <code>tree</code>
-.
+<p>[ec2-user@ip-172-31-145-18 infra]$ <code>tree</code></p>
+<pre><code>.
 └── florida
     └── miami
         └── flux-system
             ├── gotk-components.yaml
             ├── gotk-sync.yaml
-            └── kustomization.yaml</p>
+            └── kustomization.yaml
+</code></pre>
 <p>add a demo folder and a yaml file in the folder</p>
 <p>[ec2-user@ip-172-31-145-18 eks]$ <code>cd florida</code>
 [ec2-user@ip-172-31-145-18 eks]$ <code>mkdir demo &amp;&amp; cd demo &amp;&amp; touch sosodocs.yaml</code></p>
-<p>.
+<pre><code>
 └── florida
     └── miami
         ├── demo
@@ -255,7 +213,8 @@ cd sosoflux-infra
         └── flux-system
             ├── gotk-components.yaml
             ├── gotk-sync.yaml
-            └── kustomization.yaml</p>
+            └── kustomization.yaml
+</code></pre>
 <p>commit these changes to your git repo</p>
 <pre><code>git add -A &amp;&amp; \
 git commit -m &quot;added demo folder&quot; &amp;&amp; \
@@ -351,7 +310,7 @@ patches:
       kind: ServiceAccount
       name: image-reflector-controller
 </code></pre>
-<h2 id="ex-3">EX 3:</h2>
+<h2 id="ex-2">EX 2:</h2>
 <p><img alt="arch" src="../photos/arch.png" /></p>
 <ul>
 <li>install GitHub Cli</li>

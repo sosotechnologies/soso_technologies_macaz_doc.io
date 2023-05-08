@@ -1,72 +1,6 @@
 # GitOps
 my repo: [link](https://github.com/sosotechnologies/soso-flux)
-
-## FluxCD
-You can create multiple namespaces to run multiple flux jobs
-- Create a git repo called: soso-flux
-- Install Flux on windows
-
-
-***flux - install flux***
-
-```
-curl -s https://fluxcd.io/install.sh | sudo bash
-
-. <(flux completion bash)
-
-flux --version
-```
-
-Create a namespace called: flux
-
-```
-kubectl create ns flux
-```
-
-export your github username, mine is sosotechnologies
-
-```
-export GHUSER="sosotechnologies"
-```
-
-check
-
-```
-echo $GHUSER
-```
-
-Install flux, I tagged my github username and the repo: [${GHUSER}/soso-flux-demo]
-I have 2 folders in the repo: [namespaces,workloads]. Flux will deploy the contents.
-
-```
-fluxctl install \
---git-user=${GHUSER} \
---git-email=${GHUSER}@users.noreply.github.com \
---git-url=git@github.com:${GHUSER}/soso-flux \
---git-path=namespaces,workloads \
---namespace=flux | kubectl apply -f -
-```
-
-Check rollout status:
-
-```
-kubectl -n flux rollout status deployment/flux
-```
-
-Setup up an Deploy key in Github called: flux
-![gitops1](photos/gitops1.png)
-
-```
-fluxctl identity --k8s-fwd-ns flux
-```
-
-Manually Sync the repo 
-
-```
-fluxctl sync --k8s-fwd-ns flux
-```
-
-### Example 2
+## Example 1
 - my Github name is: sosotechnologies
 - Create a new repo called: infra
 - create a github personal Access Token(classic) called: flux 
@@ -118,6 +52,8 @@ cd sosoflux-infra
 ```
 
 [ec2-user@ip-172-31-145-18 infra]$ ```tree```
+
+```
 .
 └── florida
     └── miami
@@ -125,7 +61,7 @@ cd sosoflux-infra
             ├── gotk-components.yaml
             ├── gotk-sync.yaml
             └── kustomization.yaml
-
+```
 
 
 add a demo folder and a yaml file in the folder
@@ -133,7 +69,8 @@ add a demo folder and a yaml file in the folder
 [ec2-user@ip-172-31-145-18 eks]$ ```cd florida```
 [ec2-user@ip-172-31-145-18 eks]$ ```mkdir demo && cd demo && touch sosodocs.yaml```
 
-.
+```
+
 └── florida
     └── miami
         ├── demo
@@ -142,6 +79,7 @@ add a demo folder and a yaml file in the folder
             ├── gotk-components.yaml
             ├── gotk-sync.yaml
             └── kustomization.yaml
+```
 
 commit these changes to your git repo
 
@@ -289,7 +227,7 @@ patches:
       name: image-reflector-controller
 ```
 
-## EX 3:
+## EX 2:
 ![arch](photos/arch.png)
 
 - install GitHub Cli
