@@ -71,6 +71,7 @@ nav:
    - CICD: weekly/CICD/cicd.md
    - Cloud Technologies: weekly/Cloud-Technologies/intro-aws.md
    - GitHub: weekly/GitHub/github.md
+   - GitOps: weekly/GitOps/gitops.md
    - GitHub Action: weekly/Gitaction/gitaction.md
    - Terraform: weekly/Terraform/github.md
    - Docker: weekly/Docker/docker.md
@@ -81,6 +82,8 @@ nav:
    - ELK: weekly/ELK/elk.md
    - Azure: weekly/Azure/azure.md
    - OpenShift: weekly/Openshift/openshift.md
+   - Web Development: weekly/web-development/web-dev.md
+   - MySQL Windows: weekly/mysql-windows/mysql-windows.md
    - Random Topics: 
      - 3 Tier App: weekly/Random/3tier.md
      - Kubernetes API: weekly/Random/k8sapi.md
@@ -90,6 +93,7 @@ nav:
      - Helm-Terraform-jenkins: weekly/Random/Helm-Terraform-jenkins.md
      - Disaster Recovery: weekly/Random/Disaster-rec.md
      - Domain Git GoDaddy: weekly/Random/domain-github.md
+     - Scripts: weekly/Random/scripts.md
   
  
  

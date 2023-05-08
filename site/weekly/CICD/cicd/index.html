@@ -93,6 +93,8 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#configure-ssh-trigger-for-build-trigger">Configure ssh-trigger for Build trigger</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#configure-jenkins-slave-kops-ubuntu-user">Configure Jenkins-Slave Kops Ubuntu user</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#configure-aws-credential">Configure AWS Credential</a>
     </li>
         </ul>
@@ -125,6 +127,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../GitHub/github/">GitHub</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../GitOps/gitops/">GitOps</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../Gitaction/gitaction/">GitHub Action</a>
                   </li>
                   <li class="toctree-l1"><a class="" href="../../Terraform/github.md">Terraform</a>
@@ -145,6 +149,10 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../Openshift/openshift/">OpenShift</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../web-development/web-dev/">Web Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../mysql-windows/mysql-windows/">MySQL Windows</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="#">Random Topics</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../../Random/3tier/">3 Tier App</a>
@@ -162,6 +170,8 @@
                 <li class="toctree-l2"><a class="reference internal" href="../../Random/Disaster-rec/">Disaster Recovery</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../../Random/domain-github/">Domain Git GoDaddy</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../Random/scripts/">Scripts</a>
                 </li>
     </ul>
                   </li>
@@ -573,6 +583,11 @@ docker -v
 <td align="center">sososshtrigger</td>
 <td align="right">SSH Username with Private Key</td>
 </tr>
+<tr>
+<td>Jenkins-Slave(KOPS)</td>
+<td align="center">sosokopstoken</td>
+<td align="right">SSH Username with Private Key</td>
+</tr>
 </tbody>
 </table>
 <p>In the Jenkins UI:
@@ -605,6 +620,12 @@ Add a Token </p>
 <p><img alt="slack-creds" src="../cicd-photos/slack-creds.png" /> </p>
 <h4 id="configure-ssh-trigger-for-build-trigger">Configure ssh-trigger for Build trigger</h4>
 <p><img alt="ssh-trigger" src="../cicd-photos/ssh-trigger.png" /> </p>
+<h4 id="configure-jenkins-slave-kops-ubuntu-user">Configure Jenkins-Slave Kops Ubuntu user</h4>
+<ul>
+<li>use the KOPS instance private IP as the Host</li>
+<li>use the Remote directory /opt/jenkins-slave; will create this later.
+<img alt="sosokopstoken" src="../cicd-photos/sosokopstoken.png" /> </li>
+</ul>
 <h4 id="configure-aws-credential">Configure AWS Credential</h4>
 <h3 id="4-configure-systems">4. Configure Systems</h3>
 <p>Navigate to: <strong><em>Jenkins UI --&gt; manage Jenkins --&gt; Configure System</em></strong></p>
@@ -1265,10 +1286,16 @@ source .bashrc
                [OR]
 kops delete cluster --name ${NAME} --yes
 </code></pre>
-<p><strong><em>Make directory /opt/jenkins-slave</em></strong></p>
-<pre><code>sudo mkdir /opt/jenkins-slave
+<ul>
+<li><strong><em>Make directory /opt/jenkins-slave and give ownership to ubuntu</em></strong></li>
+<li><strong><em>Add Jenkins SG to Kops and Vice-Versa</em></strong></li>
+</ul>
+<pre><code>mkdir jenkins-slave
+sudo mkdir /opt/jenkins-slave
 sudo chown ubuntu.ubuntu /opt/jenkins-slave -R
 </code></pre>
+<h4 id="create-a-new-slave-node-in-jenkins">Create a new Slave Node in Jenkins</h4>
+<p><img alt="slave" src="../cicd-photos/slave.png" /></p>
 <p><strong><em>CICD Work Flow</em></strong>
 - Remove my helm and make your own helm directory in same path</p>
 <pre><code>mkdir cicd-k8s

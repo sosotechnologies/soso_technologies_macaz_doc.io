@@ -109,3 +109,55 @@ kops delete cluster --name ${NAME} --yes
 To deploy EFS-EKS-using Terraform, [clone My repo](terraform-EFS-Dynamic)
 
 You can clone and build this Documentation and use the image [mkdocs-docker-build](https://github.com/sosotechnologies/docs_docker_io)
+
+
+## EKS
+- AWS Linux 2 AMD x86_64
+- Install AWSCLI 
+- Install Kubectl version 1.23
+- EKS Version installed 1.24
+- Install Git
+- Install Terraform
+- Configure AWS
+- Install Helm
+
+### Install AWSCLI 
+  - [Right-Click to open Link in a New Tab](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+```
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+
+### Install Kubectl version 1.23
+[Right-Click to open Link in a New Tab](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
+
+```
+kubectl version --short --client
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.24.11/2023-03-17/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+```
+
+### Install Terraform 
+  - [Right-Click to open Link in a New Tab](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+
+### Install Git
+
+```
+Suso yum install git -y
+```
+
+### Install HelM 
+  - [Right-Click to open Link in a New Tab](https://helm.sh/docs/intro/install/)
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+```
+
+### Configure KubeConfig
+```
+aws eks update-kubeconfig --region us-east-1 --name DevOps-prod-SoSo-Eks
+```

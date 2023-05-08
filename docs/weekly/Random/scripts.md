@@ -1,91 +1,49 @@
-## nexus-server
-AMI: Amazon Linux-2
-InstanceType: t2.medium
+# All Scripts
 
+### Get Secrets expiration dates
 ```sh
-#!/bin/bash
-yum install java-1.8.0-openjdk.x86_64 wget -y   
-mkdir -p /opt/nexus/   
-mkdir -p /tmp/nexus/                           
-cd /tmp/nexus/
-NEXUSURL="https://download.sonatype.com/nexus/3/latest-unix.tar.gz"
-wget $NEXUSURL -O nexus.tar.gz
-EXTOUT=`tar xzvf nexus.tar.gz`
-NEXUSDIR=`echo $EXTOUT | cut -d '/' -f1`
-rm -rf /tmp/nexus/nexus.tar.gz
-rsync -avzh /tmp/nexus/ /opt/nexus/
-useradd nexus
-chown -R nexus.nexus /opt/nexus 
-cat <<EOT>> /etc/systemd/system/nexus.service
-[Unit]                                                                          
-Description=nexus service                                                       
-After=network.target                                                            
-                                                                  
-[Service]                                                                       
-Type=forking                                                                    
-LimitNOFILE=65536                                                               
-ExecStart=/opt/nexus/$NEXUSDIR/bin/nexus start                                  
-ExecStop=/opt/nexus/$NEXUSDIR/bin/nexus stop                                    
-User=nexus                                                                      
-Restart=on-abort                                                                
-                                                                  
-[Install]                                                                       
-WantedBy=multi-user.target   
+#!/bin/sh
+ DAYS="604800" 
+ YOUR_WEBHOOK_URL="collins-slack-channel"
+ echo "Input the cluster name"
+ read -r cluster
+ echo "Input the namespace"
+ read -r namespace
+ for i in `kubectl --context $cluster get cm -n $namespace | awk '{print $1}' | grep -vi name`
+ do
+     filename="cm_$i'_'$namespace.pem"
+     if `kubectl --context $cluster  -n $namespace get cm $i -o yaml | grep pem `
+     then
+         kubectl --context $cluster  -n $namespace get cm $i -o yaml | yq .data > $filename
+         cert_expr_date=$(openssl x509 -enddate -noout -in $filename | awk -F"=" '{print $2}')
+         openssl x509 -enddate -noout -in $filename  -checkend "$DAYS" | grep -q 'Certificate will expire'
+         if [ $? -eq 0 ]
+         then
+             curl -X POST -H 'Content-type: application/json' --data '{"text":"Certificate in configmap with name '$i' in namespace '$namespace' will expire in 7 days "}' $YOUR_WEBHOOK_URL
+             curl -X POST -H 'Content-type: application/json' --data '{"text":"Certificate in configmap with name '$i' in namespace '$namespace' will expire on '$cert_expr_date' "}' $YOUR_WEBHOOK_URL
+         fi
+            curl -X POST -H 'Content-type: application/json' --data '{"text":"Certificate in configmap with name '$i' in namespace '$namespace' will expire on '$cert_expr_date' "}' $YOUR_WEBHOOK_URL 
+     fi
+ done
+ for i in `kubectl --context $cluster get secret -n $namespace | awk '{print $1}' | grep -vi name`
+ do
+      filename="secret_$i'_'$namespace.pem"
+     if `kubectl --context $cluster  -n $namespace get secret $i -o yaml | grep pem `
+     then
+         kubectl --context $cluster  -n $namespace get secret $i -o yaml |yq .data | grep crt | awk -F":" '{print $2}' | base64 -d > $filename
+         cert_expr_date=$(openssl x509 -enddate -noout -in $filename | awk -F"=" '{print $2}')
+         openssl x509 -enddate -noout -in $filename  -checkend "$DAYS" | grep -q 'Certificate will expire'
+         if [ $? -eq 0 ]
+         then
+             curl -X POST -H 'Content-type: application/json' --data '{"text":"Certificate in secret with name '$i' in namespace '$namespace' will expire in 7 days "}' $YOUR_WEBHOOK_URL
+             curl -X POST -H 'Content-type: application/json' --data '{"text":"Certificate in configmap with name '$i' in namespace '$namespace' will expire on '$cert_expr_date' "}' $YOUR_WEBHOOK_URL
+         fi
+             curl -X POST -H 'Content-type: application/json' --data '{"text":"Certificate in configmap with name '$i' in namespace '$namespace' will expire on '$cert_expr_date' "}' $YOUR_WEBHOOK_URL
+     fi
+ done
 ```
 
-```
-EOT
-echo 'run_as_user="nexus"' > /opt/nexus/$NEXUSDIR/bin/nexus.rc
-systemctl daemon-reload
-systemctl start nexus
-systemctl enable nexus
-```
-
-## Nexus
-- Centos 7 (Amazon Market place)
-- TCP Port ***8081*** from MyIP and Jenkins-SG
-
-```sh
-#!/bin/bash
-yum install java-1.8.0-openjdk.x86_64 wget -y   
-mkdir -p /opt/nexus/   
-mkdir -p /tmp/nexus/                           
-cd /tmp/nexus/
-NEXUSURL="https://download.sonatype.com/nexus/3/latest-unix.tar.gz"
-wget $NEXUSURL -O nexus.tar.gz
-EXTOUT=`tar xzvf nexus.tar.gz`
-NEXUSDIR=`echo $EXTOUT | cut -d '/' -f1`
-rm -rf /tmp/nexus/nexus.tar.gz
-rsync -avzh /tmp/nexus/ /opt/nexus/
-useradd nexus
-chown -R nexus.nexus /opt/nexus 
-cat <<EOT>> /etc/systemd/system/nexus.service
-[Unit]                                                                          
-Description=nexus service                                                       
-After=network.target                                                            
-                                                                  
-[Service]                                                                       
-Type=forking                                                                    
-LimitNOFILE=65536                                                               
-ExecStart=/opt/nexus/$NEXUSDIR/bin/nexus start                                  
-ExecStop=/opt/nexus/$NEXUSDIR/bin/nexus stop                                    
-User=nexus                                                                      
-Restart=on-abort                                                                
-                                                                  
-[Install]                                                                       
-WantedBy=multi-user.target                                                      
-EOT
-echo 'run_as_user="nexus"' > /opt/nexus/$NEXUSDIR/bin/nexus.rc
-systemctl daemon-reload
-systemctl start nexus
-systemctl enable nexus
-
-```
-## SonarQube 
-- Ubuntu VERSION="18.04"
-- TCP Port ***9000***
-- TCP Port ***80*** from MyIP and Jenkins-SG
-
+### SonarQube - Ubuntu VERSION="18.04"
 
 ```sh
 #!/bin/bash
@@ -193,10 +151,7 @@ sleep 30
 reboot
 ```
 
-## Jenkins
-- Ubuntu VERSION="20.04.6 LTS 
-- TCP Port ***8080*** from Anywhere - IPv4 and IPv6
-
+### Jenkins - Ubuntu VERSION="20.04.6 LTS 
 
 ```sh
 #!/bin/bash

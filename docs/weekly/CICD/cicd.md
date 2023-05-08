@@ -383,14 +383,15 @@ See the SonarQube Configuration image
 ### 3. Configure Credential
 Navigate to: ***Jenkins UI --> manage Jenkins --> Manage Credentials --> System --> Global credentials***
 
-| Services          |   Credential ID       | UserName/Password/secret-text   |               
-|-------------------|:---------------------:|--------------------------------:|
-| DockerHub         |  sosodockertoken      |    Username-Password    |
-| AWS - ECR User    |   sosoawstoken        |   UserName/Password             |
-| MAVEN             |                       |     |
-| SonarQube         |   sososonartoken      |  secret-text  |
-| Slack             | sososlacktoken        |  secret-text    | 
-| build-trigger     | sososshtrigger        | SSH Username with Private Key  |
+| Services            |   Credential ID       | UserName/Password/secret-text   |               
+|---------------------|:---------------------:|--------------------------------:|
+| DockerHub           | sosodockertoken       |    Username-Password            |
+| AWS - ECR User      | sosoawstoken          |   UserName/Password             |
+| MAVEN               |                       |                                 |
+| SonarQube           | sososonartoken        |  secret-text                    |
+| Slack               | sososlacktoken        |  secret-text                    | 
+| build-trigger       | sososshtrigger        | SSH Username with Private Key   |
+| Jenkins-Slave(KOPS) | sosokopstoken         | SSH Username with Private Key   |
 
 In the Jenkins UI:
 Configure the following credentials
@@ -426,6 +427,11 @@ Add a Token
 
 #### Configure ssh-trigger for Build trigger 
 ![ssh-trigger](cicd-photos/ssh-trigger.png) 
+
+#### Configure Jenkins-Slave Kops Ubuntu user
+- use the KOPS instance private IP as the Host
+- use the Remote directory /opt/jenkins-slave; will create this later.
+![sosokopstoken](cicd-photos/sosokopstoken.png) 
 
 #### Configure AWS Credential
 
@@ -1164,12 +1170,18 @@ kops delete cluster --name ${NAME}
 kops delete cluster --name ${NAME} --yes
 ```
 
-***Make directory /opt/jenkins-slave***
+- ***Make directory /opt/jenkins-slave and give ownership to ubuntu***
+- ***Add Jenkins SG to Kops and Vice-Versa***
 
 ```
+mkdir jenkins-slave
 sudo mkdir /opt/jenkins-slave
 sudo chown ubuntu.ubuntu /opt/jenkins-slave -R
 ```
+
+#### Create a new Slave Node in Jenkins
+
+![slave](cicd-photos/slave.png)
 
 
 

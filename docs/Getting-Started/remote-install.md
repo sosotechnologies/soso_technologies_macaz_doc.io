@@ -16,7 +16,8 @@ aws-iam-authenticator help
 ### Install AWSCLI 
   - [Right-Click to open Link in a New Tab](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
-Install on Ubuntu
+***Install AWCLI on Ubuntu***
+
 ```
 sudo apt update -y
 sudo apt install awscli -y
@@ -37,11 +38,14 @@ chmod 700 get_helm.sh
 ```
 
 ### Install Kubectl 
-  - [Right-Click to open Link in a New Tab](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html/)
+  - [Right-Click to open Link in a New Tab](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl)
 ```
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
-echo "$(<kubectl.sha256)  kubectl" | sha256sum --check
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.24.11/2023-03-17/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+
+***More Troubleshooting Options***
+
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 [OR] sudo install -o root -g root -m 0755 kubectl /home/ec2-user/bin/kubectl
 kubectl version --client --output=yaml
