@@ -69,6 +69,22 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ex-3">EX 3:</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#repo-1">Repo 1.</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#repo-2">Repo 2</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#repo-3">Repo 3</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#cd-into-flux-fleet-directory-and-create-the-below-resources">Cd into flux-fleet directory and create the below resources</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#repo-4">repo 4</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../Gitaction/gitaction/">GitHub Action</a>
@@ -194,7 +210,7 @@ I have 2 folders in the repo: [namespaces,workloads]. Flux will deploy the conte
 <li>watch video: <a href="https://www.youtube.com/watch?v=X9R5ySkiUkc">link</a></li>
 </ul>
 <p>save creds as env var</p>
-<pre><code>export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
+<pre><code>export GITHUB_TOKEN=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
 export GITHUB_USER=sosotechnologies
 export GITHUB_REPO=infra
 
@@ -204,8 +220,8 @@ export GITHUB_REPO=infra
 </code></pre>
 <p>create an eks cluster</p>
 <p>My terraform link: <a href="">LINK</a></p>
-<p>bootstrap cluster</p>
-<pre><code>flux bootstrap github --components-extra=image-reflector-controller,image-automation-controller --owner=sosotechnologies --repository=infra2 --branch=main  --path=./clusters/eks --token-auth --personal
+<p>bootstrap cluster, this bootstrap will also install flux</p>
+<pre><code>flux bootstrap github --owner=sosotechnologies --repository=sosoflux-infra --branch=main  --path=./florida/miami --personal true
 </code></pre>
 <p>You should see this structure in your github repo:</p>
 <p><img alt="gitops2" src="../photos/gitops2.png" /></p>
@@ -217,23 +233,23 @@ export GITHUB_REPO=infra
 cd .ssh
 cat id_rsa.pub
 </code></pre>
-<pre><code>git clone git@github.com:sosotechnologies/infra.git
-cd infra
+<pre><code>git clone git@github.com:sosotechnologies/sosoflux-infra.git
+cd sosoflux-infra
 </code></pre>
 <p>[ec2-user@ip-172-31-145-18 infra]$ <code>tree</code>
 .
-└── clusters
-    └── eks
+└── florida
+    └── miami
         └── flux-system
             ├── gotk-components.yaml
             ├── gotk-sync.yaml
             └── kustomization.yaml</p>
 <p>add a demo folder and a yaml file in the folder</p>
-<p>[ec2-user@ip-172-31-145-18 eks]$ <code>cd clusters/eks/</code>
+<p>[ec2-user@ip-172-31-145-18 eks]$ <code>cd florida</code>
 [ec2-user@ip-172-31-145-18 eks]$ <code>mkdir demo &amp;&amp; cd demo &amp;&amp; touch sosodocs.yaml</code></p>
 <p>.
-└── clusters
-    └── eks
+└── florida
+    └── miami
         ├── demo
         │   └── sosodocs.yaml
         └── flux-system
@@ -334,6 +350,220 @@ patches:
     target:
       kind: ServiceAccount
       name: image-reflector-controller
+</code></pre>
+<h2 id="ex-3">EX 3:</h2>
+<p><img alt="arch" src="../photos/arch.png" /></p>
+<ul>
+<li>install GitHub Cli</li>
+<li>Create 4 repos: </li>
+<li>flux-production/apps</li>
+<li>flux-staging/apps</li>
+<li>flux-fleet[with-bootstrapping]</li>
+<li>devops-toolkit/apps[repo-already-exists]</li>
+<li>clone them separately</li>
+<li>create namespaces: production and staging </li>
+<li>create prod and staging source files in the [app] folder</li>
+<li>create a kustomization for prod and staging source files in the [app] folder</li>
+</ul>
+<p><strong><em>Install Git Cli</em></strong></p>
+<pre><code>wget https://github.com/cli/cli/releases/download/v2.15.0/gh_2.15.0_linux_amd64.rpm
+
+sudo rpm -i gh_2.15.0_linux_amd64.rpm
+
+gh --version
+</code></pre>
+<p>copy key and create in Github-SSH, then authenticate GH</p>
+<pre><code>gh auth login
+</code></pre>
+<p>save Git creds as env var</p>
+<pre><code>export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+export GITHUB_USER=sosotechnologies
+</code></pre>
+<pre><code>echo $GITHUB_USER
+echo $GITHUB_TOKEN
+</code></pre>
+<h3 id="repo-1">Repo 1.</h3>
+<pre><code>mkdir -p flux-production/apps
+cd flux-production
+git init
+gh repo create
+
+echo &quot;commit Readme&quot; | tee README.md
+
+git add . &amp;&amp; \
+git commit -m &quot;added prod folder&quot; &amp;&amp; \
+git push --set-upstream origin master
+</code></pre>
+<h3 id="repo-2">Repo 2</h3>
+<pre><code>mkdir -p flux-staging/apps
+cd flux-staging
+
+git init
+gh repo create
+
+[Select: Push an existing local repository to GitHub]
+
+echo &quot;commit Readme&quot; | tee README.md
+
+git add . &amp;&amp; \
+git commit -m &quot;added stag folder&quot; &amp;&amp; \
+git push --set-upstream origin master
+</code></pre>
+<pre><code>kubectl create ns production 
+kubectl create ns staging 
+</code></pre>
+<h3 id="repo-3">Repo 3</h3>
+<p>Remember the path defined here [apps] is the app folder I created in staging and production repos, bootstrap will:
+- install flux
+- Create a github repo
+- create the deploy keys
+...</p>
+<pre><code>flux bootstrap github --owner sosotechnologies --repository flux-fleet --branch main  --path apps --personal true
+</code></pre>
+<p>See the resources that were created from the bootstrap</p>
+<pre><code>kubectl get po -n flux-system
+kubectl get svc -n flux-system
+kubectl get secrets -n flux-system
+kubectl get cm -n flux-system
+</code></pre>
+<h4 id="cd-into-flux-fleet-directory-and-create-the-below-resources">Cd into flux-fleet directory and create the below resources</h4>
+<ul>
+<li>staging source and Kustomization</li>
+<li>production source and Kustomization</li>
+<li>devops-toolkit</li>
+</ul>
+<pre><code>git clone git@github.com:sosotechnologies/flux-fleet.git
+cd flux-fleet
+</code></pre>
+<p>So far my flux-weekend folder looks like so:</p>
+<p>.
+├── flux-fleet
+│   └── apps
+│       └── flux-system
+│           ├── gotk-components.yaml
+│           ├── gotk-sync.yaml
+│           └── kustomization.yaml
+├── flux-production
+│   ├── apps
+│   └── README.md
+└── flux-staging
+    ├── apps
+    └── README.md</p>
+<p><strong><em>Create Kustomization and Source in the flux-fleet/ folder</em></strong>
+- Create source and Kustomize for staging</p>
+<pre><code>flux create source git staging --url https://github.com/sosotechnologies/flux-staging --branch master --interval 30s --export | tee apps/staging.yaml
+</code></pre>
+<ul>
+<li>Kustomize staging to same file: apps/staging.yaml</li>
+</ul>
+<pre><code>flux create kustomization staging --source staging --path &quot;./&quot; --prune true --interval 10m --export | tee -a apps/staging.yaml
+</code></pre>
+<p><strong><em>Create source and Kustomize for production</em></strong></p>
+<pre><code>flux create source git production --url https://github.com/sosotechnologies/flux-production --branch master --interval 30s --export | tee apps/production.yaml
+</code></pre>
+<p>Kustomize production to same file: apps/production.yaml</p>
+<pre><code>flux create kustomization production --source production --path &quot;./&quot; --prune true --interval 10m --export | tee -a apps/production.yaml
+</code></pre>
+<h3 id="repo-4">repo 4</h3>
+<p>Create devops-toolkit in thesame in the flux-fleet/ folder</p>
+<pre><code>flux create source git devops-toolkit --url=https://github.com/sosotechnologies/devops-toolkit --branch=master --interval=30s --export | tee apps/devops-toolkit.yaml
+</code></pre>
+<pre><code>git add . &amp;&amp; \
+git commit -m &quot;added staging folder, production folder and devops-toolkit&quot; &amp;&amp; \
+git push --set-upstream origin main
+</code></pre>
+<p><strong><em>Now my flux-weekend folder looks like</em></strong></p>
+<p>.
+├── flux-fleet
+│   └── apps
+│       ├── devops-toolkit.yaml
+│       ├── flux-system
+│       │   ├── gotk-components.yaml
+│       │   ├── gotk-sync.yaml
+│       │   └── kustomization.yaml
+│       ├── production.yaml
+│       └── staging.yaml
+├── flux-production
+│   ├── apps
+│   └── README.md
+└── flux-staging
+    ├── apps
+    └── README.md</p>
+<pre><code>watch flux get sources git
+flux get kustomizations
+</code></pre>
+<p><strong><em>setup is done! NEXT: Create Helm Releases</em></strong></p>
+<p><strong>Staging Release</strong></p>
+<pre><code>cd flux-staging
+</code></pre>
+<p>Copy this command and fun as is:</p>
+<pre><code>echo &quot;image:
+    tag: 2.9.9
+ingress:
+    host: staging.devops-toolkit.$INGRESS_HOST.nip.io&quot; \
+    | tee values.yaml
+</code></pre>
+<pre><code>flux create helmrelease devops-toolkit-staging --source GitRepository/devops-toolkit --values values.yaml --chart &quot;helm&quot; --target-namespace staging --interval 30s --export | tee apps/devops-toolkit.yaml
+</code></pre>
+<pre><code>rm values.yaml
+</code></pre>
+<pre><code>git add . &amp;&amp; \
+git commit -m &quot;added staging helm release&quot; &amp;&amp; \
+git push --set-upstream origin master
+</code></pre>
+<pre><code>watch flux get helmreleases
+kubectl --namespace staging get pods
+</code></pre>
+<p><strong><em>NOTE:</em></strong> You can change the image tag in the staging: devops-toolkit.yaml
+    From:  tag: 2.9.9 --&gt; tag: 2.9.17 
+And [commit and push to Git] and flux will automatically detect and deploy.</p>
+<p><strong>Production Release</strong></p>
+<pre><code>cd ..
+cd flux-production
+</code></pre>
+<p>Copy this command and fun as is:</p>
+<pre><code>echo &quot;image:
+    tag: 2.9.17
+ingress:
+    host: production.devops-toolkit.$INGRESS_HOST.nip.io&quot; \
+    | tee values.yaml
+</code></pre>
+<pre><code>flux create helmrelease devops-toolkit-production --source GitRepository/devops-toolkit --values values.yaml --chart &quot;helm&quot; --target-namespace production --interval 30s --export | tee apps/devops-toolkit.yaml
+</code></pre>
+<pre><code>rm values.yaml
+</code></pre>
+<pre><code>git add . &amp;&amp; \
+git commit -m &quot;added production helm release&quot; &amp;&amp; \
+git push --set-upstream origin master
+</code></pre>
+<pre><code>flux get helmreleases
+watch kubectl --namespace production get pods
+</code></pre>
+<p>Final Tree</p>
+<p>.
+├── flux-fleet
+│   └── apps
+│       ├── devops-toolkit.yaml
+│       ├── flux-system
+│       │   ├── gotk-components.yaml
+│       │   ├── gotk-sync.yaml
+│       │   └── kustomization.yaml
+│       ├── production.yaml
+│       └── staging.yaml
+├── flux-production
+│   ├── apps
+│   │   └── devops-toolkit.yaml
+│   └── README.md
+└── flux-staging
+    ├── apps
+    │   └── devops-toolkit.yaml
+    └── README.md</p>
+<p><strong>IT'S ALL FOLKS!</strong></p>
+<p>NEXT TASK</p>
+<p>Configure ECR/OICD-IRSA/GIT tagging for CD deployment</p>
+<pre><code>aws ecr list-images --repository=soso-repository
+</code></pre>
+<pre><code>kubectl create job --from=cronjob/ecr-credentials-sync -n flux-system ecr-credentials-sync-init --dry-run=client -o yaml &gt; job.yaml
 </code></pre>
               
             </div>
