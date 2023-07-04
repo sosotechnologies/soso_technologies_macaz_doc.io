@@ -65,7 +65,7 @@ tree
 ```
 REDHAT
 sudo yum info python*-pip     //get the pip version, then install the version
-sudo yum install python39-pip
+sudo yum install python3-pip
 python3 --version
 curl -O https://bootstrap.pypa.io/get-pip.py
 python3 get-pip.py --user
@@ -200,3 +200,25 @@ kops delete cluster --name ${NAME}
 kops delete cluster --name ${NAME} --yes
 ```
 
+***Install pyton and pup on libux AWS***
+
+```
+python --version
+sudo yum install python37
+python3 --version
+```
+
+***To install pip and the EB CLI***
+
+```
+curl -O https://bootstrap.pypa.io/get-pip.py
+python3 get-pip.py --user
+
+echo $SHELL
+
+ls -a ~
+
+export PATH=/bin/bash:$PATH
+
+source .bashrc
+```

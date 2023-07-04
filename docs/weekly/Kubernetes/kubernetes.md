@@ -1,3 +1,15 @@
+# Minikube
+
+```
+choco install minikube
+minikube start
+```
+
+```
+kubectl config get-contexts
+kubectl config use-context  docker-desktop
+```
+
 # KOPS
 ***Installing kOps***
 
@@ -160,4 +172,9 @@ chmod 700 get_helm.sh
 ### Configure KubeConfig
 ```
 aws eks update-kubeconfig --region us-east-1 --name DevOps-prod-SoSo-Eks
+```
+
+
+```
+kubectl apply -f .
 ```
