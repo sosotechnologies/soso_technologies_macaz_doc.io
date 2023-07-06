@@ -80,6 +80,7 @@ nav:
    - AI: weekly/AI/ai.md
    - Kafka: weekly/Kafka/kafka.md
    - ELK: weekly/ELK/elk.md
+   - Flask: weekly/Flask/flask.md
    - Azure: weekly/Azure/azure.md
    - OpenShift: weekly/Openshift/openshift.md
    - Web Development: weekly/web-development/web-dev.md

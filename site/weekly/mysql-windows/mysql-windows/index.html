@@ -89,6 +89,8 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#setup-a-minikube-cluster">setup a minikube cluster</a>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="#">Random Topics</a>
@@ -142,6 +144,45 @@
                 <h1 id="mysql-windows">MySQL Windows</h1>
 <h2 id="installation">Installation</h2>
 <p>Community Edition Link: <a href="https://dev.mysql.com/downloads/mysql/">LINK</a></p>
+<h2 id="setup-a-minikube-cluster">setup a minikube cluster</h2>
+<pre><code>choco install minikube
+</code></pre>
+<pre><code>minikube start
+</code></pre>
+<p><strong><em>Alter password in workbench</em></strong></p>
+<pre><code>alter user 'root'@'localhost' identified with mysql_native_password by 'your-soso-password';
+
+QUIT
+</code></pre>
+<p><strong><em>Create a Database</em></strong></p>
+<pre><code>SHOW DATABASES;
+CREATE DATABASE sosotech;
+USE sosotech;
+</code></pre>
+<p><strong><em>Create Tables in the Database</em></strong></p>
+<pre><code>CREATE TABLE sosologin
+(
+  id              INT unsigned NOT NULL AUTO_INCREMENT, # Unique ID for the record
+  name            VARCHAR(150) NOT NULL,                # Name of the cat
+  owner           VARCHAR(150) NOT NULL,                # Owner of the cat
+  birth           DATE NOT NULL,                        # Birthday of the cat
+  PRIMARY KEY     (id)                                  # Make the id the primary key
+);
+</code></pre>
+<pre><code>DESCRIBE sosologin
+</code></pre>
+<p>Adding records into a table.</p>
+<pre><code>INSERT INTO sosologin ( name, owner, birth) VALUES
+  ( 'Collins', 'Macaz', '2004-01-03' ),
+  ( 'Macaz', 'Macaz', '2014-11-13' ),
+  ( 'Collins', 'Afa', '2012-05-21' );
+</code></pre>
+<p>Retrieving records from a table.</p>
+<pre><code>SELECT * FROM sosologin;
+
+SELECT name FROM sosologin WHERE owner = 'afa';
+</code></pre>
+<p>For more info: <a href="https://dev.mysql.com/doc/mysql-getting-started/en/">SEE LINK</a></p>
               
             </div>
           </div><footer>
