@@ -231,7 +231,7 @@ tree
 <h3 id="install-pip-on-rhel">Install PiP on RHeL</h3>
 <pre><code>REDHAT
 sudo yum info python*-pip     //get the pip version, then install the version
-sudo yum install python39-pip
+sudo yum install python3-pip
 python3 --version
 curl -O https://bootstrap.pypa.io/get-pip.py
 python3 get-pip.py --user
@@ -320,6 +320,23 @@ source .bashrc
 <pre><code>kops delete cluster --name ${NAME}
                [OR]
 kops delete cluster --name ${NAME} --yes
+</code></pre>
+<p><strong><em>Install pyton and pup on libux AWS</em></strong></p>
+<pre><code>python --version
+sudo yum install python37
+python3 --version
+</code></pre>
+<p><strong><em>To install pip and the EB CLI</em></strong></p>
+<pre><code>curl -O https://bootstrap.pypa.io/get-pip.py
+python3 get-pip.py --user
+
+echo $SHELL
+
+ls -a ~
+
+export PATH=/bin/bash:$PATH
+
+source .bashrc
 </code></pre>
               
             </div>

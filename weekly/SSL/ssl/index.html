@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Kubernetes/kubernetes/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/SSL/ssl/" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>Minikube - SosoTech External Documentation</title>
+    <title>Ssl - SosoTech External Documentation</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
@@ -13,9 +13,9 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Minikube";
-        var mkdocs_page_input_path = "weekly\\Kubernetes\\kubernetes.md";
-        var mkdocs_page_url = "/soso_technologies_macaz_doc.io/weekly/Kubernetes/kubernetes/";
+        var mkdocs_page_name = "Ssl";
+        var mkdocs_page_input_path = "weekly\\SSL\\ssl.md";
+        var mkdocs_page_url = "/soso_technologies_macaz_doc.io/weekly/SSL/ssl/";
       </script>
     
     <script src="../../../js/jquery-3.6.0.min.js" defer></script>
@@ -69,7 +69,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../Docker/docker/">Docker</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="../Kubernetes.md">Kubernetes</a>
+                  <li class="toctree-l1"><a class="" href="../../Kubernetes/Kubernetes.md">Kubernetes</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../Jenkins/jenkins/">Jenkins</a>
                   </li>
@@ -124,9 +124,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Minikube</li>
+      <li>Ssl</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/repo/blob/main/docs/index.md/weekly/Kubernetes/kubernetes.md">Edit on soso_technologies_macaz_doc.io</a>
+          <a href="https://github.com/sosotechnologies/soso_technologies_macaz_doc.io/repo/blob/main/docs/index.md/weekly/SSL/ssl.md">Edit on soso_technologies_macaz_doc.io</a>
     </li>
   </ul>
   <hr/>
@@ -134,126 +134,147 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="minikube">Minikube</h1>
-<pre><code>choco install minikube
-minikube start
+                <h2 id="i-will-use-my-image-deployment-and-service-for-this-demo">I will use my image deployment and service for this demo</h2>
+<p><strong><em>deployment.yaml</em></strong></p>
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: angels
+  name: angels
+  namespace: angelnamespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angels
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: angels
+    spec:
+      containers:
+      - image: sosotech/angelpalms:1.0.0
+        name: angelpalms
+        ports:
+        - containerPort: 5000
+        resources: {}
+status: {}
 </code></pre>
-<pre><code>kubectl config get-contexts
-kubectl config use-context  docker-desktop
+<p><strong><em>service.yaml</em></strong></p>
+<pre><code>k expose deploy angels --name=angel-svc -n angelnamespace --port=5000 --target-port=5000 --type=ClusterIP --dry-run=client -o yaml &gt; service.yaml
 </code></pre>
-<h1 id="kops">KOPS</h1>
-<p><strong><em>Installing kOps</em></strong></p>
-<pre><code>curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '&quot;' -f 4)/kops-linux-amd64
-chmod +x ./kops
-sudo mv ./kops /usr/local/bin/
+<pre><code class="language-yaml">apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: angels
+  name: angel-svc
+  namespace: angelnamespace
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: angels
+  type: ClusterIP
+status:
+  loadBalancer: {}
 </code></pre>
-<p><strong><em>Install Python PiP</em></strong></p>
-<pre><code>sudo apt -y update
-sudo apt install python3-pip
+<p>Check the helm url:<a href="https://helm.sh/">Helm Link</a>
+Check the istio url:<a href="https://istio.io/latest/docs/setup/install/helm/">Istio Helm Link</a></p>
+<pre><code>kubectl create ns istio-system
+kubectl create ns angelnamespace
 </code></pre>
-<p><strong><em>Install AWSCli</em></strong></p>
-<pre><code> sudo apt  install awscli -y
+<pre><code>helm repo ls
+helm repo add istio https://istio-release.storage.googleapis.com/charts
+helm repo update
+helm search repo istio
+helm ls -A
+helm install istio-base istio/base -n istio-system
+helm install istio-istiod istio/istiod -n istio-system
+helm install istio-gateway istio/gateway -n istio-system
+helm ls -A
+kubectl get po -A
 </code></pre>
-<p><strong><em>Install Kubectl</em></strong></p>
-<pre><code>curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-chmod +x ./kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
+<p>clone this repo: <a href="https://github.com/sosotechnologies/sosokubernetes/tree/master/ssl-cert-istio-jenkins-minio-sonarqube">TLS Yamls</a></p>
+<p><strong><em>Get istio-ingressgateway deployment labels to add to the label area in below yaml</em></strong></p>
+<pre><code>kubectl get deploy -n istio-system
+kubectl get deploy istio-gateway -n istio-system --show-labels
 </code></pre>
-<p><strong><em>Create S3 Bucket</em></strong></p>
-<pre><code>aws s3 ls
-aws s3 mb s3://soso-kops-bucket.local
-</code></pre>
-<p><strong><em>OPTIONAL</em></strong></p>
-<pre><code>aws s3api create-bucket \
-    --bucket soso-kops-bucket \
-    --region us-east-1 
-</code></pre>
-<p><strong><em>Add env variables in bashrc</em></strong></p>
-<pre><code>vi .bashrc
+<h3 id="gatewayyaml">gateway.yaml</h3>
+<pre><code class="language-yaml">apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: general-gateway
+  namespace: istio-system
+  labels:
+    app.kubernetes.io/instance: ingressgateway
+    app: ingressgateway
+    istio: ingressgateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - '*'
+    port:
+      name: http
+      number: 80
+      protocol: HTTP
+    # Upgrade HTTP to HTTPS
+    tls:
+      httpsRedirect: true
+  - hosts:
+    - '*'
+    port:
+      name: https
+      number: 443
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: gateway-certs
 
-export NAME=soso-kops-bucket.k8s.local                               
-export KOPS_STATE_STORE=s3://soso-kops-bucket.local 
-
-source .bashrc
+      # app.kubernetes.io/managed-by=Helm
+      # app.kubernetes.io/name=ingressgateway
+      # app.kubernetes.io/version=1.16.1
+      # app=ingressgateway
+      # helm.sh/chart=gateway-1.16.1
+      # istio=ingressgateway
 </code></pre>
-<p><strong><em>Generate an sshkeys before creating cluster</em></strong></p>
-<pre><code>ssh-keygen
+<h3 id="virtualservicesyaml">virtualservices.yaml</h3>
+<pre><code class="language-yaml">apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  labels:
+  name: angelpalms-vir-ser
+  namespace: angelnamespace
+spec:
+  gateways:
+  - istio-system/general-gateway     # This is the name and namespace from the gateway.yaml
+  hosts:
+  - 'angels.angelpalmshhcare.com'
+  http:
+  - retries:
+      attempts: 3
+      perTryTimeout: 2s
+    match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: angel-svc.angelnamespace.svc.cluster.local    #first is angelpamls service name, second is namespace
+        port:
+          number: 5000
 </code></pre>
-<p><strong><em>Install Cluster preconfig file</em></strong></p>
-<pre><code>kops create cluster \
-    --name=${NAME} \
-    --cloud=aws \
-    --zones=us-west-2a \
-    --node-size t2.medium \
-    --master-size t2.medium \
-    --master-count 1 --node-size t2.medium --node-count=1
-</code></pre>
-<p><strong><em>Edit the cluster name- OPTIONAL</em></strong></p>
-<pre><code>kops edit cluster --name ${NAME}
-</code></pre>
-<p><strong><em>Install Cluster</em></strong></p>
-<pre><code>kops update cluster --name ${NAME} --yes --admin
-</code></pre>
-<p><strong>NOTE: WAIT 10 Mins before Checking Nodes and Validating cluster</strong>*</p>
-<p><strong><em>Get nodes</em></strong></p>
-<pre><code>kubectl get nodes
-</code></pre>
-<p><strong><em>Validate Cluster</em></strong></p>
-<pre><code>kops validate cluster --wait 10m
-</code></pre>
-<p><strong><em>Delete cluster</em></strong></p>
-<pre><code>kops delete cluster --name ${NAME}
-               [OR]
-kops delete cluster --name ${NAME} --yes
-</code></pre>
-<p>To deploy EFS-EKS-using Terraform, <a href="terraform-EFS-Dynamic">clone My repo</a></p>
-<p>You can clone and build this Documentation and use the image <a href="https://github.com/sosotechnologies/docs_docker_io">mkdocs-docker-build</a></p>
-<h2 id="eks">EKS</h2>
-<ul>
-<li>AWS Linux 2 AMD x86_64</li>
-<li>Install AWSCLI </li>
-<li>Install Kubectl version 1.23</li>
-<li>EKS Version installed 1.24</li>
-<li>Install Git</li>
-<li>Install Terraform</li>
-<li>Configure AWS</li>
-<li>Install Helm</li>
-</ul>
-<h3 id="install-awscli">Install AWSCLI</h3>
-<ul>
-<li><a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">Right-Click to open Link in a New Tab</a></li>
-</ul>
-<pre><code>curl &quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot; -o &quot;awscliv2.zip&quot;
-unzip awscliv2.zip
-sudo ./aws/install
-</code></pre>
-<h3 id="install-kubectl-version-123">Install Kubectl version 1.23</h3>
-<p><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html">Right-Click to open Link in a New Tab</a></p>
-<pre><code>kubectl version --short --client
-curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.24.11/2023-03-17/bin/linux/amd64/kubectl
-chmod +x ./kubectl
-mkdir -p $HOME/bin &amp;&amp; cp ./kubectl $HOME/bin/kubectl &amp;&amp; export PATH=$PATH:$HOME/bin
-</code></pre>
-<h3 id="install-terraform">Install Terraform</h3>
-<ul>
-<li><a href="https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli">Right-Click to open Link in a New Tab</a></li>
-</ul>
-<h3 id="install-git">Install Git</h3>
-<pre><code>Suso yum install git -y
-</code></pre>
-<h3 id="install-helm">Install HelM</h3>
-<ul>
-<li><a href="https://helm.sh/docs/intro/install/">Right-Click to open Link in a New Tab</a></li>
-</ul>
-<pre><code>curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-chmod 700 get_helm.sh
-./get_helm.sh
-</code></pre>
-<h3 id="configure-kubeconfig">Configure KubeConfig</h3>
-<pre><code>aws eks update-kubeconfig --region us-east-1 --name DevOps-prod-SoSo-Eks
-</code></pre>
-<pre><code>kubectl apply -f .
-</code></pre>
+<p>sonarqube.skyfieldtechnologies.com
+ jenkins.skyfieldtechnologies.com
+ minio.skyfieldtechnologies.com</p>
               
             </div>
           </div><footer>
