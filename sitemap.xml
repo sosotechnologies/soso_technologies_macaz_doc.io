@@ -46,6 +46,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/Flask/flask/</loc>
+         <lastmod>2023-07-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://sosotechnologies.github.io/soso_technologies_macaz_doc.io/weekly/GitHub/github/</loc>
          <lastmod>2023-07-06</lastmod>
          <changefreq>daily</changefreq>
